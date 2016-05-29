@@ -13,8 +13,9 @@
   "keywords": [
     "nope"
   ],
-  "author": [
-    "Rabbit <yfhj1990@hotmail.com>"
+  "authors": [
+    "Rabbit <yfhj1990@hotmail.com>",
+    "PL <0x00.pl@gmail.com>"
   ],
   "license": "MIT",
   "devDependencies": {
