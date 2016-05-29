@@ -4,7 +4,7 @@
   "description": "a fun.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "npm run start"
+    "start": "./node_modules/.bin/gulp"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "del": "^2.2.0",
+    "gulp-cli": "^1.2.1",
     "normalize.scss": "^0.1.0"
   }
 }
