@@ -1,9 +1,18 @@
+/**
+ * Gulp file 项目构建文件
+ */
+
 var gulp = require('gulp');
-var del = require('del');
+var del  = require('del');
 
 
-function clean(done) {
-    return del(dirs.tmp, done);
+/**
+ * 清除目标文件夹.
+ *
+ * @Task
+ */
+function clean() {
+    return del(dirs.tmp);
 }
 
 
