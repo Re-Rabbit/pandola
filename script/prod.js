@@ -3,53 +3,44 @@
  *
  * 产品环境
  */
-var gulp = require('gulp')
-var del  = require('del')
+var gulp     = require('gulp')
+var del      = require('del')
 var reporter = require('gulp-sizereport')
-
-var html = require('./build-html.js')
+var html     = require('./build-html.js')
+var paths    = require('./paths.js')
 
 
 /**
- * 清除目标文件夹.
+ * 清除目标文件夹
  *
  * @Task
  */
 function clean() {
-    return del(PATH_PROD + '/*')
+    return del(paths.prod + '/*')
 }
 
 /**
- * 编译Html.
+ * 编译Html
  *
  * @Task
  */
 function buildHtml() {
-    return html.min(html.cc(gulp.src(dirs.html)))
+    return html.min(html.cc(gulp.src(paths.dirs.html)))
 	.pipe(reporter({ gzip: true }))
-        .pipe(gulp.dest(PATH_PROD))
+        .pipe(gulp.dest(paths.prod))
 }
 
 
 /**
- * Main call.
+ * Main task
+ *
+ * @Task
  */
 function main() {
-    // export
     gulp.task('default',
-              gulp.series(clean,
-                          gulp.parallel(buildHtml
-					
-				       )
+              gulp.series( clean
+                          , gulp.parallel(buildHtml)
 			 ))
 }
-
-var PATH_SRC  = 'src'
-var PATH_TMP  = 'tmp'
-var PATH_PROD = 'dist'
-
-var dirs = {
-    html: PATH_SRC + '/pages/*.html'
-};
 
 main();

@@ -1,53 +1,76 @@
-var gulp = require('gulp')
+/**
+ * Gulp file 项目构建文件
+ *
+ * 项目部署
+ */
+var gulp    = require('gulp')
+var gutil   = require('gulp-util')
 var ghpages = require('gh-pages')
+var open    = require('open')
+var del     = require('del')
+var html    = require('./build-html.js')
+var paths   = require('./paths.js')
+var config  = require('./../package.json')
 
-var del  = require('del')
-var html = require('./build-html.js')
-var spawn = require('child_process').spawn
 
 /**
- * 清除目标文件夹.
+ * 清理目标文件夹
  *
  * @Task
  */
-function clean() {
-    return del(PATH_PROD + '/*')
+function cleanTmp() {
+    return del(paths.tmp + '/*')
 }
 
+function cleanPublish() {
+    return del(paths.publish + '/*')
+}
+
+
 /**
- * 编译Html.
+ * 编译Html
  *
  * @Task
  */
 function buildHtml() {
-    return html.cc(gulp.src(dirs.html))
-        .pipe(gulp.dest(PATH_TMP))
-}
-
-function deploy(done) {
-    ghpages.publish(PATH_TMP, { clone: './.publish' });
+    return html.cc(gulp.src(paths.dirs.html))
+        .pipe(gulp.dest(paths.tmp))
 }
 
 
 /**
- * Main call.
+ * 部署到github gh-pages分支
+ *
+ * @Task
  */
-function main() {
-    // export
-    gulp.task('default',
-              gulp.series( clean
-                           , gulp.parallel(buildHtml)
-			   , deploy
-			 ))
-    setTimeout(deploy)
+function deploy(done) {
+    // github gh-pages url.
+    var url = config.description
+    
+    ghpages.publish(paths.tmp, { clone: paths.publish }, function(err) {
+	if(err) {
+	    gutil.log(err)
+	    return done()
+	}
+	
+	gutil.log('deploy success and open with ' + url)
+	open(url)
+	done()
+    })
 }
 
-var PATH_SRC  = 'src'
-var PATH_TMP  = 'tmp'
-var PATH_PROD = 'dist'
 
-var dirs = {
-    html: PATH_SRC + '/pages/*.html'
-};
+/**
+ * Main task
+ *
+ * @Task
+ */
+function main() {
+    gulp.task('default',
+              gulp.series( gulp.parallel(cleanTmp, cleanPublish)
+                         , gulp.parallel(buildHtml)
+			 , deploy
+			 ))
+}
 
-main();
+main()

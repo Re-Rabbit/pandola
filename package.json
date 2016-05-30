@@ -1,12 +1,12 @@
 {
   "name": "pandola",
   "version": "0.0.1",
-  "description": "a fun.",
+  "description": "http://re-rabbit.github.io/pandola",
   "main": "gulpfile.js",
   "scripts": {
     "start": "./node_modules/.bin/gulp --gulpfile=script/dev.js --cwd=./",
     "build": "./node_modules/.bin/gulp --gulpfile=script/prod.js --cwd=./",
-      "deploy": "./node_modules/.bin/gulp --gulpfile=script/deploy.js --cwd=./",
+      "deploy": "./node_modules/.bin/gulp --gulpfile=script/deploy.js --cwd=./"
   },
   "repository": {
     "type": "git",
