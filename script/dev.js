@@ -3,11 +3,11 @@
  *
  * 开发环境
  */
-var gulp   = require('gulp')
-var del    = require('del')
-var html   = require('./build-html.js')
-var server = require('./build-server.js')
-var paths  = require('./paths.js')
+var gulp        = require('gulp')
+var del         = require('del')
+var html        = require('./build-html.js')
+var paths       = require('./paths.js')
+var browserSync = require('browser-sync').create()
 
 /**
  * 清除目标文件夹
@@ -17,6 +17,7 @@ var paths  = require('./paths.js')
 function clean() {
     return del(paths.tmp + '/*')
 }
+
 
 /**
  * 编译Html
@@ -35,18 +36,37 @@ function buildHtml() {
  * @Task
  */
 function main() {
+    
+    var bsReload = browserSync.reload
+
+    // reload files
+    function reload(done) {
+	bsReload()
+	done()
+    }
+
+    // start server
+    function server() {
+	browserSync.init({
+	    port: 8888,
+            server: {
+		baseDir: paths.tmp
+            }
+	})
+    }
+    
     // watcher
     function watch() {
-        return gulp.watch(paths.dirs.html, gulp.series(buildHtml))
+	server()
+        gulp.watch(paths.dirs.html, gulp.series(buildHtml, reload))
     }
 
     // export
     gulp.task('default',
               gulp.series( clean
                          , gulp.parallel(buildHtml)
-			 , server(paths.tmp)
 			 , watch
 			 ))
 }
 
-main();
+main()

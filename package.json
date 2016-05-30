@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/gulp --gulpfile=script/dev.js --cwd=./",
     "build": "./node_modules/.bin/gulp --gulpfile=script/prod.js --cwd=./",
-      "deploy": "./node_modules/.bin/gulp --gulpfile=script/deploy.js --cwd=./"
+    "deploy": "./node_modules/.bin/gulp --gulpfile=script/deploy.js --cwd=./"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "browser-sync": "^2.12.10",
     "compression": "^1.6.2",
     "del": "^2.2.0",
     "express": "^4.13.4",
