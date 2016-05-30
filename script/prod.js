@@ -16,7 +16,7 @@ var paths    = require('./paths.js')
  * @Task
  */
 function clean() {
-    return del(paths.prod + '/*')
+    return del(paths.dist + '/*')
 }
 
 /**
@@ -27,7 +27,7 @@ function clean() {
 function buildHtml() {
     return html.min(html.cc(gulp.src(paths.dirs.html)))
 	.pipe(reporter({ gzip: true }))
-        .pipe(gulp.dest(paths.prod))
+        .pipe(gulp.dest(paths.dist))
 }
 
 
