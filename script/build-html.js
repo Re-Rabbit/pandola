@@ -16,7 +16,6 @@ function min(stream) {
     return stream
 	.pipe(htmlmin({collapseWhitespace: true}))
 	.pipe(rev({ merge: true }))
-    
 }
 
 module.exports = {
