@@ -1,4 +1,6 @@
-
+/**
+ * Paths.
+ */
 var PATH_SRC  = 'src'
 var PATH_TMP  = 'tmp'
 var PATH_DIST = 'dist'
@@ -10,5 +12,7 @@ exports.dist = PATH_DIST
 exports.publish = PATH_PUBLISH
 
 exports.dirs = {
-    html: PATH_SRC + '/pages/*.html'
+    html: PATH_SRC + '/pages/*.html',
+    style: PATH_SRC + '/styles/pages/*.scss',
+    script: PATH_SRC + '/styles/pages/*.js',
 }

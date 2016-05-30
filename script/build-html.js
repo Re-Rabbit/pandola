@@ -1,4 +1,3 @@
-//var template = require('gulp-template')
 var wrap    = require('gulp-wrap')
 var data    = require('gulp-data')
 var htmlmin = require('gulp-htmlmin')
