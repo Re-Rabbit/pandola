@@ -7,6 +7,7 @@ var gulp = require('gulp')
 var del  = require('del')
 
 var html = require('./build-html.js')
+var server = require('./build-server.js')
 
 /**
  * 清除目标文件夹.
@@ -14,7 +15,7 @@ var html = require('./build-html.js')
  * @Task
  */
 function clean() {
-    return del(dirs.tmp)
+    return del(PATH_TMP + '/*')
 }
 
 /**
@@ -39,10 +40,11 @@ function main() {
 
     // export
     gulp.task('default',
-              gulp.series(clean,
-                          gulp.parallel(buildHtml,
-					
-					watch)))
+              gulp.series( clean
+                           , gulp.parallel(buildHtml)
+			   , server(PATH_TMP)
+			   , watch
+			 ))
 }
 
 var PATH_SRC  = 'src'
