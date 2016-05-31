@@ -1,7 +1,7 @@
 var electron = require('electron')
+var build    = require('./prod.js')
 
 function main() {
-    
     var win
     
     return function(app, BrowserWindow) {

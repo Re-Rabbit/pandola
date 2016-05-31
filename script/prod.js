@@ -37,10 +37,16 @@ function buildHtml() {
  * @Task
  */
 function main() {
+    console.log('build start')
     gulp.task('default',
               gulp.series( clean
                           , gulp.parallel(buildHtml)
 			 ))
+    console.log('build done')
 }
 
 main();
+
+module.exports = {
+    main: main
+}
