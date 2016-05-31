@@ -7,6 +7,7 @@ var gulp     = require('gulp')
 var del      = require('del')
 var reporter = require('gulp-sizereport')
 var html     = require('./build-html.js')
+var style     = require('./build-style.js')
 var paths    = require('./paths.js')
 
 
@@ -30,6 +31,17 @@ function buildHtml() {
         .pipe(gulp.dest(paths.dist))
 }
 
+/**
+ * 编译Style
+ *
+ * @Task
+ */
+function buildStyle() {
+    return html.min(html.cc(gulp.src(paths.dirs.html)))
+	.pipe(reporter({ gzip: true }))
+        .pipe(gulp.dest(paths.dist))
+}
+
 
 /**
  * Main task
@@ -39,7 +51,7 @@ function buildHtml() {
 function main() {
     gulp.task('default',
               gulp.series( clean
-                          , gulp.parallel(buildHtml)
+                          , gulp.parallel(buildHtml, buildStyle)
 			 ))
 }
 
