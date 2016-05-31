@@ -33,7 +33,8 @@ node_modules
 .node_repl_history
 
 
-# Custom config.
-
+# Custom config
+# Ignore build dirs
 tmp
 dist
+.publish
