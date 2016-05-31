@@ -3,12 +3,12 @@
  *
  * 产品环境
  */
-var gulp     = require('gulp')
-var del      = require('del')
+var gulp = require('gulp')
+var del = require('del')
 var reporter = require('gulp-sizereport')
-var html     = require('./build-html.js')
-var style     = require('./build-style.js')
-var paths    = require('./paths.js')
+var html = require('./build-html.js')
+var style = require('./build-style.js')
+var paths = require('./paths.js')
 
 
 /**
@@ -27,7 +27,7 @@ function clean() {
  */
 function buildHtml() {
     return html.min(html.cc(gulp.src(paths.dirs.html)))
-	.pipe(reporter({ gzip: true }))
+        .pipe(reporter({ gzip: true }))
         .pipe(gulp.dest(paths.dist))
 }
 
@@ -38,8 +38,8 @@ function buildHtml() {
  */
 function buildStyle() {
     return html.min(html.cc(gulp.src(paths.dirs.html)))
-	.pipe(reporter({ gzip: true }))
-        .pipe(gulp.dest(paths.dist))
+        .pipe(reporter({ gzip: true }))
+        .pipe(gulp.dest(paths.dist + '/styles'))
 }
 
 
@@ -51,9 +51,9 @@ function buildStyle() {
 function main() {
     console.log('build start')
     gulp.task('default',
-              gulp.series( clean
-                          , gulp.parallel(buildHtml, buildStyle)
-			 ))
+        gulp.series(clean
+            , gulp.parallel(buildHtml, buildStyle)
+        ))
     console.log('build done')
 }
 

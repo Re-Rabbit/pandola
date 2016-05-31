@@ -3,11 +3,11 @@
  *
  * 开发环境
  */
-var gulp        = require('gulp')
-var del         = require('del')
-var html        = require('./build-html.js')
-var style       = require('./build-style.js')
-var paths       = require('./paths.js')
+var gulp = require('gulp')
+var del = require('del')
+var html = require('./build-html.js')
+var style = require('./build-style.js')
+var paths = require('./paths.js')
 var browserSync = require('browser-sync').create()
 
 /**
@@ -37,7 +37,7 @@ function buildHtml() {
  */
 function buildStyle() {
     return style.cc(gulp.src(paths.dirs.style))
-        .pipe(gulp.dest(paths.tmp))
+        .pipe(gulp.dest(paths.tmp + '/styles'))
 }
 
 /**
@@ -51,35 +51,35 @@ function main() {
 
     // reload files
     function reload(done) {
-	      bsReload()
-	      done()
+        bsReload()
+        done()
     }
 
     // start server
     function server() {
-	      browserSync.init({
-	          port: 8888,
+        browserSync.init({
+            port: 8888,
             server: {
-		            baseDir: paths.tmp
+                baseDir: paths.tmp
             }
-	      })
+        })
     }
 
     // watcher
     function watch() {
-	      server()
+        server()
         gulp.watch(paths.dirs.html, gulp.series(buildHtml, reload))
         gulp.watch(paths.dirs.style, gulp.series(buildStyle, reload))
     }
 
     // export
     gulp.task('default',
-              gulp.series( clean
-                           , gulp.parallel(buildHtml
-                                           , buildStyle
-                                          )
-			                     , watch
-			                   ))
+        gulp.series(clean
+            , gulp.parallel(buildHtml
+                , buildStyle
+            )
+            , watch
+        ))
 }
 
 main()
