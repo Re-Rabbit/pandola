@@ -11,13 +11,15 @@ var paths = require('./paths.js')
  */
 function main() {
     var target = [ paths.tmp
-                   , paths.dist
-                   , paths.publish
+                 , paths.dist
+                 , paths.publish
+		 , './npm-debug.log'
                  ]
 
     function done(paths) {
-        console.log('This files or folders would be deleted ', paths.join('\n'))
-        console.log('清理完毕')
+	if(paths.length)
+            console.log('This files or folders would be deleted ', paths.join('\n'))
+        console.log('workspace clear.')
     }
 
     del(target).then(done)

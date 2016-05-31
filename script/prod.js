@@ -49,10 +49,16 @@ function buildStyle() {
  * @Task
  */
 function main() {
+    console.log('build start')
     gulp.task('default',
               gulp.series( clean
                           , gulp.parallel(buildHtml, buildStyle)
 			 ))
+    console.log('build done')
 }
 
 main();
+
+module.exports = {
+    main: main
+}
