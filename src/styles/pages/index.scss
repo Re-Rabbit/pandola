@@ -7,10 +7,12 @@
 // public
 @import "public";
 
-
+@import "../layouts/container";
 @import "../components/button";
 
 
+@include reset-console();
+ 
 .height--f10 {
     height: 100%;
 }
@@ -24,4 +26,32 @@
 .left-bar_item {
     padding: 2rem;
     border-bottom: 2px solid gray;
+}
+
+@mixin icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    
+    margin-right: 1em;
+}
+
+.icon--mail {
+    @include icon;
+    background-color: lightsteelblue;
+}
+.icon--trash {
+    @include icon;
+    background-color: lightsteelblue;
+}
+
+.counter--red {
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    color: lightgray;
+    background-color: red;
+    border-radius: 1em;
+    padding: 0.3em;
+    margin: -0.3em;
 }
