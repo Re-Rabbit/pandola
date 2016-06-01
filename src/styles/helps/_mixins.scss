@@ -1,3 +1,11 @@
+///
+/// Mixins
+/// 
+
+
+///
+/// Reset
+/// 
 @mixin reset-box() {
     margin:  0;
     padding: 0;
@@ -19,12 +27,40 @@
     border: 0 none;
 }
 
-@mixin reset-body( $fontSize: 16px
-		 , $color: #000
-		 , $bgColor: #fff
-		 ) {
-    font-size: $fontSize;
+@mixin reset-body( $fontFamily: sans-serif
+                   , $fontSize: 16px
+		               , $color: #000
+		               , $bgColor: #fff
+		             ) {
+    font-family: $fontFamily;
+    font-size:   $fontSize;
     line-height: 1;
     color: $color;
     background-color: $bgColor;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@mixin reset-console() {
+    html,
+    body,
+    body > div,
+    body > .main,
+    body > main {
+        @include size(100%);
+    }
+}
+
+
+/// Box
+
+@mixin size($width, $height: null) {
+    @if($height) {
+        width:  $width;
+        hieght: $height;
+    } @else {
+        width:  $width;
+        height: $width;
+    }
 }
