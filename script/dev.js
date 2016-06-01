@@ -3,6 +3,10 @@
  *
  * 开发环境
  */
+
+
+// @Todo add Javascript builder.
+
 var gulp        = require('gulp')
 var del         = require('del')
 var html        = require('./build-html.js')
@@ -37,7 +41,7 @@ function buildHtml() {
  */
 function buildStyle() {
     return style.cc(gulp.src(paths.dirs.style))
-        .pipe(gulp.dest(paths.tmp))
+        .pipe(gulp.dest(paths.tmp + '/styles'))
 }
 
 /**
@@ -51,35 +55,36 @@ function main() {
 
     // reload files
     function reload(done) {
-	      bsReload()
-	      done()
+	bsReload()
+	done()
     }
 
     // start server
     function server() {
-	      browserSync.init({
-	          port: 8888,
+	browserSync.init({
+	    port: 8888,
             server: {
-		            baseDir: paths.tmp
+		baseDir: paths.tmp
             }
-	      })
+	})
     }
 
     // watcher
     function watch() {
-	      server()
+	server()
         gulp.watch(paths.dirs.html, gulp.series(buildHtml, reload))
-        gulp.watch(paths.dirs.style, gulp.series(buildStyle, reload))
+        gulp.watch(paths.dirs.styleSources, gulp.series(buildStyle, reload))
     }
 
     // export
     gulp.task('default',
               gulp.series( clean
-                           , gulp.parallel(buildHtml
-                                           , buildStyle
-                                          )
-			                     , watch
-			                   ))
+                         , gulp.parallel( buildHtml
+                                        , buildStyle
+                                        )
+			 , watch
+			 ))
 }
+
 
 main()

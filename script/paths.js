@@ -14,5 +14,6 @@ exports.publish = PATH_PUBLISH
 exports.dirs = {
     html: PATH_SRC + '/pages/*.html',
     style: PATH_SRC + '/styles/pages/*.scss',
-    script: PATH_SRC + '/styles/pages/*.js',
+    styleSources: PATH_SRC + '/styles/**/*.scss',
+    script: PATH_SRC + '/scripts/pages/*.js',
 }
