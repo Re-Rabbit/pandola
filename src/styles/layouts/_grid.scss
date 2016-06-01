@@ -1,0 +1,63 @@
+$grid: 12;
+
+%row {    
+    // clean float
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.float-right {
+    float: right;
+}
+
+@for $i from 0 through $grid {
+    .col-#{$i}, .col-right-#{$i} {
+        width: percentage($i/$grid);
+        box-sizing: border-box;
+    }
+    .col-#{$i} {
+        float: left;
+    }
+    .col-right-#{$i} {
+        float: right;
+    }
+    .col-offset-#{$i} {
+        margin-left: percentage($i/$grid);
+    }
+    .col-push-#{$i} {
+        position: relative;
+        left: percentage($i/$grid);
+    }
+    .col-pull-#{$i} {
+        position: relative;
+        left: - percentage($i/$grid);
+    }
+}
+
+
+@for $i from 0 through 10 {
+    .col-f#{$i}, .col-right-f#{$i} {
+        width: percentage($i/10);
+        box-sizing: border-box;
+    }
+    .col-f#{$i} {
+        float: left;
+    }
+    .col-right-f#{$i} {
+        float: right;
+    }
+    .col-offset-f#{$i} {
+        margin-left: percentage($i/10);
+    }
+    .col-push-f#{$i} {
+        position: relative;
+        left: percentage($i/10);
+    }
+    .col-pull-f#{$i} {
+        position: relative;
+        left: - percentage($i/10);
+    }
+}
