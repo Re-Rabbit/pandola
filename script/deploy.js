@@ -1,7 +1,7 @@
 /**
  * Gulp file 项目构建文件
  *
- * 项目部署
+ * 项目部署到 github gh-pages
  */
 var gulp    = require('gulp')
 var gutil   = require('gulp-util')
@@ -9,6 +9,7 @@ var ghpages = require('gh-pages')
 var open    = require('open')
 var del     = require('del')
 var html    = require('./build-html.js')
+var style   = require('./build-style.js')
 var paths   = require('./paths.js')
 var config  = require('./../package.json')
 
@@ -37,6 +38,15 @@ function buildHtml() {
         .pipe(gulp.dest(paths.tmp))
 }
 
+/**
+ * 编译Style
+ *
+ * @Task
+ */
+function buildStyle() {
+    return style.cc(gulp.src(paths.dirs.style))
+        .pipe(gulp.dest(paths.tmp + '/styles'))
+}
 
 /**
  * 部署到github gh-pages分支
@@ -45,17 +55,17 @@ function buildHtml() {
  */
 function deploy(done) {
     // github gh-pages url.
-    var url = config.description
-    
+    var url = 'https://' + config.description
+
     ghpages.publish(paths.tmp, { clone: paths.publish }, function(err) {
-	if(err) {
-	    gutil.log(err)
-	    return done()
-	}
-	
-	gutil.log('deploy success and open with ' + url)
-	open(url)
-	done()
+	      if(err) {
+	          gutil.log(err)
+	          return done()
+	      }
+
+	      gutil.log('deploy success and open with ' + url)
+	      open(url)
+	      done()
     })
 }
 
@@ -68,9 +78,9 @@ function deploy(done) {
 function main() {
     gulp.task('default',
               gulp.series( gulp.parallel(cleanTmp, cleanPublish)
-                         , gulp.parallel(buildHtml)
-			 , deploy
-			 ))
+                           , gulp.parallel(buildHtml, buildStyle)
+			                     , deploy
+			                   ))
 }
 
 main()
