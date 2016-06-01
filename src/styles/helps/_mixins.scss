@@ -64,3 +64,10 @@
         height: $width;
     }
 }
+
+
+@mixin middle-block($width: 50rem) {
+    width: $width;
+    marign-left:  auto;
+    marign-right: auto;
+}
