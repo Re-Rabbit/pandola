@@ -9,3 +9,19 @@
 
 
 @import "../components/button";
+
+
+.height--f10 {
+    height: 100%;
+}
+
+.left-bar {
+    color: lightgray;
+    background-color: darkslateblue;
+    height: 100%;
+}
+
+.left-bar_item {
+    padding: 2rem;
+    border-bottom: 2px solid gray;
+}
