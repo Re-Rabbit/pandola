@@ -2,10 +2,6 @@
 /// Containers
 ///
 
-.container-console {
-    @include reset-console();
-}
-
 .container {
     @include middle-block($container);
 }
