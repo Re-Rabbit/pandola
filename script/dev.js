@@ -6,6 +6,7 @@ var gulp        = require('gulp')
 var del         = require('del')
 var html        = require('./build-html.js')
 var style       = require('./build-style.js')
+var apiServer   = require('./build-server.js')
 var paths       = require('./paths.js')
 var browserSync = require('browser-sync').create()
 
@@ -74,11 +75,13 @@ function main() {
     // export
     gulp.task('default',
               gulp.series( clean
-                         , gulp.parallel( buildHtml
-                                        , buildStyle
-                                        )
-			 , watch
-			 ))
+                           , gulp.parallel( buildHtml
+                                            , buildStyle
+                                          )
+			                     , gulp.parallel(watch
+                                           , apiServer
+                                          )
+			                   ))
 }
 
 

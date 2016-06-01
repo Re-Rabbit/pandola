@@ -1,25 +1,33 @@
-var gutil = require('gulp-util')
-var express = require('express')
-var morgan = require('morgan')
+var gutil       = require('gulp-util')
+var express     = require('express')
+var morgan      = require('morgan')
 var compression = require('compression')
-var open = require('open')
+var cors        = require('cors')
+var paths       = require('./paths.js')
 
 
-function server(dir) {
-    return function() {
-	var port = 8888
-	var url  = 'http://localhost:' + port
-	
-	express()
-	    .use(compression())
-	    .use(morgan('dev'))
-	    .use('/', express.static(dir, { extensions: ['html'] }))
-	    .listen(port)
+// @Todo remove static files
+// @Todo add api
 
-	gutil.log('server started on ' + url)
-	
-	open(url)
-    }
+var apiNamespace = 'api'
+var apiVersion   = '1'
+
+function apiPathPrefix() {
+    return '/' + apiNamespace + '/v' + apiVersion
+}
+
+function server() {
+	  var port = 7777
+	  var url  = 'http://localhost:' + port
+	  express()
+        .use(cors())
+	      .use(compression())
+	      .use(morgan('dev'))
+	      .use('/', express.static(paths.tmp, { extensions: ['html'] }))
+        .use(apiPathPrefix(), require('./api.js'))
+	      .listen(port)
+
+	  gutil.log('server started on ' + url)
 }
 
 module.exports = server

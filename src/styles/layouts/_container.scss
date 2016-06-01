@@ -1,0 +1,15 @@
+///
+/// Containers
+///
+
+.container-console {
+    @include reset-console();
+}
+
+.container {
+    @include middle-block($container);
+}
+
+.section {
+    margin-bottom: 1rem;
+}
