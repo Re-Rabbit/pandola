@@ -1,7 +1,7 @@
 {
   "name": "pandola",
   "version": "0.0.1",
-  "description": "http://re-rabbit.github.io/pandola",
+  "description": "https://re-rabbit.github.io/pandola",
   "main": "gulpfile.js",
   "scripts": {
     "clean": "node script/clean.js",

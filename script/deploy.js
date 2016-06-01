@@ -55,7 +55,7 @@ function buildStyle() {
  */
 function deploy(done) {
     // github gh-pages url.
-    var url = 'https://' + config.description
+    var url = config.description
 
     ghpages.publish(paths.tmp, { clone: paths.publish }, function(err) {
 	      if(err) {
