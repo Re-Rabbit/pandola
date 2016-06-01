@@ -1,8 +1,36 @@
 ///
-/// config.
+/// Config
 ///
 
-// 
-$global-font-size: 14px;
+
+///
+/// Font
+///
+
+// font family
+$global-font-family: "Microsoft YaHei UI","Microsoft YaHei","Helvetica Neue","Helvetica,Arial","Hiragino Sans GB","Hiragino Sans GB W3","sans-serif";
+
+// font size
+// 1rem = 16px
+$global-font-size: 16px;
+
+// default foreground color
 $global-color: #232323;
+// default background color
 $global-bgColor: #f3f3f3;
+
+
+///
+/// Color
+///
+
+// gray
+$color-gray-ll: #ddd;
+$color-gray-l:  #aaa;
+$color-gray:    #888;
+$color-gray-d:  #555;
+$color-gray-dd: #333;
+
+// primary color
+$color-primary:   #90ee90;
+$color-secondary: #bdb76b;

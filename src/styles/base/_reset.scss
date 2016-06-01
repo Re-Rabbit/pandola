@@ -1,3 +1,6 @@
+///
+/// Reset everything
+///
 
 // Global reset
 
@@ -37,9 +40,10 @@ audio:not([controls]),[hidden] {
 // Base reset
 
 body {
-    @include reset-body($global-font-size
-			, $global-color
-			, $global-bgColor);
+    @include reset-body( $global-font-family
+                         , $global-font-size
+			                   , $global-color
+			                   , $global-bgColor);
 }
 
 ol, ul {
