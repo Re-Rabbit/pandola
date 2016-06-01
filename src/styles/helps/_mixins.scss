@@ -1,0 +1,30 @@
+@mixin reset-box() {
+    margin:  0;
+    padding: 0;
+    border:  0;
+    ouline:  0;
+}
+
+@mixin reset-font() {
+    font-size:   1rem;
+    font-weight: inherit;
+    font-style:  inherit;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+
+@mixin reset-theme() {
+    background-color: transparent;
+    color: inherit;
+    border: 0 none;
+}
+
+@mixin reset-body( $fontSize: 16px
+		 , $color: #000
+		 , $bgColor: #fff
+		 ) {
+    font-size: $fontSize;
+    line-height: 1;
+    color: $color;
+    background-color: $bgColor;
+}
