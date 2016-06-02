@@ -37,7 +37,7 @@ function buildHtml() {
  * @Task
  */
 function buildStyle() {
-    return html.min(html.cc(gulp.src(paths.dirs.html)))
+    return html.min(html.cc(gulp.src(paths.dirs.style)))
         .pipe(reporter({ gzip: true }))
         .pipe(gulp.dest(paths.dist + '/styles'))
 }
