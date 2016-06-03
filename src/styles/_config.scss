@@ -22,6 +22,22 @@ $global-bgColor: #f3f3f3;
 
 
 ///
+/// Text
+///
+$font-size-lg: 1.2rem;
+$font-size:    1rem;
+$font-size-sm: 0.8rem;
+$font-size-2x: 2rem;
+$font-size-3x: 3rem;
+$font-size-4x: 4rem;
+
+
+$font-weight-l: 100;
+$font-weight:   400;
+$font-weight-d: 700;
+
+
+///
 /// Color
 ///
 
@@ -68,11 +84,11 @@ $shadows: (
 
 
 ///
-/// Container
+/// Containers
 ///
 
 $container-sm: 50rem;
 $container:    64rem;
 $container-lg: 75rem;
 
-$aside-default-width:  15rem;
+$aside-default-width:  12rem;
