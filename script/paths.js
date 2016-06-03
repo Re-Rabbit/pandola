@@ -16,4 +16,7 @@ exports.dirs = {
     style: PATH_SRC + '/styles/pages/*.scss',
     styleSources: PATH_SRC + '/styles/**/*.scss',
     script: PATH_SRC + '/scripts/pages/*.js',
+    libs: {
+	font: './node_modules/ionicons/dist/fonts/**/*.*'
+    }
 }

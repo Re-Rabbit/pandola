@@ -1,55 +1,87 @@
 <section class="console">
-  
-  <!-- Aside -->
-  
-  <aside class="aside-bar">
-
-    <nav><ul class="menus">
-	<li class="menus__item">
-	  <a href="#" class="menu">PAGE INDEX</a>
-	</li><!-- /.menu-item -->
-	<li class="menus__item">
-	  <a href="#" class="menu">GITHUB</a>
-	</li><!-- /.menu-item -->
-    </ul></nav><!-- /.menu -->
     
-  </aside>
+    <!-- Aside -->
+    
+    <aside class="aside-bar">
 
-  <!-- Main -->
-  
-  <main class="main">
-    <section class="container">
-      
-      <div class="section">
+	<nav><ul class="menus">
+	    <li class="menus__item">
+		<a href="#" class="menu">
+		    <span class="menu__icon ion-md-document"></span>
+	    PAGE INDEX
+		</a>
+	    </li><!-- /.menu-item -->
+	    <li class="menus__item">
+		<a href="#" class="menu">
+		    <span class="menu__icon ion-logo-github"></span>
+	    GITHUB
+		</a>
+	    </li><!-- /.menu-item -->
+	</ul></nav><!-- /.menu -->
+	
+    </aside>
 
-	<header class="header">
-	  <h2>OUR PAGES</h2>
-	</header>
+    
+    <!-- Main -->
+    
+    <main class="main">
+	<section class="container">
+	    
+	    <div class="section">
 
-	<section class="pages">
-	  <div class="pages__item">
-	    <a href="/detail.html">
-	      <section class="page">
-		<header class="page__header">D</header>
-		<section class="page__detail">detail.html</section>
-	      </section>
-	    </a>
-	  </div>
+		<header class="header">
+		    <h2>Page</h2>
+		</header>
+
+		<section class="pages" id="pages">
+		    
+		    <article class="pages__item">
+			<a href="/detail.html">
+			    <section class="page">
+				<header class="page__header">D</header>
+				<section class="page__detail">detail.html</section>
+			    </section>
+			</a>
+		    </article><!-- /.pages__item -->
+		    
+		</section><!-- /.pages -->
+
+	    </div><!-- /.section -->
+
+
+	    <!-- Icons -->
+	    
+	    <div class="section">
+
+		<header class="header">
+		    <h2>Icon</h2>
+		</header>
+
+		<section class="icons" id="icons">
+
+		    <template id="icon">
+			<article class="icons__item">
+			    <section class="icon">
+				<section class="icon__icon">
+				    <span class="ion {{name}}"></span>
+				</section>
+
+				<section class="icon__name">
+		  {{name}}
+				</section>
+				
+				<section class="icon__content">
+		  {{code}}
+				</section>
+			    </section>
+			</article><!-- /.icons__item -->
+		    </template>
+		    
+		</section><!-- /.icons -->
+
+	    </div><!-- /.section -->
+	    
 	</section>
-
-      </div><!-- /.section -->
-      
-    </section>
-  </main>
-  
+    </main>
+    
 </section>
-
-
-<script>
-  function api(path) {
-    return 'http://localhost:7777/api/v1/' + path
-  }
-  fetch(api('page'))
-    .then(res => res.json())
-    .then(console.log)
-</script>

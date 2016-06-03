@@ -10,6 +10,8 @@ var open    = require('open')
 var del     = require('del')
 var html    = require('./build-html.js')
 var style   = require('./build-style.js')
+var script  = require('./build-script.js')
+var font    = require('./build-font.js')
 var paths   = require('./paths.js')
 var config  = require('./../package.json')
 
@@ -49,6 +51,26 @@ function buildStyle() {
 }
 
 /**
+ * 编译Script
+ *
+ * @Task
+ */
+function buildScript() {
+    return style.cc(gulp.src(paths.dirs.script))
+        .pipe(gulp.dest(paths.tmp + '/scripts'))
+}
+
+/**
+ * 编译Font
+ *
+ * @Task
+ */
+function buildFont() {
+    return font.cc(gulp.src(paths.dirs.libs.font))
+        .pipe(gulp.dest(paths.tmp + '/fonts'))
+}
+
+/**
  * 部署到github gh-pages分支
  *
  * @Task
@@ -77,10 +99,13 @@ function deploy(done) {
  */
 function main() {
     gulp.task('default',
-              gulp.series( gulp.parallel(cleanTmp, cleanPublish)
-                           , gulp.parallel(buildHtml, buildStyle)
-			                     , deploy
-			                   ))
+              gulp.series(gulp.parallel(cleanTmp,
+					cleanPublish),
+			  gulp.parallel(buildHtml,
+					buildStyle,
+					buildScripts,
+					buildFont),
+			  deploy))
 }
 
 main()

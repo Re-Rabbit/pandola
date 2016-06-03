@@ -41,6 +41,7 @@
     "gulp-template": "^4.0.0",
     "gulp-util": "^3.0.7",
     "gulp-wrap": "^0.13.0",
+    "ionicons": "^3.0.0",
     "morgan": "^1.7.0",
     "normalize.scss": "^0.1.0",
     "open": "0.0.5"

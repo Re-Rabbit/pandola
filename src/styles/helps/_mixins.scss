@@ -55,6 +55,7 @@
     body > main,
     body > .console {
         @include size(100%);
+	overflow-y: auto;
     }
 }
 
@@ -93,4 +94,13 @@
 
 @mixin shadow($z: 0) {
     box-shadow: map-get($shadows, $z);
+}
+
+
+/// Text
+
+@mixin monospaced-icon() {
+    display: inline-block;
+    min-width: 1.2em;
+    text-align: center;
 }

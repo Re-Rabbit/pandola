@@ -1,0 +1,27 @@
+styles/
+|
+|- helps/
+|   |- _functions.scss    # Sass Functions
+|   |- _extends.scss      # Sass Placeholders
+|   |- _mixins.scss       # Sass Mixins
+|
+|- base/
+|   |- _reset.scss        # Reset/normalize
+|   |- _typo.scss         # Typography rules
+|
+|- components/
+|   |- _buttons.scss      # Buttons
+|
+|- layout/
+|   |- _grid.scss         # Grid system
+|   |- _container.scss    # Contianer
+|
+|- pages/
+|   |- _public.scss	  # Public imports
+|   |- _index.scss        # Index
+|
+|- node_modules/../
+|   |- _normalize.scss    # Normalize
+|   |- _ionicons.scss     # Ionicons
+|
+`- config.scss            # Variables

@@ -3,6 +3,11 @@
 ///
 
 .container {
+    box-sizing: border-box;
+    padding: 1rem;
+}
+
+.middle-container {
     @include middle-block($container);
 }
 

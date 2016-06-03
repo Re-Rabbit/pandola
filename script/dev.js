@@ -6,6 +6,8 @@ var gulp        = require('gulp')
 var del         = require('del')
 var html        = require('./build-html.js')
 var style       = require('./build-style.js')
+var script      = require('./build-script.js')
+var font        = require('./build-font.js')
 var apiServer   = require('./build-server.js')
 var paths       = require('./paths.js')
 var browserSync = require('browser-sync').create()
@@ -41,6 +43,26 @@ function buildStyle() {
 }
 
 /**
+ * 编译Font
+ *
+ * @Task
+ */
+function buildFont() {
+    return font.cc(gulp.src(paths.dirs.libs.font))
+        .pipe(gulp.dest(paths.tmp + '/fonts'))
+}
+
+/**
+ * 编译Script
+ *
+ * @Task
+ */
+function buildScript() {
+    return font.cc(gulp.src(paths.dirs.script))
+        .pipe(gulp.dest(paths.tmp + '/scripts'))
+}
+
+/**
  * Main task
  *
  * @Task
@@ -70,18 +92,19 @@ function main() {
         server()
         gulp.watch(paths.dirs.html, gulp.series(buildHtml, reload))
         gulp.watch(paths.dirs.styleSources, gulp.series(buildStyle, reload))
+	gulp.watch(paths.dirs.script, gulp.series(buildScript, reload))
     }
 
     // export
     gulp.task('default',
-              gulp.series( clean
-                           , gulp.parallel( buildHtml
-                                            , buildStyle
-                                          )
-			                     , gulp.parallel(watch
-                                           , apiServer
-                                          )
-			                   ))
+              gulp.series(clean,
+			  gulp.parallel(buildHtml,
+					buildStyle,
+					buildScript,
+					buildFont),
+			  gulp.parallel(watch,
+					apiServer)
+			 ))
 }
 
 
