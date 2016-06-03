@@ -6,20 +6,108 @@
 
 // public
 @import "public";
-
-@import "../layouts/container";
 @import "../components/button";
+@import "../layouts/container";
 
 
-@include reset-console();
- 
+$aside-width: 15rem;
+
+///
+/// Box
+///
+@at-root {
+    @include reset-console();
+}
+
+.aside-bar {
+    @include console-container($aside-width);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.main {
+    @include console-container(100%);
+    box-sizing: border-box;
+    padding-left: $aside-width;
+}
+
+///
+/// Theme
+///
+.aside-bar {
+    @include theme-reverse($bgc: $color-primary);
+    @include shadow(2);
+}
+
+
+///
+/// Page
+///
+.header {
+    border-bottom: 1px solid #ddd;
+    padding: 1rem 0;
+    box-sizing: border-box;
+}
+
+.menus {
+    padding-top: 3rem;
+}
+.menus__item {
+    padding: 1rem;
+    text-align: center;
+}
+
+.pages {
+    @extend .row;
+}
+.pages__item {
+    @extend .grid;
+    @extend .width--3;
+    padding: 1rem 2rem;
+}
+.page {
+    border-radius: 4px;
+    padding: 1rem;
+
+    transition: all 0.2s ease-in-out 0s;
+    background-color: $color-white;
+    &:hover {
+	background-color: $color-primary;
+    }
+}
+.page__header {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+
+    transition: all 0.2s ease-in-out 0s;
+    color: $color-primary;
+    .page:hover & {
+	color: $color-white;
+    }
+}
+.page__detail {
+    text-align: center;
+    font-size: 0.8rem;
+
+    transition: all 0.2s ease-in-out 0s;
+    .page:hover & {
+	color: $color-white;
+    }
+}
+
+
+
+
+
 .height--f10 {
     height: 100%;
 }
 
 .left-bar {
     color: lightgray;
-    background-color: darkslateblue;
+    background-color: $color-primary;
     height: 100%;
 }
 

@@ -40,10 +40,10 @@ audio:not([controls]),[hidden] {
 // Base reset
 
 body {
-    @include reset-body( $global-font-family
-                         , $global-font-size
-			                   , $global-color
-			                   , $global-bgColor);
+    @include reset-body($global-font-family,
+			$global-font-size,
+			$global-color,
+			$global-bgColor);
 }
 
 ol, ul {
@@ -52,4 +52,9 @@ ol, ul {
 
 a, img {
     border: none;
+}
+
+a {
+    @include reset-theme();
+    text-decoration: none;
 }

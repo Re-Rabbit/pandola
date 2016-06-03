@@ -26,6 +26,8 @@ $global-bgColor: #f3f3f3;
 ///
 
 // gray
+$color-white: #fff;
+$color-black: #000;
 $color-gray-ll: #ddd;
 $color-gray-l:  #aaa;
 $color-gray:    #888;
@@ -33,15 +35,44 @@ $color-gray-d:  #555;
 $color-gray-dd: #333;
 
 // primary color
-$color-primary:   #90ee90;
+$color-primary:   #4CAF50; //#90ee90;
 $color-secondary: #bdb76b;
 
+
+///
+/// Shadow
+///
+
+$shadow-inset:  rgba(#000, 0.2);
+$shadow-outset: rgba(#000, 0.14);
+$shadow-around: rgba(#000, 0.12);
+
+$shadows: (
+    0: none,
+    1: (0px 2px 4px -1px   $shadow-inset,
+	0px 4px 5px 0px    $shadow-outset,
+	0px 1px 10px 0px   $shadow-around),
+    2: (0px 5px 6px -3px   $shadow-inset,
+	0px 9px 12px 1px   $shadow-outset,
+	0px 3px 16px 2px   $shadow-around),
+    3: (0px 7px 9px -4px   $shadow-inset,
+	0px 14px 21px 2px  $shadow-outset,
+	0px 5px 26px 4px   $shadow-around),
+    4: (0px 9px 12px -6px  $shadow-inset,
+	0px 19px 29px 2px  $shadow-outset,
+	0px 7px 36px 6px   $shadow-around),
+    5: (0px 11px 15px -7px $shadow-inset,
+	0px 24px 38px 3px  $shadow-outset,
+	0px 9px 46px 8px   $shadow-around)
+);
 
 
 ///
 /// Container
 ///
 
-$container-sm: 800px;
-$container:    1000px;
-$container-lg: 1200px;
+$container-sm: 50rem;
+$container:    64rem;
+$container-lg: 75rem;
+
+$aside-default-width:  15rem;

@@ -1,0 +1,6 @@
+h2 {
+    @include reset-font()
+
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
