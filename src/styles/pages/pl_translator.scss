@@ -1,0 +1,26 @@
+@import "public";
+@import "../layouts/container";
+
+
+
+$aside-width: 15rem;
+
+.main {
+    @include console-container(100%);
+    box-sizing: border-box;
+    padding-left: $aside-width;
+}
+
+.text-layer {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+.trans-box {
+    @extend .row;
+    
+    .original, .transed {
+        width: 600px;
+    }
+}
