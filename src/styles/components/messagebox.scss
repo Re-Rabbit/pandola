@@ -1,0 +1,11 @@
+@mixin messagebox {
+    position: fixed;
+    width: 800px;
+    height: 600px;
+    left: 50%;
+    top: 50%;
+    margin-left: -400px;
+    margin-top: -300px;
+    z-index: 90;
+}
+
