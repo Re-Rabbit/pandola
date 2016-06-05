@@ -1,13 +1,15 @@
 @mixin model__main($width, $height) {
-    @include shadow(1);
+    @include shadow($model-main-shadow);
+    background-color: #fff;
     position: fixed;
     width: $width;
     height: $height;
     left: $width / 2;
     top: $height / 2;
-    margin-left: 50%;
-    margin-top: 50%;
-    z-index: 2;
+    transform: translate3d(-50%, -50%, 0);
+    // margin-left: 50%;
+    // margin-top: 50%;
+    z-index: $model-main-z;
 }
 
 @mixin model__bg {
@@ -16,9 +18,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: black;
+    background-color: rgba(#000, $model-bg-alpha);
     opacity: 0.5;
-    z-index: 1;
+    z-index: $model-bg-z;
 }
 
 @mixin model() {
@@ -27,6 +29,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 89;
+    z-index: $model-z;
 }
 
