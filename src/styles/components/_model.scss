@@ -1,9 +1,10 @@
 @mixin model__main($width, $height) {
+    @include shadow(1);
     position: fixed;
     width: $width;
     height: $height;
-    left: 50%;
-    top: 50%;
+    left: $width / 2;
+    top: $height / 2;
     margin-left: 50%;
     margin-top: 50%;
     z-index: 2;
