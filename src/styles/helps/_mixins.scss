@@ -117,3 +117,42 @@
     min-width: 1.2em;
     text-align: center;
 }
+
+/// Fill
+@mixin fill($direction, isFixed: fixed) {
+    @if ifFixed == fixed {
+        position: fixed;
+    }
+    @else
+    {
+        position: absolute;
+    }
+
+    @if $direction == "t" {
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+    @else if $direction == "r" {
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    @else if $direction == "b" {
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    @else if $direction == "l" {
+        top: 0;
+        left: 0;
+        bottom: 0;
+    }
+    @else if $direction == "a" {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+

@@ -53,7 +53,7 @@ button[disabled] {
 
 button, .button, .button--border, .button--radius, .button--circle {
     &:hover {
-        background-color: darken($color-primary, 10%);    
+        background-color: darken($color-primary, 10%);
     }
     &:active {
         background-color: $color-secondary;
