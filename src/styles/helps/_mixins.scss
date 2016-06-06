@@ -97,6 +97,19 @@
 }
 
 
+/// Border radius
+
+@mixin border-radius-ex($tl, $tr, $bl, $br) {
+    border-top-left-radius: $tl;
+    border-top-right-radius: $tr;
+    border-bottom-left-radius: $bl;
+    border-bottom-right-radius: $br;
+}
+
+@mixin border-radius($size){
+    @include border-radius-ex($size, $size, $size, $size);
+}
+
 /// Text
 
 @mixin monospaced-icon() {

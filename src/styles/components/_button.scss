@@ -1,3 +1,63 @@
+@import '../config.scss';
+@import '../helps/mixins.scss';
+
 .button {
     @include reset-theme();
+    display: inline-block;
+}
+
+.button--border {
+    @extend .button;
+    background-color: $color-primary;
+    color: $color-secondary;
+    border: $border-size solid darken($color-primary, 20%);
+}
+
+.button--radius {
+    @extend .button--border;
+    @include border-radius(0.3em);
+}
+
+
+.button--circle {
+    @extend .button--border;
+    @include border-radius(50%);
+}
+
+.button--flat {
+    @extend .button;
+}
+
+.button--sm {
+    font-size: 0.8rem;
+}
+
+.button--lg {
+    font-size: 1.5rem;
+}
+
+.button--block {
+    width: 100%;
+    @include border-radius(0);
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
+button[disabled] {
+    &, &:hover, &:active {
+        color: $color-gray-l;
+        background-color: $color-gray-d;
+        border-color: $color-gray-dd;
+    }
+}
+
+button, .button, .button--border, .button--radius, .button--circle {
+    &:hover {
+        background-color: darken($color-primary, 10%);    
+    }
+    &:active {
+        background-color: $color-secondary;
+        color: $color-primary;
+        border-color: darken($color-primary, 20%);
+    }
 }

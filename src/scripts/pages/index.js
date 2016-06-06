@@ -1,3 +1,5 @@
+import 'whatwg-fetch'
+
 function api(path) {
     return 'http://localhost:7777/api/' + path
 }
