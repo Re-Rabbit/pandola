@@ -2,10 +2,6 @@ import 'whatwg-fetch'
 import iconTpl from 'index/icon.njk'
 
 
-
-
-console.log(iconTpl)
-
 function api(path) {
     return 'http://localhost:7777/api/' + path
 }
