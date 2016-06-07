@@ -1,7 +1,14 @@
-{% extends "layouts/application.html" %} {% block style %}
-<link rel="stylesheet" href="/styles/login.css" /> {% endblock %} {% block script %}
+{% extends "layouts/application.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="/styles/login.css" />
+{% endblock %}
+
+{% block scripts %}
 <script src="/scripts/login.js"></script>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <main class="content center-all">
     <div class="login">
         <main>
