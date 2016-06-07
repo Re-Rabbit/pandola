@@ -4567,7 +4567,8 @@ h2 {
   color: lightgoldenrodyellow;
   background-color: dodgerblue;
   border-color: #005db7;
-  vertical-align: middle; }
+  vertical-align: middle;
+  padding: 0.3em 0.5em; }
   .button:hover, .button--border:hover, .button--noborder:hover, .button--radius:hover, .button--circle:hover, .button--circle__30px:hover, .button--circle__60px:hover, .button--flat:hover, .button--block:hover {
     color: #f5f5a4;
     background-color: #0077ea;
@@ -6655,3 +6656,18 @@ body > .console {
   border-radius: 1em;
   padding: 0.3em;
   margin: -0.3em; }
+
+.flex-center-col {
+  display: flex;
+  justify-content: center;
+  flex-direction: col; }
+
+.flex-center-row {
+  display: flex;
+  justify-content: center;
+  flex-direction: row; }
+
+.flex-center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
