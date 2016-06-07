@@ -7,17 +7,7 @@ function api(path) {
 }
 
 
-function replaceIconTemplate(temp) {
-    return function(icon) {
-        return temp.replace(/{{name}}/g, icon.name)
-	    .replace(/{{code}}/g, icon.code || 'error')
-    }
-}
-
-
 function main() {
-
-    var temp = document.querySelector('#icon').innerHTML
 
     fetch(api('page'))
         .then(res => res.json())
@@ -26,9 +16,9 @@ function main() {
     fetch(api('icon'))
         .then(res => res.json())
         .then(res => {
-	    var con = document.querySelector('#icons')
-	    var datas = res.map(replaceIconTemplate(temp)).join('')
-	    con.innerHTML += datas
+	          var con = document.querySelector('#icons')
+	          var datas = res.map(n => iconTpl.render({ name: n.name, code: n.code })).join('')
+	          con.innerHTML += datas
         })
 }
 
