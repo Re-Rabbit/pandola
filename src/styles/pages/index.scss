@@ -153,4 +153,65 @@ $aside-width: 15rem;
 .icon__content {
     font-size: 0.8rem;
     color: $color-gray;
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+
+.height--f10 {
+    height: 100%;
+}
+
+.left-bar {
+    color: lightgray;
+    background-color: $color-primary;
+    height: 100%;
+}
+
+.left-bar_item {
+    padding: 2rem;
+    border-bottom: 2px solid gray;
+}
+
+@mixin icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    
+    margin-right: 1em;
+}
+
+.icon--mail {
+    @include icon;
+    background-color: lightsteelblue;
+}
+.icon--trash {
+    @include icon;
+    background-color: lightsteelblue;
+}
+
+.counter--red {
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    color: lightgray;
+    background-color: red;
+    border-radius: 1em;
+    padding: 0.3em;
+    margin: -0.3em;
+}
+
+.flex-center-col {
+    @include flex-center-col;
+}
+.flex-center-row {
+    @include flex-center-row;
+}
+
+.flex-center-all {
+    @include flex-center-all;
+}
+>>>>>>> f7c1af15672d0c40446b0c1643dbc30f87c8aa25

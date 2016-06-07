@@ -8,6 +8,7 @@
     text-align: center;
     @include auto-darken($button-color-text, $button-color-main, $button-color-border);
     vertical-align: middle;
+    padding: 0.3em 0.5em;
 }
 
 
