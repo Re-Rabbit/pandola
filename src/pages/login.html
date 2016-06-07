@@ -1,0 +1,28 @@
+{% extends "layouts/application.html" %} {% block style %}
+<link rel="stylesheet" href="/styles/login.css" /> {% endblock %} {% block script %}
+<script src="/scripts/login.js"></script>
+{% endblock %} {% block content %}
+<main class="content center-all">
+    <div class="login">
+        <main>
+            <form class="login-input" action="#">
+                <header class="center-row">
+                    <span class='login-logo'></span>
+                    <h1>login</h1>
+                </header>
+                <main class="login-input__main">
+                    <input type="text" placeholder="USERNAME" />
+                    <input type="text" placeholder="PASSWORD" />
+                </main>
+                <footer class="login-input__footer space-row">
+                    <span>enter password</span>
+                    <input type="submit" class="button button--noborder" value="    LOGIN    " />
+                </footer>
+            </form>
+        </main>
+        <footer class="center-row">
+            some footer text and <a href="#"> links </a>
+        </footer>
+    </div>
+</main>
+{% endblock %}
