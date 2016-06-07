@@ -1,31 +1,50 @@
 @import '../config.scss';
 @import '../helps/mixins.scss';
 
+
 .button {
-    @include reset-theme();
     display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    @include auto-darken($button-color-text, $button-color-main, $button-color-border);
+    vertical-align: middle;
 }
+
 
 .button--border {
     @extend .button;
-    background-color: $color-primary;
-    color: $color-secondary;
-    border: $border-size solid darken($color-primary, 20%);
+    border: $border-size solid $button-color-border;
+}
+.button--noborder {
+    @extend .button;
+    border: 0;
 }
 
 .button--radius {
-    @extend .button--border;
+    @extend .button;
     @include border-radius(0.3em);
 }
 
 
 .button--circle {
-    @extend .button--border;
+    @extend .button;
     @include border-radius(50%);
+}
+.button--circle__30px {
+    @extend .button--circle;
+    @include size(30px);
+    line-height: 30px;
+}
+.button--circle__60px {
+    @extend .button--circle;
+    @include size(60px);
+    line-height: 60px;
 }
 
 .button--flat {
     @extend .button;
+    color: inherit;
+    background-color: transparent;
 }
 
 .button--sm {
@@ -37,6 +56,7 @@
 }
 
 .button--block {
+    @extend .button;
     width: 100%;
     @include border-radius(0);
     border-left-width: 0;
@@ -48,16 +68,5 @@ button[disabled] {
         color: $color-gray-l;
         background-color: $color-gray-d;
         border-color: $color-gray-dd;
-    }
-}
-
-button, .button, .button--border, .button--radius, .button--circle {
-    &:hover {
-        background-color: darken($color-primary, 10%);
-    }
-    &:active {
-        background-color: $color-secondary;
-        color: $color-primary;
-        border-color: darken($color-primary, 20%);
     }
 }
