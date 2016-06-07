@@ -196,3 +196,22 @@
         @include color-darken($color, $bg-color, $border-color, $active-darken-rate);
     }
 }
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin flex-center-row {
+    @include flex-center;
+    flex-direction: row;
+}
+@mixin flex-center-col {
+    @include flex-center;
+    flex-direction: col;
+}
+@mixin flex-center-all {
+    @include flex-center;
+    align-items: center;
+}
+
