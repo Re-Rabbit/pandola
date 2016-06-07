@@ -8,7 +8,7 @@ var html        = require('./build-html.js')
 var style       = require('./build-style.js')
 var script      = require('./build-script.js')
 var font        = require('./build-font.js')
-var apiServer   = require('./build-server.js')
+var apiServer   = require('./mock-server.js')
 var paths       = require('./paths.js')
 var browserSync = require('browser-sync').create()
 

@@ -1,14 +1,17 @@
-var wrap    = require('gulp-wrap')
-var data    = require('gulp-data')
-var htmlmin = require('gulp-htmlmin')
-var rev     = require('gulp-rev')
+var data     = require('gulp-data')
+var htmlmin  = require('gulp-htmlmin')
+var rev      = require('gulp-rev')
+var nunjucks = require('gulp-nunjucks');
+
 
 function cc(stream) {
     return stream
-	.pipe(data(function(file) {
-	    return { filename: file.path.match(/(\w+).html/)[1] }
-	}))
-	.pipe(wrap({ src: './src/pages/_layout' }, { variable: 'data' }))
+    /*
+      .pipe(data(function(file) {
+      return { filename: file.path.match(/(\w+).html/)[1] }
+      }))
+    */
+	.pipe(nunjucks.compile())
 }
 
 function min(stream) {

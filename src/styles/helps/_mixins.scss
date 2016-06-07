@@ -119,7 +119,7 @@
 }
 
 /// Fill
-@mixin fill($direction, isFixed: fixed) {
+@mixin fill($direction, $isFixed: fixed) {
     @if ifFixed == fixed {
         position: fixed;
     }
