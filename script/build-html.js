@@ -6,12 +6,7 @@ var nunjucks = require('gulp-nunjucks');
 
 function cc(stream) {
     return stream
-    /*
-      .pipe(data(function(file) {
-      return { filename: file.path.match(/(\w+).html/)[1] }
-      }))
-    */
-	.pipe(nunjucks.compile())
+	.pipe(nunjucks.compile().on('error', console.log))
 }
 
 function min(stream) {

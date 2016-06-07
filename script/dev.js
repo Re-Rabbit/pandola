@@ -58,7 +58,7 @@ function buildFont() {
  * @Task
  */
 function buildScript() {
-    return font.cc(gulp.src(paths.dirs.script))
+    return script.cc(gulp.src(paths.dirs.script))
         .pipe(gulp.dest(paths.tmp + '/scripts'))
 }
 

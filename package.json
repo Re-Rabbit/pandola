@@ -23,10 +23,14 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
     "browser-sync": "^2.12.10",
     "compression": "^1.6.2",
     "cors": "^2.7.1",
     "del": "^2.2.0",
+    "exports-loader": "^0.6.3",
     "express": "^4.13.4",
     "gh-pages": "^0.11.0",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -34,15 +38,23 @@
     "gulp-data": "^1.2.1",
     "gulp-gh-pages": "^0.5.4",
     "gulp-htmlmin": "^2.0.0",
+    "gulp-nunjucks": "^2.2.0",
     "gulp-rev": "^7.0.0",
     "gulp-sass": "^2.3.1",
     "gulp-sizereport": "^1.1.3",
     "gulp-template": "^4.0.0",
     "gulp-util": "^3.0.7",
-    "gulp-wrap": "^0.13.0",
     "ionicons": "^3.0.0",
     "morgan": "^1.7.0",
     "normalize.scss": "^0.1.0",
-    "open": "0.0.5"
+    "nunjucks-loader": "^2.4.3",
+    "open": "0.0.5",
+    "vinyl-named": "^1.1.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "whatwg-fetch": "^1.0.0"
   }
 }
