@@ -54,6 +54,9 @@ $color-gray-dd: #333;
 $color-primary:   #4CAF50; //#90ee90;
 $color-secondary: #bdb76b;
 
+$hover-darken-rate: 10%;
+$active-darken-rate: 20%;
+
 
 ///
 /// Shadow
@@ -64,7 +67,7 @@ $shadow-outset: rgba(#000, 0.14);
 $shadow-around: rgba(#000, 0.12);
 
 $shadows: (
-    0: none,
+	0: none,
     1: (0px 2px 4px -1px   $shadow-inset,
 	0px 4px 5px 0px    $shadow-outset,
 	0px 1px 10px 0px   $shadow-around),
@@ -111,4 +114,15 @@ $model-bg-z: 1;
 $model-main-z: 2;
 $model-bg-alpha: 0.28;
 $model-main-shadow: 1;
+
+///
+/// Button main color
+///
+
+$button-color-text: lightgoldenrodyellow;
+$button-color-main: dodgerblue;
+$button-color-border: darken($button-color-main, 20%);
+
+
+
 

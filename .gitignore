@@ -36,5 +36,6 @@ node_modules
 # Custom config
 # Ignore build dirs
 tmp
+*~
 dist
 .publish

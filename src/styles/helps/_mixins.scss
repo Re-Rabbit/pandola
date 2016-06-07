@@ -96,7 +96,11 @@
 }
 
 
-/// Border radius
+/// Border
+
+@mixin border($size, $color, $style:solid) {
+    border: $size $style $color;
+}
 
 @mixin border-radius-ex($tl, $tr, $bl, $br) {
     border-top-left-radius: $tl;
@@ -155,3 +159,40 @@
     }
 }
 
+
+/// Color
+
+@mixin color($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    color: $color;
+    background-color: $bg-color;
+    border-color: $border-color;
+}
+
+@mixin color-darken($color:inherit, $bg-color:inherit, $border-color:inherit, $rate:10%) {
+    color: darken($color, $rate);
+    background-color: darken($bg-color, $rate);
+    border-color: darken($border-color, $rate);
+}
+
+
+@mixin hover-darken($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    &:hover {
+        @include color-darken($color, $bg-color, $border-color, $hover-darken-rate);
+    }
+}
+
+@mixin active-darken($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    &:active {
+        @include color-darken($color, $bg-color, $border-color, $active-darken-rate);
+    }
+}
+
+@mixin auto-darken($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    @include color($color, $bg-color, $border-color);
+    &:hover {
+        @include color-darken($color, $bg-color, $border-color, $hover-darken-rate);
+    }
+    &:active {
+        @include color-darken($color, $bg-color, $border-color, $active-darken-rate);
+    }
+}
