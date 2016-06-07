@@ -1,7 +1,3 @@
-
-
-// @Todo add Javascript builder.
-
 var gulp        = require('gulp')
 var del         = require('del')
 var html        = require('./build-html.js')
@@ -11,6 +7,7 @@ var font        = require('./build-font.js')
 var apiServer   = require('./mock-server.js')
 var paths       = require('./paths.js')
 var browserSync = require('browser-sync').create()
+
 
 /**
  * 清除目标文件夹
@@ -81,8 +78,13 @@ function main() {
     function server() {
         browserSync.init({
             port: 8888,
+            logFileChanges: true,
             server: {
-                baseDir: paths.tmp
+                baseDir: paths.tmp,
+                middleware: function(req, res, next) {
+                    // @Todo add proxy server.
+                    return next()
+                }
             }
         })
     }
@@ -90,21 +92,21 @@ function main() {
     // watcher
     function watch() {
         server()
-        gulp.watch(paths.dirs.html, gulp.series(buildHtml, reload))
+        gulp.watch(paths.dirs.htmlSources, gulp.series(buildHtml, reload))
         gulp.watch(paths.dirs.styleSources, gulp.series(buildStyle, reload))
-	gulp.watch(paths.dirs.script, gulp.series(buildScript, reload))
+	      gulp.watch(paths.dirs.scriptSources, gulp.series(buildScript, reload))
     }
 
     // export
     gulp.task('default',
               gulp.series(clean,
-			  gulp.parallel(buildHtml,
-					buildStyle,
-					buildScript,
-					buildFont),
-			  gulp.parallel(watch,
-					apiServer)
-			 ))
+			                    gulp.parallel(buildHtml,
+					                              buildStyle,
+					                              buildScript,
+					                              buildFont),
+			                    gulp.parallel(watch,
+					                              apiServer)
+			                   ))
 }
 
 

@@ -58,7 +58,7 @@ $aside-width: 15rem;
     padding: 1rem;
     padding-left: 2rem;
     &:hover {
-	background-color: darken($color-primary, 10%);
+	      background-color: darken($color-primary, 10%);
     }
 }
 .menu {
@@ -83,7 +83,7 @@ $aside-width: 15rem;
     transition: all 0.2s ease-in-out 0s;
     background-color: $color-white;
     &:hover {
-	background-color: $color-primary;
+	      background-color: $color-primary;
     }
 }
 .page__header {
@@ -94,7 +94,7 @@ $aside-width: 15rem;
     transition: all 0.2s ease-in-out 0s;
     color: $color-primary;
     .page:hover & {
-	color: $color-white;
+	      color: $color-white;
     }
 }
 .page__detail {
@@ -103,17 +103,23 @@ $aside-width: 15rem;
 
     transition: all 0.2s ease-in-out 0s;
     .page:hover & {
-	color: $color-white;
+	      color: $color-white;
     }
 }
 
+
+
+///
+/// Icons
+///
+
 .icons {
-    @extend .row;
+    
 }
 .icons__item {
-    @extend .grid;
-    @extend .width--f1;
-    padding: 0.5rem;
+    display: inline-block;
+    width: 10rem;
+    padding: 1rem;
     text-align: center;
 }
 .icon {
@@ -126,12 +132,12 @@ $aside-width: 15rem;
 .icon__icon {
     min-height: 3rem;
     .ion {
-	font-size: 3rem;
-	transition: all 0.2s ease-in-out 0s;
-	.icon:hover & {
-	    transform: scale(1.2);
-	    color: $color-primary;
-	}
+	      font-size: 3rem;
+	      transition: all 0.2s ease-in-out 0s;
+	      .icon:hover & {
+	          transform: scale(1.2);
+	          color: $color-primary;
+	      }
     }
 }
 .icon__name {
@@ -141,12 +147,15 @@ $aside-width: 15rem;
     padding: 1rem;
     height: 3rem;
     .icon:hover & {
-	color: $color-primary;
+	      color: $color-primary;
     }
 }
 .icon__content {
     font-size: 0.8rem;
     color: $color-gray;
+<<<<<<< HEAD
+}
+=======
 }
 
 
@@ -205,3 +214,4 @@ $aside-width: 15rem;
 .flex-center-all {
     @include flex-center-all;
 }
+>>>>>>> f7c1af15672d0c40446b0c1643dbc30f87c8aa25
