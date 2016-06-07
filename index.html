@@ -2,29 +2,69 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="styles/index.css">
+<!-- CSP defined -->
+<!--
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+-->
+
+<!-- Used for a app page -->
+<meta name="application-name" content="pandola">
+
+<!-- Descriptions. -->
+<meta name="description" content="nope">
+
+<!-- @todo from https://github.com/joshbuchea/HEAD -->
+
+    
+<link rel="stylesheet" href="/styles/index.css" />
+
   </head>
   <body>
-    <section class="console">
-  
+    
+<section class="console">
   <!-- Aside -->
   
   <aside class="aside-bar">
 
     <nav><ul class="menus">
 	<li class="menus__item">
-	  <a href="#" class="menu">PAGE INDEX</a>
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-md-bookmark"></span>
+	    PAGE INDEX
+	  </a>
 	</li><!-- /.menu-item -->
 	<li class="menus__item">
-	  <a href="#" class="menu">GITHUB</a>
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-md-ionic"></span>
+	    ICONS
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-ios-construct"></span>
+	    COMPONENTS
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-ios-document"></span>
+	    DOCUMENTS
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-logo-github"></span>
+	    GITHUB
+	  </a>
 	</li><!-- /.menu-item -->
     </ul></nav><!-- /.menu -->
     
   </aside>
 
+  
   <!-- Main -->
   
   <main class="main">
@@ -33,19 +73,84 @@
       <div class="section">
 
 	<header class="header">
-	  <h2>OUR PAGES</h2>
+	  <h2>Page</h2>
 	</header>
 
-	<section class="pages">
-	  <div class="pages__item">
+	<section class="pages" id="pages">
+	  
+	  <article class="pages__item">
 	    <a href="/detail.html">
 	      <section class="page">
 		<header class="page__header">D</header>
 		<section class="page__detail">detail.html</section>
 	      </section>
 	    </a>
-	  </div>
-	</section>
+	  </article><!-- /.pages__item -->
+	  
+	</section><!-- /.pages -->
+
+      </div><!-- /.section -->
+
+
+      <!-- Icons -->
+      
+      <div class="section">
+
+	<header class="header">
+	  <h2>Icon</h2>
+	</header>
+
+	<section class="icons" id="icons">
+
+	  <template id="icon">
+	    <article class="icons__item">
+	      <section class="icon">
+		<section class="icon__icon">
+		  <span class="ion "></span>
+		</section>
+
+		<section class="icon__name">
+		  
+		</section>
+		
+		<section class="icon__content">
+		  
+		</section>
+	      </section>
+	    </article><!-- /.icons__item -->
+	  </template>
+	  
+	</section><!-- /.icons -->
+
+      </div><!-- /.section -->
+
+      <!-- Buttons -->
+      
+      <div class="section">
+
+	<header class="header">
+	  <h2>Buttons</h2>
+	</header>
+
+	<section class="buttons" id="buttons">
+		<button>button</button>
+		<div class="button">div.button</div>
+		<div class="button--radius">div.button--radius</div>
+		<div class="button--circle__60px">div.button--circle__60px</div>
+		<div class="button--flat">div.button--flat</div>
+		<div class="button--border">div.button--border</div>
+		<div></div>
+		
+		<button class="button--radius button--sm button--noborder">button.button--radius.button--sm.button--noborder</button>
+		<button class="button--radius button--lg button--border">button.button--radius.button--lg.button--border</button>
+		<div></div>
+		
+		<button class="button--radius button--border" disabled>button.button--radius.button--noborder[disabled]</button>
+		<button class="button--radius  button--noborder button--block">button.button--radius.button--noborder.button--block</button>
+		<button class="button--radius  button--border button--block">button.button--radius.button--border.button--block</button>
+		<div></div>
+
+	</section><!-- /.buttons -->
 
       </div><!-- /.section -->
       
@@ -54,17 +159,8 @@
   
 </section>
 
+    
+<script src="/scripts/index.js"></script>
 
-<script>
-  function api(path) {
-    return 'http://localhost:7777/api/v1/' + path
-  }
-  fetch(api('page'))
-    .then(res => res.json())
-    .then(console.log)
-</script>
-
-
-    <script src="scripts/index.js"></script>
   </body>
-</html>
+</html>
