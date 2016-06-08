@@ -21,8 +21,10 @@ $global-font-size: 16px;
 $global-color: #232323;
 // default background color
 $global-bgColor: #f3f3f3;
-
+// default images path
 $global-image-path: "/images/";
+// default border radius
+$global-border-radius: 4px;
 
 
 ///
@@ -46,8 +48,8 @@ $font-weight-d: 700;
 ///
 
 // gray
-$color-white: #fff;
-$color-black: #000;
+$color-white:   #fff;
+$color-black:   #000;
 $color-gray-ll: #ddd;
 $color-gray-l:  #aaa;
 $color-gray:    #888;
@@ -57,6 +59,23 @@ $color-gray-dd: #333;
 // primary color
 $color-primary:   #4CAF50; //#90ee90;
 $color-secondary: #bdb76b;
+
+// stated color
+$color-info:    #03A9F4; // blue
+$color-success: #4CAF50; // green
+$color-warning: #FF9800; // yellow
+$color-error:   #F44336; // red
+
+// alpha
+$alpha-ll: 0.08;
+$alpha-l:  0.32;
+$alpha:    0.56;
+$alpha-d:  0.72;
+$alpha-dd: 0.88;
+$alpha-hide: 0;
+$alpha-show: 1;
+
+
 
 $hover-darken-rate: 10%;
 $active-darken-rate: 20%;

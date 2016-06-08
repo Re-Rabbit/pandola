@@ -49,9 +49,7 @@
 @mixin reset-console() {
     html,
     body,
-    body > section,
     body > .main,
-    body > main,
     body > .console {
         @include size(100%);
 	overflow-y: auto;
