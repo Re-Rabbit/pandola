@@ -7,7 +7,10 @@
 // public
 @import "public";
 @import "../components/button";
+@import "../components/breadcrumb";
 @import "../layouts/container";
+@import "../layouts/aside";
+
 
 
 $aside-width: 15rem;
@@ -21,9 +24,6 @@ $aside-width: 15rem;
 
 .aside-bar {
     @include console-container($aside-width);
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .main {
@@ -32,18 +32,11 @@ $aside-width: 15rem;
     padding-left: $aside-width;
 }
 
-///
-/// Theme
-///
-.aside-bar {
-    @include theme-reverse($bgc: $color-primary);
-    @include shadow(2);
-}
-
 
 ///
 /// Page
 ///
+
 .header {
     border-bottom: 1px solid #ddd;
     padding: 1rem 0;
@@ -54,16 +47,18 @@ $aside-width: 15rem;
 .menus {
     padding-top: 3rem;
 }
-.menus__item {
+
+.menu {
+    display: block;
     padding: 1rem;
     padding-left: 2rem;
+    font-size: 0.8rem;
+
     &:hover {
-	      background-color: darken($color-primary, 10%);
+	background-color: darken($color-primary, 10%);
     }
 }
-.menu {
-    font-size: 0.8rem;
-}
+
 .menu__icon {
     @include monospaced-icon()
 }
@@ -83,7 +78,7 @@ $aside-width: 15rem;
     transition: all 0.2s ease-in-out 0s;
     background-color: $color-white;
     &:hover {
-	      background-color: $color-primary;
+	background-color: $color-primary;
     }
 }
 .page__header {
@@ -94,7 +89,7 @@ $aside-width: 15rem;
     transition: all 0.2s ease-in-out 0s;
     color: $color-primary;
     .page:hover & {
-	      color: $color-white;
+	color: $color-white;
     }
 }
 .page__detail {
@@ -103,7 +98,7 @@ $aside-width: 15rem;
 
     transition: all 0.2s ease-in-out 0s;
     .page:hover & {
-	      color: $color-white;
+	color: $color-white;
     }
 }
 
@@ -132,12 +127,12 @@ $aside-width: 15rem;
 .icon__icon {
     min-height: 3rem;
     .ion {
-	      font-size: 3rem;
-	      transition: all 0.2s ease-in-out 0s;
-	      .icon:hover & {
-	          transform: scale(1.2);
-	          color: $color-primary;
-	      }
+	font-size: 3rem;
+	transition: all 0.2s ease-in-out 0s;
+	.icon:hover & {
+	    transform: scale(1.2);
+	    color: $color-primary;
+	}
     }
 }
 .icon__name {
@@ -147,7 +142,7 @@ $aside-width: 15rem;
     padding: 1rem;
     height: 3rem;
     .icon:hover & {
-	      color: $color-primary;
+	color: $color-primary;
     }
 }
 .icon__content {

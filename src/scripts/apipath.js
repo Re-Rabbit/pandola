@@ -1,5 +1,5 @@
-const APIServerPath = 'http://localhost:7777/api/'
+import project from 'toml!.project'
 
 export default function api(path) {
-    return APIServerPath + path
+    return `${project.api}/${path}`
 }

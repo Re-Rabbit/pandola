@@ -1,3 +1,12 @@
+{#
+
+Icon.
+
+ionicons
+
+#}
+
+
 {% extends "layouts/index.html" %}
 
 {% block script %}
@@ -7,25 +16,46 @@
 
 {% block main %}
 
-<!-- Main -->
+<header><ol class="breadcrumb">
+    <li class="breadcrumb__item">
+      <a class="breadcrumb__home" href="/">
+	<span class="ion ion-md-home"></span>
+      </a>
+    </li>
+    <li class="breadcrumb__item">
+      <a href="/">Dashboard</a>
+    </li>
+    <li class="breadcrumb__item breadcrumb__item--active">
+      <a href="/">Icon</a>
+    </li>
+</ol></header>
 
-<main class="main">
-  <section class="container">
 
-    <!-- Icons -->
+<!-- Icons -->
+<div class="section">
+
+  <div class="row">
+    <header class="header grid">
+      <h2>ICON</h2>
+      <small>
+	From <a class="link" href="http://ionicons.com">ionicons</a>
+	
+	<span class="ion-logo-github"></span>
+	<a class="link" href="https://github.com/driftyco/ionicons">https://github.com/driftyco/ionicons</a>
+      </small>
+    </header><!-- /.title -->
+
     
-    <div class="section">
+    <section class="search-bar grid--last">
+      <input type="search" placeholder="Type names" id="search" />
+      <span class="ion-ios-search-outline"></span>
+    </section><!-- /.search-bar -->
+  </div>
 
-	    <header class="header">
-	      <h2>Icon</h2>
-	    </header>
+  
+  <section class="icons" id="icons"></section><!-- /.icons -->
 
-
-	    <section class="icons" id="icons"></section><!-- /.icons -->
-
-    </div><!-- /.section -->
+</div><!-- /.section -->
     
-  </section>
-</main>
 
 {% endblock %}

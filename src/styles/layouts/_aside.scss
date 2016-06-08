@@ -1,0 +1,18 @@
+////
+/// Aside.
+///
+/// 侧边栏
+////
+
+$aside-shadow: 2;
+$aside-bg-img: "#{$global-image-path}binding_dark.png";
+
+.aside-bar {
+    @include fill(l);
+}
+
+.aside-bar {
+    @include theme-reverse();
+    @include shadow($aside-shadow);
+    background-image: url($aside-bg-img);
+}

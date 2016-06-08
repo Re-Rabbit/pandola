@@ -85,7 +85,7 @@
 
 /// Theme
 
-@mixin theme-reverse($c: #fff, $bgc: #000) {
+@mixin theme-reverse($c: $global-bgColor, $bgc: $global-color) {
     color: $c;
     background-color: $bgc;
 }
@@ -122,36 +122,31 @@
 }
 
 /// Fill
-@mixin fill($direction, $isFixed: fixed) {
+@mixin fill($direction: a, $isFixed: fixed) {
     @if ifFixed == fixed {
         position: fixed;
     }
-    @else
-    {
+    @else {
         position: absolute;
     }
 
-    @if $direction == "t" {
+    @if $direction == t {
         left: 0;
         right: 0;
         top: 0;
-    }
-    @else if $direction == "r" {
+    } @else if $direction == r {
         top: 0;
         right: 0;
         bottom: 0;
-    }
-    @else if $direction == "b" {
+    } @else if $direction == b {
         left: 0;
         right: 0;
         bottom: 0;
-    }
-    @else if $direction == "l" {
+    } @else if $direction == l {
         top: 0;
         left: 0;
         bottom: 0;
-    }
-    @else if $direction == "a" {
+    } @else {
         top: 0;
         right: 0;
         bottom: 0;
@@ -215,3 +210,10 @@
     align-items: center;
 }
 
+
+
+@mixin nav-link() {
+    li {
+	display: inline-block;
+    }
+}

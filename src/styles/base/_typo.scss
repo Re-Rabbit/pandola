@@ -1,6 +1,13 @@
-h2 {
+h2,.h2 {
     @include reset-font()
 
     font-size: 2rem;
+    font-weight: $font-weight-d;
     margin-bottom: 1rem;
+}
+
+small,.small {
+    display: block;
+    font-size: $font-size-sm;
+    color: $color-gray-d;
 }

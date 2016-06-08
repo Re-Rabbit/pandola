@@ -9,29 +9,31 @@ var path    = require('path')
 
 function webpackConfig() {
     return {
-	      module: {
-	          loaders: [{
-		            test: /\.jsx?$/,
-		            loader: 'babel',
-		            query: { compact: false }
-		        },{
+	module: {
+	    loaders: [{
+		test: /\.jsx?$/,
+		loader: 'babel',
+		query: { compact: false }
+	    },{
                 test: /\.njk$/,
-		            loader: 'nunjucks'
-		        }]
-	      },
-	      resolve: {
-	          root: [
-		            path.resolve('./src/pages/templates'),
-                path.resolve('./src/scripts/')
-	          ]
-	      }
+		loader: 'nunjucks'
+	    }]
+	},
+	resolve: {
+	    root: [
+		path.resolve('./src/pages/templates'),
+                path.resolve('./src/scripts/'),
+		path.resolve('./')
+	    ]
+	}
     }
 }
 
+// @todo fix file path.
 function cc(stream) {
     return stream
-	      .pipe(named(function(file) {
-            var filename = file.path.match(/pages\/([^]+)\.js$/)
+	.pipe(named(function(file) {
+            var filename = file.path.match(/pages[\/|\\]([^]+)\.js$/)
             if(filename) {
                 file.named = filename[1]
             } else {
@@ -40,7 +42,7 @@ function cc(stream) {
 
             return this.queue(file)
         }))
-	      .pipe(webpack(webpackConfig()))
+	.pipe(webpack(webpackConfig()).on('error', console.log))
 }
 
 

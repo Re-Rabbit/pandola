@@ -5,6 +5,7 @@
 ///
 /// @author PL <0x00.pl@gmail.com>
 /// @author Rabbit <yfhj1990@hotmail.com>
+/// @author WuWu <zooxyt@gmail.com>
 ///
 /// @todo table elements reset.
 /// @todo form elements reset.
@@ -72,5 +73,12 @@ a, img {
 }
 a {
     @include reset-theme();
+    font-size: inherit;
     text-decoration: none;
+}
+
+a.link {
+    color: $color-primary;
+    transition: color 0.2s ease-in-out 0s;
+    &:hover { color: darken($color-primary, 10%); }
 }
