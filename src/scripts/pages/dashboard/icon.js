@@ -71,17 +71,14 @@ function main() {
 	    let clipboard = new Clipboard('.icons__item')
 	    
 	    clipboard.on('success', function(e) {
-		console.info('Action:', e.action)
-		console.info('Text:', e.text)
-		console.info('Trigger:', e.trigger)
 
-		notify({ state: 'success', content: `已复制 ${e.text} 到剪贴板` })
+		notify.of({ position: 'bm', state: 'success', content: `已复制 ${e.text} 到剪贴板` })
 
 		e.clearSelection()
 	    })
 
 	    clipboard.on('error', function(e) {
-		notify({ state: 'error', content: `复制失败` })
+		notify.of({ state: 'error', content: `复制失败` })
 	    });
 
 	    

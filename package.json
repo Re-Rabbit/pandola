@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "clipboard": "^1.5.10",
+    "immutable": "^3.8.1",
     "whatwg-fetch": "^1.0.0"
   }
 }
