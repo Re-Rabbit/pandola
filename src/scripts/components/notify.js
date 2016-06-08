@@ -2,7 +2,7 @@
  * Notify.
  */
 
-import { Map } from 'Immutable'
+import { Map } from 'immutable'
 import notifyTpl from 'components/notify.njk'
 
 // @todo add hover pause animation

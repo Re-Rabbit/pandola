@@ -26,6 +26,22 @@
     @include border-radius(0.3em);
 }
 
+.button--radius__top {
+    @extend .button;
+    @include border-radius-direction("t");
+}
+.button--radius__bottom {
+    @extend .button;
+    @include border-radius-direction("b");
+}
+.button--radius__left {
+    @extend .button;
+    @include border-radius-direction("l");
+}
+.button--radius__right {
+    @extend .button;
+    @include border-radius-direction("r");
+}
 
 .button--circle {
     @extend .button;

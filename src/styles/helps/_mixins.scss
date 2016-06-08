@@ -107,6 +107,25 @@
     border-bottom-right-radius: $br;
 }
 
+@mixin border-radius-direction($direction, $size: $border-radius-size-default) {
+    @if(str-index($direction, "t") or str-index($direction, "u")){
+        border-top-left-radius: $size;
+        border-top-right-radius: $size;
+    }
+    @if(str-index($direction, "b") or str-index($direction, "d")){
+        border-bottom-left-radius: $size;
+        border-bottom-right-radius: $size;
+    }
+    @if(str-index($direction, "l")){
+        border-top-left-radius: $size;
+        border-bottom-left-radius: $size;
+    }
+    @if(str-index($direction, "r")){
+        border-top-right-radius: $size;
+        border-bottom-right-radius: $size;
+    }
+}
+
 @mixin border-radius($size){
     @include border-radius-ex($size, $size, $size, $size);
 }
