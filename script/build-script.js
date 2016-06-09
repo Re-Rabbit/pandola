@@ -29,19 +29,14 @@ function webpackConfig() {
     }
 }
 
-// @todo fix file path.
+
 function cc(stream) {
     return stream
 	.pipe(named(function(file) {
-            var filename = file.path.match(/pages[\/|\\]([^]+)\.js$/)
-			return filename[1]
-            // if(filename) {
-            //     file.named = filename[1]
-            // } else {
-            //     file.named = path.basename(file.path, path.extname(file.path))
-            // }
-
-            // return this.queue(file)
+			var path_base = "src/scripts/pages"
+			var path_obj = path.parse(path.relative(path_base, file.path))
+			var filename = path.join(path_obj.dir, path_obj.name)
+			return filename
         }))
 	.pipe(webpack(webpackConfig()).on('error', console.log))
 }
