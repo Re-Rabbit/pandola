@@ -34,13 +34,14 @@ function cc(stream) {
     return stream
 	.pipe(named(function(file) {
             var filename = file.path.match(/pages[\/|\\]([^]+)\.js$/)
-            if(filename) {
-                file.named = filename[1]
-            } else {
-                file.named = path.basename(file.path, path.extname(file.path))
-            }
+			return filename[1]
+            // if(filename) {
+            //     file.named = filename[1]
+            // } else {
+            //     file.named = path.basename(file.path, path.extname(file.path))
+            // }
 
-            return this.queue(file)
+            // return this.queue(file)
         }))
 	.pipe(webpack(webpackConfig()).on('error', console.log))
 }
