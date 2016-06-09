@@ -8,28 +8,43 @@
     //margin-bottom: 1rem;
 }
 
+
+/// box & typo
+
 .breadcrumb__item {
+    
     display: inline-block;
     vertical-align: baseline;
     font-size: $font-size-sm;
-    
-    color: $color-primary;
-    
-    transition: color 0.2s ease-in-out 0s;
-    &:hover {
-	      color: darken($color-primary, 10%);
-    }
 
     &:after {
 	      content: '/';
 	      font-weight: 100;
-	      //margin: 0 0.25rem;
 	      color: $color-gray;
     }
 }
 
+
+/// transition
+
+.breadcrumb__item {
+    transition: color 0.2s ease-in-out 0s;
+    color: $color-primary;
+
+    &:hover {
+	      color: darken($color-primary, 10%);
+    }
+}
+
+
+///
+/// Actived item
+///
+
 .breadcrumb__item--active {
+
     color: $color-gray;
+
     &:hover {
 	      color: inherit;
     }
@@ -40,10 +55,18 @@
 }
 
 
+///
+/// Home icon
+///
+
 .breadcrumb__home {
+
     display: inline-block;
+
+    // @todo remove this
     position: relative;
     top: 0.05rem;
+
     .ion {
 	      font-size: $font-size-lg;
     }

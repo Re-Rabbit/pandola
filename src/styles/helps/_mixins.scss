@@ -18,6 +18,7 @@
     font-weight: normal;
     font-style:  normal;
     font-family: inherit;
+    line-height: 1;
     vertical-align: baseline;
 }
 
@@ -28,9 +29,9 @@
 }
 
 @mixin reset-body($fontFamily: sans-serif,
-		  $fontSize: 16px,
-		  $color: #000,
-		  $bgColor: #fff) {
+		              $fontSize: 16px,
+		              $color: #000,
+		              $bgColor: #fff) {
     // typo
     font-family: $fontFamily;
     font-size:   $fontSize;
@@ -52,7 +53,7 @@
     body > .main,
     body > .console {
         @include size(100%);
-	overflow-y: auto;
+	      overflow-y: auto;
     }
 }
 
@@ -231,7 +232,7 @@
 
 @mixin nav-link() {
     li {
-	display: inline-block;
+	      display: inline-block;
     }
 }
 
@@ -239,4 +240,18 @@
 @mixin border-box-padding($pad...) {
     box-sizing: border-box;
     padding: $pad;
+}
+
+@mixin trans($prop: all,
+             $during: 0.2s,
+             $ease: ease-in-out,
+             $delay: 0s) {
+    transition: $prop $during $ease $delay;
+}
+
+@mixin trans-hover() {
+    @include trans();
+    &:hover {
+        @content;
+    }
 }

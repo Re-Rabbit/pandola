@@ -1,3 +1,5 @@
+console.log('test')
+
 var canvas = document.querySelector('canvas'),
     ctx = canvas.getContext('2d');
 var w = window.innerWidth;
@@ -214,3 +216,5 @@ loop();
  requestAnimationFrame(animateDots);	
  });
  */
+
+
