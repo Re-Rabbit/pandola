@@ -11,7 +11,7 @@ $grid: 12;
 ///
 
 // font family
-$global-font-family: "Microsoft YaHei UI","Microsoft YaHei","Helvetica Neue","Helvetica,Arial","Hiragino Sans GB","Hiragino Sans GB W3","sans-serif";
+$global-font-family: "Microsoft YaHei UI","Microsoft YaHei","Ubuntu mono","Helvetica Neue","Helvetica,Arial","Hiragino Sans GB","Hiragino Sans GB W3","sans-serif";
 
 // font size
 // 1rem = 16px
@@ -90,22 +90,22 @@ $shadow-outset: rgba(#000, 0.14);
 $shadow-around: rgba(#000, 0.12);
 
 $shadows: (
-	0: none,
+	  0: none,
     1: (0px 2px 4px -1px   $shadow-inset,
-	0px 4px 5px 0px    $shadow-outset,
-	0px 1px 10px 0px   $shadow-around),
+	      0px 4px 5px 0px    $shadow-outset,
+	      0px 1px 10px 0px   $shadow-around),
     2: (0px 5px 6px -3px   $shadow-inset,
-	0px 9px 12px 1px   $shadow-outset,
-	0px 3px 16px 2px   $shadow-around),
+	      0px 9px 12px 1px   $shadow-outset,
+	      0px 3px 16px 2px   $shadow-around),
     3: (0px 7px 9px -4px   $shadow-inset,
-	0px 14px 21px 2px  $shadow-outset,
-	0px 5px 26px 4px   $shadow-around),
+	      0px 14px 21px 2px  $shadow-outset,
+	      0px 5px 26px 4px   $shadow-around),
     4: (0px 9px 12px -6px  $shadow-inset,
-	0px 19px 29px 2px  $shadow-outset,
-	0px 7px 36px 6px   $shadow-around),
+	      0px 19px 29px 2px  $shadow-outset,
+	      0px 7px 36px 6px   $shadow-around),
     5: (0px 11px 15px -7px $shadow-inset,
-	0px 24px 38px 3px  $shadow-outset,
-	0px 9px 46px 8px   $shadow-around)
+	      0px 24px 38px 3px  $shadow-outset,
+	      0px 9px 46px 8px   $shadow-around)
 );
 
 
@@ -138,6 +138,7 @@ $model-main-z: 2;
 $model-bg-alpha: 0.28;
 $model-main-shadow: 1;
 
+
 ///
 /// Button main color
 ///
@@ -145,7 +146,3 @@ $model-main-shadow: 1;
 $button-color-text: lightgoldenrodyellow;
 $button-color-main: dodgerblue;
 $button-color-border: darken($button-color-main, 20%);
-
-
-
-

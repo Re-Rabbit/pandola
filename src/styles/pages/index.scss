@@ -9,12 +9,11 @@
 @import "../components/button";
 @import "../components/breadcrumb";
 @import "../components/notify";
+@import "../components/label";
 @import "../layouts/container";
-@import "../layouts/aside";
+@import "../layouts/console";
 
 
-
-$aside-width: 15rem;
 
 ///
 /// Box
@@ -23,27 +22,10 @@ $aside-width: 15rem;
     @include reset-console();
 }
 
-.aside-bar {
-    @include console-container($aside-width);
-}
-
-.main {
-    @include console-container(100%);
-    box-sizing: border-box;
-    padding-left: $aside-width;
-}
-
 
 ///
-/// Page
+/// menu
 ///
-
-.header {
-    border-bottom: 1px solid #ddd;
-    padding: 1rem 0;
-    box-sizing: border-box;
-    margin-bottom: 1rem;
-}
 
 .menus {
     padding-top: 3rem;
@@ -56,7 +38,7 @@ $aside-width: 15rem;
     font-size: 0.8rem;
 
     &:hover {
-	background-color: darken($color-primary, 10%);
+	      background-color: darken($color-primary, 10%);
     }
 }
 
@@ -64,14 +46,93 @@ $aside-width: 15rem;
     @include monospaced-icon()
 }
 
+///
+/// top-bar
+///
+.header__top {
+    @extend %p1;
+    //padding-left: 0.5rem;
+    border-bottom: 1px solid $color-gray-ll;
+}
+
+///
+/// bottom-bar
+///
+
+.header__middle {
+    @extend %p1;
+}
+
+///
+/// bottom-bar
+///
+
+.header__bottom {
+    @include fill(b, false);
+}
+
+///
+/// logo
+///
+.logo {
+    text-align: center;
+}
+
+.logo__content {
+    color: $color-primary;
+    font-size: $font-size-lg;
+}
+
+
+
+
+///
+/// tab
+///
+.tab {
+    padding: 0 1rem;
+}
+.tab__title {
+    padding: 0.5rem 0.25rem;
+    display: inline-block;
+    border-bottom: 0.25rem solid $color-primary;
+    font-weight: $font-weight-d;
+    cursor: pointer;
+}
+
+
+///
+/// title
+///
+
+.title-logo {
+    //padding: 0.5rem 0;
+    width: 4rem;
+    color: #3F51B5;
+    .ion {
+        font-size: $font-size-4x;
+    }
+}
+
+.title-description {
+    margin-bottom: 0.5rem;
+}
+
+
+///
+/// Pages
+///
+
 .pages {
     @extend .row;
 }
+
 .pages__item {
     @extend .grid;
     @extend .width--2;
     padding: 1rem 2rem;
 }
+
 .page {
     border-radius: 4px;
     padding: 1rem;
@@ -79,9 +140,10 @@ $aside-width: 15rem;
     transition: all 0.2s ease-in-out 0s;
     background-color: $color-white;
     &:hover {
-	background-color: $color-primary;
+	      background-color: $color-primary;
     }
 }
+
 .page__header {
     text-align: center;
     font-size: 3rem;
@@ -90,16 +152,17 @@ $aside-width: 15rem;
     transition: all 0.2s ease-in-out 0s;
     color: $color-primary;
     .page:hover & {
-	color: $color-white;
+	      color: $color-white;
     }
 }
+
 .page__detail {
     text-align: center;
     font-size: 0.8rem;
 
     transition: all 0.2s ease-in-out 0s;
     .page:hover & {
-	color: $color-white;
+	      color: $color-white;
     }
 }
 
@@ -110,8 +173,9 @@ $aside-width: 15rem;
 ///
 
 .icons {
-    
+    //text-align: center;
 }
+
 .icons__item {
     display: inline-block;
     width: 10rem;
@@ -128,12 +192,12 @@ $aside-width: 15rem;
 .icon__icon {
     min-height: 3rem;
     .ion {
-	font-size: 3rem;
-	transition: all 0.2s ease-in-out 0s;
-	.icon:hover & {
-	    transform: scale(1.2);
-	    color: $color-primary;
-	}
+	      font-size: 3rem;
+	      transition: all 0.2s ease-in-out 0s;
+	      .icon:hover & {
+	          transform: scale(1.2);
+	          color: $color-primary;
+	      }
     }
 }
 .icon__name {
@@ -143,7 +207,7 @@ $aside-width: 15rem;
     padding: 1rem;
     height: 3rem;
     .icon:hover & {
-	color: $color-primary;
+	      color: $color-primary;
     }
 }
 .icon__content {

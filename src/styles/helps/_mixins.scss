@@ -15,8 +15,8 @@
 
 @mixin reset-font() {
     font-size:   1rem;
-    font-weight: inherit;
-    font-style:  inherit;
+    font-weight: normal;
+    font-style:  normal;
     font-family: inherit;
     vertical-align: baseline;
 }
@@ -233,4 +233,10 @@
     li {
 	display: inline-block;
     }
+}
+
+
+@mixin border-box-padding($pad...) {
+    box-sizing: border-box;
+    padding: $pad;
 }

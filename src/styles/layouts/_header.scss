@@ -1,0 +1,9 @@
+.header {
+    background-color: $color-white;
+    //@include shadow(1);
+    padding: 1rem;
+    padding-left: $aside-default-width + 2rem;
+    box-sizing: border-box;
+    @include fill(t);
+    z-index: 11;
+}

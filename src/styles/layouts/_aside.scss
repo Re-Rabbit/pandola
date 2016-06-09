@@ -9,6 +9,8 @@ $aside-bg-img: "#{$global-image-path}binding_dark.png";
 
 .aside-bar {
     @include fill(l);
+    z-index: 12;
+    max-width: $aside-default-width;
 }
 
 .aside-bar {

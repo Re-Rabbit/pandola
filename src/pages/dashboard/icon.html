@@ -7,7 +7,13 @@ ionicons
 #}
 
 
+{% from "templates/components/label.njk" import label %}
+
+
+
+
 {% extends "layouts/index.html" %}
+
 
 {% block script %}
 <script src="/scripts/dashboard/icon.js"></script>
@@ -15,46 +21,81 @@ ionicons
 
 
 {% block main %}
+<header class="console-header">
 
-<header><ol class="breadcrumb">
-    <li class="breadcrumb__item">
-      <a class="breadcrumb__home" href="/">
-	<span class="ion ion-md-home"></span>
-      </a>
-    </li>
-    <li class="breadcrumb__item">
-      <a href="/">Dashboard</a>
-    </li>
-    <li class="breadcrumb__item breadcrumb__item--active">
-      <a href="/">Icon</a>
-    </li>
-</ol></header>
+  <header class="header__top row">
+    <ol class="breadcrumb grid width--3">
+      <li class="breadcrumb__item">
+        <a class="breadcrumb__home" href="/">
+	        <span class="ion ion-md-home"></span>
+        </a>
+      </li>
+      <li class="breadcrumb__item">
+        <a href="/">Dashboard</a>
+      </li>
+      <li class="breadcrumb__item breadcrumb__item--active">
+        <a href="/">Icon</a>
+      </li>
+    </ol>
+
+    <section class="logo grid width--6">
+      <div class="logo__content">PANDORA</div>
+    </section>
+  </header>
 
 
-<!-- Icons -->
-<div class="section">
+  <div class="header__middle row">
 
-  <div class="row">
-    <header class="header grid">
-      <h2>ICON</h2>
-      <small>
-	From <a class="link" href="http://ionicons.com">ionicons</a>
-	
-	<span class="ion-logo-github"></span>
-	<a class="link" href="https://github.com/driftyco/ionicons">https://github.com/driftyco/ionicons</a>
+    <section class="grid title-logo">
+      <span class="ion ion-ios-ionic"></span>
+    </section>
+
+
+    <section class="grid">
+      <header class="title">
+        ICON
+        {{ label("in process", state="warning") }}
+      </header>
+
+      <small class="title-description">
+	      From <a class="link" href="http://ionicons.com">ionicons</a>
+	      <span class="ion-logo-github"></span>
+	      <a class="link" href="https://github.com/driftyco/ionicons">https://github.com/driftyco/ionicons</a>
       </small>
-    </header><!-- /.title -->
+
+      <small>
+        <span class="ion ion-ios-bulb-outline"></span>
+        <span id="count">0</span>
+      </small>
+    </section>
 
     
     <section class="search-bar grid--last">
       <input type="search" placeholder="Type names" id="search" />
       <span class="ion-ios-search-outline"></span>
     </section><!-- /.search-bar -->
-  </div>
 
-  
-  <section class="icons" id="icons"></section><!-- /.icons -->
+  </div><!-- /.row -->
 
-</div><!-- /.section -->    
+
+  <footer class="header__bottom">
+    <section class="tab">
+      <div class="tab__title">
+        DETAIL
+      </div>
+    </section>
+  </footer>
+
+
+</header>
+
+<!-- Body Container-->
+
+<main class="console-body">
+
+  <!-- Icons -->
+  <section class="icons" id="icons"></section>
+
+</main>
 
 {% endblock %}

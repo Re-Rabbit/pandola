@@ -9,5 +9,11 @@ h2,.h2 {
 small,.small {
     display: block;
     font-size: $font-size-sm;
-    color: $color-gray-d;
+    color: $color-gray;
+}
+
+.title {
+    font-size: $font-size-lg;
+    margin-bottom: 0.5rem;
+    font-weight: $font-weight-d;
 }

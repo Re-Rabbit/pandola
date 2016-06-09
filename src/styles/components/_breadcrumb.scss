@@ -5,7 +5,7 @@
 ////
 
 .breadcrumb {
-    margin-bottom: 1rem;
+    //margin-bottom: 1rem;
 }
 
 .breadcrumb__item {
@@ -17,25 +17,25 @@
     
     transition: color 0.2s ease-in-out 0s;
     &:hover {
-	color: darken($color-primary, 10%);
+	      color: darken($color-primary, 10%);
     }
 
     &:after {
-	content: '/';
-	font-weight: 100;
-	margin: 0 0.5rem;
-	color: $color-gray
+	      content: '/';
+	      font-weight: 100;
+	      //margin: 0 0.25rem;
+	      color: $color-gray;
     }
 }
 
 .breadcrumb__item--active {
     color: $color-gray;
     &:hover {
-	color: inherit;
+	      color: inherit;
     }
     &:after {
-	content: ' ';
-	display: none;
+	      content: ' ';
+	      display: none;
     }
 }
 
@@ -45,6 +45,6 @@
     position: relative;
     top: 0.05rem;
     .ion {
-	font-size: $font-size-lg;
+	      font-size: $font-size-lg;
     }
 }

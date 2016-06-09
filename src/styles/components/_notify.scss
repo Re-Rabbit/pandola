@@ -29,30 +29,30 @@ $notify-gutter-scale: 2;
     position: fixed;
     
     &--tm {
-	top: $notify-gutter;
-	left: 50%;
-	transform: translate3d(-50%, 0, 0);
+	      top: $notify-gutter;
+	      left: 50%;
+	      transform: translate3d(-50%, 0, 0);
     }
     &--tr {
-	top: $notify-gutter;
-	right: $notify-gutter * $notify-gutter-scale;
+	      top: $notify-gutter;
+	      right: $notify-gutter * $notify-gutter-scale;
     }
     &--tl {
-	top: $notify-gutter;
-	left: $notify-gutter * $notify-gutter-scale;
+	      top: $notify-gutter;
+	      left: $notify-gutter * $notify-gutter-scale;
     }
     &--bm {
-	bottom: $notify-gutter;
-	left: 50%;
-	transform: translate3d(-50%, 0, 0);
+	      bottom: $notify-gutter;
+	      left: 50%;
+	      transform: translate3d(-50%, 0, 0);
     }
     &--br {
-	bottom: $notify-gutter;
-	right: $notify-gutter * $notify-gutter-scale;
+	      bottom: $notify-gutter;
+	      right: $notify-gutter * $notify-gutter-scale;
     }
     &--bl {
-	bottom: $notify-gutter;
-	left: $notify-gutter * $notify-gutter-scale;
+	      bottom: $notify-gutter;
+	      left: $notify-gutter * $notify-gutter-scale;
     }
 }
 
@@ -63,20 +63,20 @@ $notify-gutter-scale: 2;
 .notify {
     @include theme-reverse();
     &--info {
-	@include theme-reverse($bgc: rgba($color-info, $alpha-d));
-	.notify__icon { background-color: darken($color-info, 10%); }
+	      @include theme-reverse($bgc: rgba($color-info, $alpha-d));
+	      .notify__icon { background-color: darken($color-info, 10%); }
     }
     &--success {
-	@include theme-reverse($bgc: rgba($color-success, $alpha-d));
-	.notify__icon { background-color: darken($color-success, 10%); }
+	      @include theme-reverse($bgc: rgba($color-success, $alpha-d));
+	      .notify__icon { background-color: darken($color-success, 10%); }
     }
     &--warning {
-	@include theme-reverse($bgc: rgba($color-warning, $alpha-d));
-	.notify__icon { background-color: darken($color-warning, 10%); }
+	      @include theme-reverse($bgc: rgba($color-warning, $alpha-d));
+	      .notify__icon { background-color: darken($color-warning, 10%); }
     }
     &--error {
-	@include theme-reverse($bgc: rgba($color-error, $alpha-d));
-	.notify__icon { background-color: darken($color-error, 10%); }
+	      @include theme-reverse($bgc: rgba($color-error, $alpha-d));
+	      .notify__icon { background-color: darken($color-error, 10%); }
     }
 
     // @todo add hover effects.
@@ -93,7 +93,7 @@ $notify-gutter-scale: 2;
     text-align: center;
 
     .ion {
-	font-size: $font-size-lg;
+	      font-size: $font-size-lg;
     }
 }
 
