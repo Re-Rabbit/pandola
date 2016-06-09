@@ -50,7 +50,7 @@
     "nunjucks-loader": "^2.4.3",
     "open": "0.0.5",
     "toml-loader": "^1.0.0",
-    "vinyl-named": "^1.1.0",
+    "vinyl-named": "git+https://github.com/0x00-pl/vinyl-named.git",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-stream": "^3.2.0"

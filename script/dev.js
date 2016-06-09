@@ -1,12 +1,12 @@
-var gulp        = require('gulp')
-var del         = require('del')
-var html        = require('./build-html.js')
-var style       = require('./build-style.js')
-var script      = require('./build-script.js')
-var font        = require('./build-font.js')
-var image       = require('./build-image.js')
-var apiServer   = require('./mock-server.js')
-var paths       = require('./paths.js')
+var gulp = require('gulp')
+var del = require('del')
+var html = require('./build-html.js')
+var style = require('./build-style.js')
+var script = require('./build-script.js')
+var font = require('./build-font.js')
+var image = require('./build-image.js')
+var apiServer = require('./mock-server.js')
+var paths = require('./paths.js')
 var browserSync = require('browser-sync').create()
 
 
@@ -66,7 +66,10 @@ function buildImage() {
  * @Task
  */
 function buildScript() {
-    return script.cc(gulp.src(paths.dirs.script))
+    return script.cc(
+        gulp.src(
+            paths.dirs.script,
+            { base: "src/scripts/pages" }))
         .pipe(gulp.dest(paths.tmp + '/scripts'))
 }
 
@@ -92,7 +95,7 @@ function main() {
             logFileChanges: true,
             server: {
                 baseDir: paths.tmp,
-                middleware: function(req, res, next) {
+                middleware: function (req, res, next) {
                     // @Todo add proxy server.
                     return next()
                 }
@@ -105,21 +108,21 @@ function main() {
         server()
         gulp.watch(paths.dirs.htmlSources, gulp.series(buildHtml, reload))
         gulp.watch(paths.dirs.styleSources, gulp.series(buildStyle, reload))
-	gulp.watch(paths.dirs.scriptSources, gulp.series(buildScript, reload))
-	gulp.watch(paths.dirs.image, gulp.series(buildImage, reload))
+        gulp.watch(paths.dirs.scriptSources, gulp.series(buildScript, reload))
+        gulp.watch(paths.dirs.image, gulp.series(buildImage, reload))
     }
 
     // export
     gulp.task('default',
-              gulp.series(clean,
-			  gulp.parallel(buildHtml,
-					buildStyle,
-					buildScript,
-					buildFont,
-					buildImage),
-			  gulp.parallel(watch,
-					apiServer)
-			 ))
+        gulp.series(clean,
+            gulp.parallel(buildHtml,
+                buildStyle,
+                buildScript,
+                buildFont,
+                buildImage),
+            gulp.parallel(watch,
+                apiServer)
+        ))
 }
 
 

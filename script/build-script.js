@@ -32,12 +32,7 @@ function webpackConfig() {
 
 function cc(stream) {
     return stream
-	.pipe(named(function(file) {
-			var path_base = "src/scripts/pages"
-			var path_obj = path.parse(path.relative(path_base, file.path))
-			var filename = path.join(path_obj.dir, path_obj.name)
-			return filename
-        }))
+	.pipe(named())
 	.pipe(webpack(webpackConfig()).on('error', console.log))
 }
 
