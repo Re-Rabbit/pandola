@@ -1,0 +1,14 @@
+{#
+
+Label.
+
+#}
+
+
+{% macro label(content="", state="info", radius=true) %}
+
+<span class="label label--{{state}} {{ 'label--radius' if true else ''}}">
+  {{content}}
+</span>
+
+{% endmacro %}

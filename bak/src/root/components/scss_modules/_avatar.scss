@@ -1,0 +1,34 @@
+////
+/// Avatar.
+///
+/// 头像
+////
+
+$avatar-size: 6rem;
+
+.avatar {
+    @include size($avatar-size);
+    display: inline-block;
+    cursor: pointer;
+
+    img {
+	@include border-radius(50%);
+	width: 100%;
+	height: auto;
+    }
+}
+
+.avatar {
+    &--xs {
+	@include size($avatar-size - 2rem);
+    }
+    &--sm {
+	@include size($avatar-size - 1rem);
+    }
+    &--lg {
+	@include size($avatar-size + 1rem);
+    }
+    &--xl {
+	@include size($avatar-size + 2rem);
+    }
+}

@@ -1,0 +1,82 @@
+{#
+
+App.
+
+#}
+
+
+{% extends "pages/layouts/application.html" %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="public.css" />
+{% endblock %}
+
+
+{% block scripts %}
+{% block script %}{% endblock %}
+{% endblock %}
+
+
+{% block content %}
+<section class="console">
+  <!-- Aside -->
+
+  <aside class="console-aside">
+
+    <header class="aside-header">
+      <div class="aside-avatar">
+	<div class="avatar" id="login">
+	  <img src="/layouts/images/photo.jpg" />
+	</div>
+      </div>
+    </header>
+
+    <nav>
+      <ul class="menus">
+	<li class="menus__item">
+	  <a href="../index/" class="menu">
+	    <span class="menu__icon ion-md-bookmark"></span>
+	    PAGE INDEX
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="../icon/" class="menu">
+	    <span class="menu__icon ion-md-ionic"></span>
+	    ICONS
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-ios-construct"></span>
+	    COMPONENTS
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-ios-document"></span>
+	    DOCUMENTS
+	  </a>
+	</li><!-- /.menu-item -->
+	<li class="menus__item">
+	  <a href="#" class="menu">
+	    <span class="menu__icon ion-logo-github"></span>
+	    GITHUB
+	  </a>
+	</li><!-- /.menu-item -->
+      </ul>
+    </nav><!-- /.menu -->
+
+  </aside>
+
+
+
+  <!-- Main -->
+
+  <main class="console-main">
+    {% block main %}{% endblock %}
+  </main>
+
+
+</section>
+{% endblock %}

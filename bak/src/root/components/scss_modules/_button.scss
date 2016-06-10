@@ -1,0 +1,86 @@
+
+.button {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+    @include auto-darken($button-color-text, $button-color-main, $button-color-border);
+    vertical-align: middle;
+    padding: 0.3em 0.5em;
+}
+
+
+.button--border {
+    @extend .button;
+    border: $border-size solid $button-color-border;
+}
+.button--noborder {
+    @extend .button;
+    border: 0;
+}
+
+.button--radius {
+    @extend .button;
+    @include border-radius(0.3em);
+}
+
+.button--radius__top {
+    @extend .button;
+    @include border-radius-direction("t");
+}
+.button--radius__bottom {
+    @extend .button;
+    @include border-radius-direction("b");
+}
+.button--radius__left {
+    @extend .button;
+    @include border-radius-direction("l");
+}
+.button--radius__right {
+    @extend .button;
+    @include border-radius-direction("r");
+}
+
+.button--circle {
+    @extend .button;
+    @include border-radius(50%);
+}
+.button--circle__30px {
+    @extend .button--circle;
+    @include size(30px);
+    line-height: 30px;
+}
+.button--circle__60px {
+    @extend .button--circle;
+    @include size(60px);
+    line-height: 60px;
+}
+
+.button--flat {
+    @extend .button;
+    color: inherit;
+    background-color: transparent;
+}
+
+.button--sm {
+    font-size: 0.8rem;
+}
+
+.button--lg {
+    font-size: 1.5rem;
+}
+
+.button--block {
+    @extend .button;
+    width: 100%;
+    @include border-radius(0);
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
+button[disabled] {
+    &, &:hover, &:active {
+        color: $color-gray-l;
+        background-color: $color-gray-d;
+        border-color: $color-gray-dd;
+    }
+}

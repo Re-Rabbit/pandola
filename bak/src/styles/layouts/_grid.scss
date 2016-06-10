@@ -1,0 +1,54 @@
+
+.row {
+    // clean float
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+.grid {
+    float: left;
+}
+.grid-right,
+.grid--last {
+    float: right;
+}
+
+@for $i from 0 through $grid {
+    .width--#{$i} {
+        width: percentage($i/$grid);
+        box-sizing: border-box;
+    }
+    .offset--#{$i} {
+        margin-left: percentage($i/$grid);
+    }
+    .push--#{$i} {
+        position: relative;
+        left: percentage($i/$grid);
+    }
+    .pull--#{$i} {
+        position: relative;
+        left: - percentage($i/$grid);
+    }
+}
+
+
+@for $i from 0 through 10 {
+    .width--f#{$i} {
+        width: percentage($i/10);
+        box-sizing: border-box;
+    }
+    .offset--f#{$i} {
+        margin-left: percentage($i/10);
+    }
+    .push--f#{$i} {
+        position: relative;
+        left: percentage($i/10);
+    }
+    .pull--f#{$i} {
+        position: relative;
+        left: - percentage($i/10);
+    }
+}

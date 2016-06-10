@@ -1,0 +1,84 @@
+////
+/// Reset.
+///
+/// Everything reset. Box, theme, text, etc.
+///
+/// @author PL <0x00.pl@gmail.com>
+/// @author Rabbit <yfhj1990@hotmail.com>
+/// @author WuWu <zooxyt@gmail.com>
+///
+/// @todo table elements reset.
+/// @todo form elements reset.
+////
+
+
+/// Global tags reset.
+///
+/// @require {mixin} reset-box
+/// @require {mixin} reset-font
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    @include reset-box();
+    @include reset-font();
+}
+
+
+/// HTML5 tags reset.
+///
+/// @require {mixin} reset-box
+article, aside, canvas, details, figcaption,
+figure, footer, header, hgroup, menu, nav,
+section, summary, main {
+    display: block;
+    @include reset-box();
+}
+audio, canvas, video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+audio:not([controls]),[hidden] {
+    display: none;
+}
+
+
+/// Base.
+///
+/// @require {mixin} reset-body
+body {
+    @include reset-body($global-font-family,
+			$global-font-size,
+			$global-color,
+			$global-bgColor);
+}
+
+
+/// List.
+ol, ul {
+    list-style-type: none;
+}
+
+
+/// Links.
+///
+/// @require {mixin} reset-theme
+a, img {
+    border: none;
+}
+a {
+    @include reset-theme();
+    font-size: inherit;
+    text-decoration: none;
+}
+
+a.link {
+    color: $color-primary;
+    transition: color 0.2s ease-in-out 0s;
+    &:hover { color: darken($color-primary, 10%); }
+}

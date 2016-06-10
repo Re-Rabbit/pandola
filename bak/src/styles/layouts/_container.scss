@@ -1,0 +1,16 @@
+///
+/// Containers
+///
+
+.container {
+    box-sizing: border-box;
+    padding: 2rem;
+}
+
+.middle-container {
+    @include middle-block($container);
+}
+
+.section {
+    margin-bottom: 1rem;
+}
