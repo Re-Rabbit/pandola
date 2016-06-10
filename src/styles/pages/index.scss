@@ -10,6 +10,7 @@
 @import "../components/notify";
 @import "../components/label";
 @import "../components/form";
+@import "../components/avatar";
 @import "../layouts/container";
 @import "../layouts/console";
 
@@ -23,13 +24,26 @@
     @include reset-console();
 }
 
+///
+/// aside
+///
+
+.aside-header {
+    padding: 1rem 0;
+}
+
+.aside-avatar {
+    text-align: center;
+    padding: 1rem;
+}
+
 
 ///
 /// menu
 ///
 
 .menus {
-    padding-top: 3rem;
+    padding-top: 1rem;
 }
 
 .menu {
@@ -39,7 +53,7 @@
     font-size: 0.8rem;
 
     &:hover {
-	      background-color: darken($color-black, 10%);
+	background-color: darken($color-black, 10%);
     }
 }
 
@@ -102,7 +116,7 @@
     //padding: 0.5rem 0;
     width: 4rem;
     color: #3F51B5;
-    .ion {
+    .ic {
         font-size: $font-size-4x;
     }
 }
@@ -133,7 +147,7 @@
     transition: all 0.2s ease-in-out 0s;
     background-color: $color-white;
     &:hover {
-	      background-color: $color-primary;
+	background-color: $color-primary;
     }
 }
 
@@ -145,7 +159,7 @@
     transition: all 0.2s ease-in-out 0s;
     color: $color-primary;
     .page:hover & {
-	      color: $color-white;
+	color: $color-white;
     }
 }
 
@@ -155,59 +169,52 @@
 
     transition: all 0.2s ease-in-out 0s;
     .page:hover & {
-	      color: $color-white;
+	color: $color-white;
     }
 }
 
 
-
+$icon-block-height: 3rem;
+$icon-width: 10rem;
 ///
 /// Icons
 ///
-
-.icons {
-    //text-align: center;
-}
-
 .icons__item {
     display: inline-block;
-    width: 10rem;
+    width: $icon-width;
     padding: 1rem;
     text-align: center;
 }
 .icon {
-    border-radius: 4px;
-    padding: 0.5rem 0;
-    cursor: pointer;
-    background-color: $color-white;
+    @include border-box-padding(1rem 0);
     @include shadow(1);
+    border-radius: $global-border-radius;
+    background-color: $color-white;
+    cursor: pointer;
 }
 .icon__icon {
-    min-height: 3rem;
-    .ion {
-	      font-size: 3rem;
-	      transition: all 0.2s ease-in-out 0s;
-	      .icon:hover & {
-	          transform: scale(1.2);
-	          color: $color-primary;
-	      }
+    height: $icon-block-height;
+    font-size: $font-size-3x;
+    
+    @include trans-hover(".icon") {
+	transform: scale(1.2);
+	color: $color-primary;
     }
 }
 .icon__name {
-    font-size: 0.8rem;
+    @extend %p1;
     margin: 0.5rem 0;
-    box-sizing: border-box;
-    padding: 1rem;
-    height: 3rem;
-    .icon:hover & {
-	      color: $color-primary;
+    height: $icon-block-height;
+    font-size: $font-size-sm;
+
+    @include trans-hover(".icon") {
+	color: $color-primary;
     }
 }
 .icon__content {
-    font-size: 0.8rem;
+    font-size: $font-size-sm;
     color: $color-gray;
 }
-
 
 
 

@@ -10,7 +10,9 @@
     @include reset-font();
     @include reset-theme();
     @include border-box-padding(0.5rem 1.5rem);
+    
     width: 6rem;
+    line-height: $global-line-height;
 }
 
 .field__label {
@@ -25,4 +27,7 @@
     @include border-box-padding(0.5rem 0);
     display: inline-block;
     text-align: center;
+    .ic {
+	line-height: $global-line-height;
+    }
 }

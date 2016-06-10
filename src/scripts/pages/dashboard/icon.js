@@ -75,7 +75,7 @@ function main() {
 
 	          clipboard.on('success', function(e) {
 
-		            notify.of({ position: 'bm', state: 'success', content: `已复制 ${e.text} 到剪贴板` })
+		            notify.of({ position: 'tr', state: 'success', content: `已复制 ${e.text} 到剪贴板` })
 
 		            e.clearSelection()
 	          })

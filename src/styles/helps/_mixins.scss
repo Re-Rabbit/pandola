@@ -7,14 +7,14 @@
 /// Reset
 /// 
 @mixin reset-box() {
-    margin:  0;
-    padding: 0;
-    border:  0;
-    ouline:  0;
+    margin:   0;
+    padding:  0;
+    border:   0;
+    outline:  0;
 }
 
 @mixin reset-font() {
-    font-size:   1rem;
+    font-size:   inherit;
     font-weight: normal;
     font-style:  normal;
     font-family: inherit;
@@ -249,9 +249,9 @@
     transition: $prop $during $ease $delay;
 }
 
-@mixin trans-hover() {
+@mixin trans-hover($selector) {
     @include trans();
-    &:hover {
+    #{$selector}:hover & {
         @content;
     }
 }

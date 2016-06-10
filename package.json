@@ -49,6 +49,8 @@
     "normalize.scss": "^0.1.0",
     "nunjucks-loader": "^2.4.3",
     "open": "0.0.5",
+    "request": "^2.72.0",
+    "toml": "^2.3.0",
     "toml-loader": "^1.0.0",
     "vinyl-named": "git+https://github.com/0x00-pl/vinyl-named.git",
     "webpack": "^1.13.1",
@@ -56,6 +58,7 @@
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.9.1",
     "clipboard": "^1.5.10",
     "immutable": "^3.8.1",
     "whatwg-fetch": "^1.0.0"
