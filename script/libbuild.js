@@ -6,8 +6,15 @@ var named = require('vinyl-named')
 var path = require('path')
 var webpack = require('webpack-stream')
 var del = require('del')
+var reload = require('browser-sync').reload
+var cached = require('gulp-cached')
+var remember = require('gulp-remember')
+var fs = require('fs')
+
+
 
 var src = './pages'
+var components = './components'
 
 var paths = {
     src: src,
@@ -39,27 +46,28 @@ function buildHtml() {
 function buildStyle() {
     return gulp
         .src(paths.dirs.style)
+	.pipe(cached('styles'))
         .pipe(sass().on('error', sass.logError))
+	.pipe(remember('styles'))
         .pipe(gulp.dest(paths.tmp))
 }
 
 function buildScript() {
     var webpackConfig = {
+	watch: true,
         module: {
             loaders: [{
                 test: /\.jsx?$/,
-                loader: 'babel',
-                query: { compact: false }
+                loader: 'babel'
             }, {
-                    test: /\.njk$/,
-                    loader: 'nunjucks'
-                }]
+                test: /\.njk$/,
+                loader: 'nunjucks'
+            }]
         },
         resolve: {
             root: [
-                // path.resolve('./src/pages/templates'),
-                path.resolve(src),
-                path.resolve('./')
+                path.resolve('./'),
+		path.resolve('./components')
             ]
         }
     }
@@ -67,8 +75,9 @@ function buildScript() {
     return gulp
         .src(paths.dirs.script, { base: src })
         .pipe(named())
-        .pipe(webpack(webpackConfig).on('error', console.log))
+        .pipe(webpack(webpackConfig)).on('error', console.log)
         .pipe(gulp.dest(paths.tmp))
+	.pipe(reload({ stream: true }))
 }
 
 function buildFont() {
@@ -84,11 +93,11 @@ function buildImage() {
 }
 
 var buildAll = gulp.parallel(buildHtml
-    , buildStyle
-    , buildScript
-    , buildFont
-    , buildImage
-)
+			     , buildStyle
+			     //, buildScript
+			     , buildFont
+			     , buildImage
+			    )
 
 
 module.exports = {

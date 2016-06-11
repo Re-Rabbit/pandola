@@ -1,9 +1,12 @@
 var gulp = require('gulp')
 var gutil = require('gulp-util')
 var express = require('express')
+var morgan = require('morgan')
 var cors = require('cors')
 var compression = require('compression')
 var browserSync = require('browser-sync').create()
+var cached = require('gulp-cached')
+var remember = require('gulp-remember')
 var build = require('./libbuild')
 
 
@@ -20,8 +23,7 @@ function apiServer() {
     express()
         .use(cors())
         .use(compression())
-        // .use(morgan('dev'))
-        // .use('/', express.static(paths.tmp, { extensions: ['html'] }))
+        .use(morgan('dev'))
         .use('/api', apiRouter())
         .listen(port)
 
@@ -30,22 +32,17 @@ function apiServer() {
 
 
 function main() {
-    function reload(cb) {
+    function reload(done) {
         browserSync.reload()
-        cb()
+        done()
     }
 
     function server() {
         browserSync.init({
             port: 8888,
-            logFileChanges: true,
             startPath: '/index/',
             server: {
-                baseDir: build.paths.tmp,
-                middleware: function (req, res, next) {
-                    // @Todo add proxy server.
-                    return next()
-                }
+                baseDir: build.paths.tmp
             }
         })
     }
@@ -55,9 +52,11 @@ function main() {
         server()
         gulp.watch(build.paths.dirs.html, gulp.series(build.buildHtml, reload))
         gulp.watch(build.paths.dirs.style, gulp.series(build.buildStyle, reload))
-        gulp.watch(build.paths.dirs.script, gulp.series(build.buildScript, reload))
+        
         gulp.watch(build.paths.dirs.image, gulp.series(build.buildImage, reload))
         gulp.watch(build.paths.dirs.api, gulp.series(reload))
+	gulp.watch(build.paths.tmp + '/**/*.js', { delay: 1000 }, gulp.series(reload))
+
     }
 
     gulp.task
@@ -66,7 +65,8 @@ function main() {
             (build.buildAll
             , gulp.parallel
                 (watch
-                , apiServer
+                 , apiServer
+		 , build.buildScript
                 )
             )
         )
