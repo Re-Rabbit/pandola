@@ -9,7 +9,7 @@ var del = require('del')
 var reload = require('browser-sync').reload
 var cached = require('gulp-cached')
 var remember = require('gulp-remember')
-var fs = require('fs')
+var webpackConfig = require('./../webpack.config.js')
 
 
 
@@ -52,30 +52,23 @@ function buildStyle() {
         .pipe(gulp.dest(paths.tmp))
 }
 
+
 function buildScript() {
-    var webpackConfig = {
-	watch: true,
-        module: {
-            loaders: [{
-                test: /\.jsx?$/,
-                loader: 'babel'
-            }, {
-                test: /\.njk$/,
-                loader: 'nunjucks'
-            }]
-        },
-        resolve: {
-            root: [
-                path.resolve('./'),
-		path.resolve('./components')
-            ]
-        }
-    }
 
     return gulp
         .src(paths.dirs.script, { base: src })
         .pipe(named())
-        .pipe(webpack(webpackConfig)).on('error', console.log)
+        .pipe(webpack(webpackConfig, null, (err, stats) => {
+
+	    //console.log(stats.toJson())
+	    console.log(stats.toString({
+		colors: true,
+		modules: false,
+		chunks: false,
+		cached: false
+	    }))
+	    
+	})).on('error', console.log)
         .pipe(gulp.dest(paths.tmp))
 	.pipe(reload({ stream: true }))
 }

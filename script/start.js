@@ -2,6 +2,7 @@ var gulp = require('gulp')
 var gutil = require('gulp-util')
 var express = require('express')
 var morgan = require('morgan')
+var bodyParser = require('body-parser')
 var cors = require('cors')
 var compression = require('compression')
 var browserSync = require('browser-sync').create()
@@ -23,6 +24,8 @@ function apiServer() {
     express()
         .use(cors())
         .use(compression())
+	.use(bodyParser.urlencoded({ extended: false }))
+	.use(bodyParser.json())
         .use(morgan('dev'))
         .use('/api', apiRouter())
         .listen(port)
@@ -60,16 +63,16 @@ function main() {
     }
 
     gulp.task
-        ('default'
-        , gulp.series
-            (build.buildAll
-            , gulp.parallel
-                (watch
-                 , apiServer
-		 , build.buildScript
-                )
-            )
-        )
+    ('default'
+     , gulp.series
+     (build.buildAll
+      , gulp.parallel
+      (watch
+       , apiServer
+       , build.buildScript
+      )
+     )
+    )
 }
 
 main()

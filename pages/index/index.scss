@@ -271,3 +271,33 @@ $icon-width: 10rem;
 .flex-center-all {
     @include flex-center-all;
 }
+
+
+
+
+
+///
+/// Comments
+///
+
+.comments {
+    @include shadow(1);
+    width: 40%;
+    background: $color-white;
+    border-radius: $global-border-radius;
+}
+
+.comment {
+    @include border-box-padding(1rem);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $color-gray-ll;
+
+    &:last-child {
+	margin: 0;
+	border: 0;
+    }
+}
+
+.comment-left {
+    width: 8rem;
+}

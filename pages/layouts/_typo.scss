@@ -1,15 +1,39 @@
 h2,.h2 {
-    @include reset-font()
+    @include reset-font();
 
     font-size: 2rem;
     font-weight: $font-weight-d;
     margin-bottom: 1rem;
 }
 
+h4,.h4 {
+    @include reset-font();
+
+    font-size: $font-size-lg;
+    font-weight: $font-weight-d;
+    margin-bottom: 1rem;
+}
+
+p.p {
+    @include reset-font();
+    font-size: $font-size-sm;
+    margin-bottom: 1rem;
+}
+
+
+
+
 small,.small {
     display: block;
     font-size: $font-size-sm;
     color: $color-gray;
+}
+
+h1,h2,h3,h4,h5 {
+    & + small {
+	margin-top: -0.5rem;
+	margin-bottom: 1rem;
+    }
 }
 
 .title {
