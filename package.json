@@ -5,11 +5,9 @@
   "main": "gulpfile.js",
   "scripts": {
     "clean": "node script/clean.js",
-    "start": "./node_modules/.bin/gulp --gulpfile=script/dev.js --cwd=./",
-    "build": "./node_modules/.bin/gulp --gulpfile=script/prod.js --cwd=./",
-    "deploy": "./node_modules/.bin/gulp --gulpfile=script/deploy.js --cwd=./",
-    "pc": "./node_modules/.bin/electron script/pc.js",
-    "new-start": "./node_modules/.bin/gulp --gulpfile=script/new-start.js --cwd=./"
+    "start": "./node_modules/.bin/gulp --gulpfile=script/start.js --cwd=./",
+    "build": "./node_modules/.bin/gulp --gulpfile=script/build.js --cwd=./",
+    "deploy": "./node_modules/.bin/gulp --gulpfile=script/deploy.js --cwd=./"
   },
   "repository": {
     "type": "git",
