@@ -1,0 +1,24 @@
+{% extends "pages/layouts/aside.html" %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="../index/index.css" />
+{% endblock %}
+
+{% block script %}
+<script src="/commons.js"></script>
+<script src="index.js"></script>
+{% endblock %}
+
+
+{% block main %}
+<main class="main">
+    <div class="section">
+        <header class="header">
+            <h2>Login</h2>
+        </header>
+        <div class="avatar login" id="login"></div>
+        <div id="debug">[empty]</div>
+    </div>
+</main>
+{% endblock %}

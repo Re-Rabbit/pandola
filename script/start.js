@@ -57,7 +57,7 @@ function main() {
         gulp.watch(build.paths.dirs.style, gulp.series(build.buildStyle, reload))
         
         gulp.watch(build.paths.dirs.image, gulp.series(build.buildImage, reload))
-        gulp.watch(build.paths.dirs.api, gulp.series(reload))
+        // gulp.watch(build.paths.dirs.api, gulp.series(reload))  // useless
 	gulp.watch(build.paths.tmp + '/**/*.js', { delay: 1000 }, gulp.series(reload))
 
     }
