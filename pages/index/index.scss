@@ -10,6 +10,7 @@
 @import "../../components/scss_modules/label";
 @import "../../components/scss_modules/form";
 @import "../../components/scss_modules/avatar";
+@import "../../components/scss_modules/icon";
 @import "../layouts/container";
 @import "../layouts/console";
 @import "../../components/notify/notify";
@@ -216,6 +217,81 @@ $icon-width: 10rem;
     color: $color-gray;
 }
 
+
+///
+/// icon-detail
+///
+.icons-detail {
+    @include fill(r);
+    @include shadow(1);
+    @include theme-reverse($bgc: $color-primary);
+    @include border-box-padding(2rem 0);
+    width: 15rem;
+
+    @include trans();
+    transform: translate3d(100%, 0, 0);
+}
+
+.icons-detail-header {
+    @extend %p1;
+    text-align: center;
+    font-size: $font-size-lg;
+
+    .ic {
+	font-size: $font-size-2x;
+	margin-right: 0.5rem
+    }
+}
+
+.icons-detail__close {
+    @include fill(tl, false);
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer;
+}
+
+.icons-detail-name {
+    @extend %p1;
+    text-align: center;
+}
+
+.icons-detail-tags {
+    @extend %p1;
+    text-align: center;
+}
+
+.icons-detail-ic {
+    @extend %p1;
+    text-align: center;
+    margin: 1rem 0;
+
+    &__item {
+	margin-bottom: 0.5rem;
+    }
+}
+
+.icons-detail-finder {
+    @extend %p1;
+    text-align: center;
+    
+    &__item {
+	text-align: center;
+	padding: 0.5rem;
+    }
+}
+
+.js-icons-detail-active-hook {
+    .console-main {
+	padding-right: 15rem;
+    }
+    .icons-detail {
+	transform: translate3d(0, 0, 0);
+    }
+}
+
+.anim--init {
+    @include trans();
+}
 
 
 .height--f10 {

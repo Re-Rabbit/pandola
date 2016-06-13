@@ -8,6 +8,7 @@ ionicons
 
 
 {% from "templates/label.njk" import label %}
+{% from "templates/container.njk" import container %}
 
 
 
@@ -104,7 +105,82 @@ ionicons
 <main class="console-body">
 
   <!-- Icons -->
-  <section class="icons" id="icons"></section>
+  {{container("icons")}}
+
+  
+  <section class="icons-detail anim--init">
+    
+    <section class="icons-detail__close">
+	<span class="ic--2x ion-ios-close-circle-outline"></span>
+    </section>
+    
+    <header class="icons-detail-header">
+      ICON Detail
+    </header>
+
+    <section class="icons-detail-name">
+      <h6>NAME</h6>
+      <span id="icon-name">ion-ios-ionic</span>
+    </section>
+
+    <section class="icons-detail-tags">
+      <h6>TAGS</h6>
+      <div id="icon-tags">
+	{{ label("android", state="info") }}
+	{{ label("md", state="info") }}
+	{{ label("ion", state="info") }}
+      </div>
+    </section>
+    
+    <section class="icons-detail-ic">
+      <div id="icon-icons">
+	<section class="icons-detail-ic__item">
+	  <h6>Size: 2X</h6>
+	  <div>
+	    <span class="ic--2x ion-ios-ionic"></span>
+	  </div>
+	</section>
+
+	<section class="icons-detail-ic__item">
+	  <h6>Size: 3X</h6>
+	  <div>
+	    <span class="ic--3x ion-ios-ionic"></span>
+	  </div>
+	</section>
+
+	<section class="icons-detail-ic__item">
+	  <h6>Size: 4X</h6>
+	  <div>
+	    <span class="ic--4x ion-ios-ionic"></span>
+	  </div>
+	</section>
+      </div>
+    </section>
+
+    
+    <section class="icons-detail-finder">
+      <h6>MAYBE YOU NEED</h6>
+      <div id="icon-finder">
+	<div class="row">
+	  <div class="icons-detail-finder__item grid width--4">
+	    <span class="ic ic--3x ion-ios-ionic"></span>
+	  </div>
+	  <div class="icons-detail-finder__item grid width--4">
+	    <span class="ic ic--3x ion-ios-ionic"></span>
+	  </div>
+	  <div class="icons-detail-finder__item grid width--4">
+	    <span class="ic ic--3x ion-ios-ionic"></span>
+	  </div>
+	  <div class="icons-detail-finder__item grid width--4">
+	    <span class="ic ic--3x ion-ios-ionic"></span>
+	  </div>
+	</div>
+      </div>
+    </section><!-- /.icons-detail-finder -->
+    
+  </section>
+
+  
 
 </main>
 
