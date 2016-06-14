@@ -24,8 +24,8 @@ function apiServer() {
     express()
         .use(cors())
         .use(compression())
-	.use(bodyParser.urlencoded({ extended: false }))
-	.use(bodyParser.json())
+	      .use(bodyParser.urlencoded({ extended: false }))
+	      .use(bodyParser.json())
         .use(morgan('dev'))
         .use('/api', apiRouter())
         .listen(port)
@@ -53,20 +53,20 @@ function main() {
     // watcher
     function watch() {
         server()
-        gulp.watch(build.paths.dirs.html, gulp.series(build.buildHtml, reload))
+        gulp.watch(build.paths.watchers.html, gulp.series(build.buildHtml, reload))
         gulp.watch(build.paths.watchers.style, gulp.series(build.buildStyle, reload))
-        
+
         gulp.watch(build.paths.dirs.image, gulp.series(build.buildImage, reload))
         // gulp.watch(build.paths.dirs.api, gulp.series(reload))  // useless
-	gulp.watch(build.paths.tmp + '/**/*.js', { delay: 1000 }, gulp.series(reload))
+	      gulp.watch(build.paths.tmp + '/**/*.js', { delay: 1000 }, gulp.series(reload))
 
     }
 
     gulp.task('default' , gulp.series(build.buildAll,
-				      gulp.parallel(watch,
-						    apiServer,
-						    build.buildScript)
-				     ))
+				                              gulp.parallel(watch,
+						                                        apiServer,
+						                                        build.buildScript)
+				                             ))
 }
 
 main()
