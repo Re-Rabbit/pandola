@@ -1,38 +1,38 @@
-var electron = require('electron')
-var build    = require('./prod.js')
+// var electron = require('electron')
+// var build    = require('./prod.js')
 
-function main() {
-    var win
+// function main() {
+//     var win
     
-    return function(app, BrowserWindow) {
-	function createWindow() {
-	    filepath = 'file://' + __dirname + '/../tmp/index.html'
+//     return function(app, BrowserWindow) {
+// 	function createWindow() {
+// 	    filepath = 'file://' + __dirname + '/../tmp/index.html'
 	    
-	    win = new BrowserWindow({ width: 800, heihgt: 600 })
+// 	    win = new BrowserWindow({ width: 800, heihgt: 600 })
 
-	    win.loadURL(filepath)
+// 	    win.loadURL(filepath)
 
-	    win.webContents.openDevTools()
+// 	    win.webContents.openDevTools()
 
-	    win.on('closed', function() {
-		win = null
-	    })
-	}
+// 	    win.on('closed', function() {
+// 		win = null
+// 	    })
+// 	}
 
-	app.on('ready', createWindow)
+// 	app.on('ready', createWindow)
 
-	app.on('window-all-close', function() {
-	    if(process.platform !== 'darwin') app.quit()
-	})
+// 	app.on('window-all-close', function() {
+// 	    if(process.platform !== 'darwin') app.quit()
+// 	})
 
-	app.on('activate', function() {
-	    if(win === null) createWindow()
-	})
-    }
-}
+// 	app.on('activate', function() {
+// 	    if(win === null) createWindow()
+// 	})
+//     }
+// }
 
 
-var app           = electron.app
-var BrowserWindow = electron.BrowserWindow
+// var app           = electron.app
+// var BrowserWindow = electron.BrowserWindow
 
-main()(app, BrowserWindow)
+// main()(app, BrowserWindow)

@@ -1,0 +1,50 @@
+////
+/// Console containers.
+////
+
+
+$console-aside-z: 10;
+$console-aside-shadow: 1;
+$console-aside-bg-img: "#{$aside-image-path}binding_dark.png";
+
+$console-aside-width: 12rem;
+$console-header-height: 12rem;
+
+/// @todo calc need supports.
+$console-body-height: calc(100% - #{$console-header-height});
+
+
+.console-aside {
+    @include fill(l);
+    z-index: $console-aside-z;
+    width: $console-aside-width;
+}
+
+
+.console-aside {
+    @include theme-reverse();
+    @include shadow($console-aside-shadow);
+    background-image: url($console-aside-bg-img);
+}
+
+
+.console-main {
+    @include console-container(100%);
+    box-sizing: border-box;
+    padding-left: $console-aside-width;
+}
+
+
+.console-header {
+    box-sizing: border-box;
+    background-color: $color-white;
+    height: $console-header-height;
+    border-bottom: 1px solid $color-gray-ll;
+    position: relative;
+}
+
+.console-body {
+    @extend %p1;
+    overflow-y: auto;
+    height: $console-body-height;
+}

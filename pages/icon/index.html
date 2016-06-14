@@ -1,0 +1,188 @@
+{#
+
+Icon.
+
+ionicons
+
+#}
+
+
+{% from "templates/label.njk" import label %}
+{% from "templates/container.njk" import container %}
+
+
+
+{% extends "pages/layouts/aside.html" %}
+
+
+{% block script %}
+<script src="/commons.js"></script>
+<script src="index.js"></script>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="../index/index.css" />
+{% endblock %}
+
+
+
+{% block main %}
+<header class="console-header">
+
+  <header class="header__top row">
+    <ol class="breadcrumb grid width--3">
+      <li class="breadcrumb__item">
+        <a class="breadcrumb__home" href="/">
+	  <span class="ic ion-md-home"></span>
+        </a>
+      </li>
+      <li class="breadcrumb__item">
+        <a href="/">Dashboard</a>
+      </li>
+      <li class="breadcrumb__item breadcrumb__item--active">
+        <a href="/">Icon</a>
+      </li>
+    </ol>
+
+    <section class="logo grid width--6">
+      <div class="logo__content">PANDORA</div>
+    </section>
+  </header>
+
+
+  <div class="header__middle row">
+
+    <section class="grid title-logo">
+      <span class="ic ion-ios-ionic"></span>
+    </section>
+
+    
+    <section class="grid">
+      <header class="title">
+        ICON
+        {{ label("in process", state="warning") }}
+      </header>
+
+      <small class="title-description">
+	From <a class="link" href="http://ionicons.com">ionicons</a>
+	<span class="ion-logo-github"></span>
+	<a class="link" href="https://github.com/driftyco/ionicons">https://github.com/driftyco/ionicons</a>
+      </small>
+
+      <small>
+        <span class="ic ion-ios-bulb-outline"></span>
+        <span id="count">0</span>
+      </small>
+    </section>
+
+
+    <section class="search-bar grid--last">
+      <label class="field__label" for="search">
+        <input class="field" type="search" placeholder="Type names" id="search" name="search" autofocus />
+        <div class="field__icon">
+          <span class="ic ion-ios-search-outline"></span>
+        </div>
+      </label>
+    </section><!-- /.search-bar -->
+
+  </div><!-- /.row -->
+
+
+  <footer class="header__bottom">
+    <section class="tab">
+      <div class="tab__title">
+        DETAIL
+      </div>
+    </section>
+  </footer>
+
+
+</header>
+
+<!-- Body Container-->
+
+<main class="console-body">
+  <!-- Icons -->
+  <div class="js-icons-scroller">
+    {{container("icons")}}
+  </div>
+</main>
+
+<section class="icons-detail" id="icons-detail">
+
+  <section class="icons-detail__close" id="close">
+    <span class="ic--2x ion-ios-close-circle-outline"></span>
+  </section>
+
+  <header class="icons-detail-header">
+    ICON Detail
+  </header>
+
+  <section class="icons-detail-name">
+    <header class="icons-detail-title">NAME</header>
+    <span id="icon-name">ion-ios-ionic</span>
+  </section>
+
+  <section class="icons-detail-code">
+    <header class="icons-detail-title">CODE</header>
+    <span id="icon-name">\uf122</span>
+  </section>
+
+  <section class="icons-detail-tags">
+    <header class="icons-detail-title">TAGS</header>
+    <div id="icon-tags">
+      {{ label("android", state="info") }}
+      {{ label("md", state="info") }}
+      {{ label("ion", state="info") }}
+    </div>
+  </section>
+
+  <section class="icons-detail-ic">
+    <div id="icon-icons">
+      <section class="icons-detail-ic__item">
+	<header class="icons-detail-title">Size: 2X</header>
+	<div>
+	  <span class="ic--2x ion-ios-ionic"></span>
+	</div>
+      </section>
+
+      <section class="icons-detail-ic__item">
+	<header class="icons-detail-title">Size: 3X</header>
+	<div>
+	  <span class="ic--3x ion-ios-ionic"></span>
+	</div>
+      </section>
+
+      <section class="icons-detail-ic__item">
+	<header class="icons-detail-title">Size: 4X</header>
+	<div>
+	  <span class="ic--4x ion-ios-ionic"></span>
+	</div>
+      </section>
+    </div>
+  </section>
+
+
+  <section class="icons-detail-finder">
+    <header class="icons-detail-title">MAYBE YOU NEED</header>
+    <div id="icon-finder" class="js-iscroll-flag">
+      <div class="row">
+	<div class="icons-detail-finder__item grid width--4">
+	  <span class="ic ic--3x ion-ios-ionic"></span>
+	</div>
+	<div class="icons-detail-finder__item grid width--4">
+	  <span class="ic ic--3x ion-ios-ionic"></span>
+	</div>
+	<div class="icons-detail-finder__item grid width--4">
+	  <span class="ic ic--3x ion-ios-ionic"></span>
+	</div>
+	<div class="icons-detail-finder__item grid width--4">
+	  <span class="ic ic--3x ion-ios-ionic"></span>
+	</div>
+      </div>
+    </div>
+  </section><!-- /.icons-detail-finder -->
+  
+</section>
+
+{% endblock %}

@@ -1,0 +1,482 @@
+///
+/// Index.
+///
+/// @page
+///
+
+@import "../layouts/public";
+@import "../../components/scss_modules/button";
+@import "../../components/scss_modules/breadcrumb";
+@import "../../components/scss_modules/label";
+@import "../../components/scss_modules/form";
+@import "../../components/scss_modules/avatar";
+@import "../../components/scss_modules/icon";
+@import "../layouts/container";
+@import "../layouts/console";
+@import "../layouts/anim";
+@import "../../components/notify/notify";
+@import "../../components/tips/tips";
+
+
+
+///
+/// Box
+///
+
+@at-root {
+    @include reset-console();
+}
+
+///
+/// aside
+///
+
+.aside-header {
+    padding: 1rem 0;
+}
+
+.aside-avatar {
+    text-align: center;
+    padding: 1rem;
+}
+
+
+///
+/// menu
+///
+
+.menus {
+    padding-top: 1rem;
+}
+
+.menu {
+    display: block;
+    padding: 1rem;
+    padding-left: 2rem;
+    font-size: 0.8rem;
+
+    &:hover {
+	background-color: darken($color-black, 10%);
+    }
+}
+
+.menu__icon {
+    @include monospaced-icon()
+}
+
+///
+/// header
+///
+.header__top {
+    @extend %p1;
+    //padding-left: 0.5rem;
+    border-bottom: 1px solid $color-gray-ll;
+}
+
+.header__middle {
+    @extend %p1;
+}
+
+.header__bottom {
+    @include fill(b, false);
+}
+
+///
+/// logo
+///
+.logo {
+    text-align: center;
+}
+
+.logo__content {
+    color: $color-primary;
+    font-size: $font-size-lg;
+}
+
+
+
+
+///
+/// tab
+///
+.tab {
+    padding: 0 1rem;
+}
+.tab__title {
+    padding: 0.5rem 0.25rem;
+    display: inline-block;
+    border-bottom: 0.25rem solid $color-primary;
+    font-weight: $font-weight-d;
+    cursor: pointer;
+}
+
+
+///
+/// title
+///
+
+.title-logo {
+    //padding: 0.5rem 0;
+    width: 4rem;
+    color: #3F51B5;
+    .ic {
+        font-size: $font-size-4x;
+    }
+}
+
+.title-description {
+    margin-bottom: 0.5rem;
+}
+
+
+///
+/// Pages
+///
+
+.pages {
+    @extend .row;
+}
+
+.pages__item {
+    @extend .grid;
+    @extend .width--2;
+    padding: 1rem 2rem;
+}
+
+.page {
+    border-radius: 4px;
+    padding: 1rem;
+
+    transition: all 0.2s ease-in-out 0s;
+    background-color: $color-white;
+    &:hover {
+	background-color: $color-primary;
+    }
+}
+
+.page__header {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+
+    transition: all 0.2s ease-in-out 0s;
+    color: $color-primary;
+    .page:hover & {
+	color: $color-white;
+    }
+}
+
+.page__detail {
+    text-align: center;
+    font-size: 0.8rem;
+
+    transition: all 0.2s ease-in-out 0s;
+    .page:hover & {
+	color: $color-white;
+    }
+}
+
+
+$icon-block-height: 3rem;
+$icon-width: 10rem;
+///
+/// Icons
+///
+.icons__item {
+    display: inline-block;
+    width: $icon-width;
+    padding: 1rem;
+    text-align: center;
+}
+.icon {
+    @include border-box-padding(1rem 0);
+    @include shadow(1);
+    border-radius: $global-border-radius;
+    background-color: $color-white;
+    cursor: pointer;
+}
+.icon__icon {
+    height: $icon-block-height;
+    font-size: $font-size-3x;
+    
+    @include trans-hover(".icon") {
+	transform: scale(1.2);
+	color: $color-primary;
+    }
+}
+.icon__name {
+    @extend %p1;
+    margin: 0.5rem 0;
+    height: $icon-block-height;
+    font-size: $font-size-sm;
+
+    @include trans-hover(".icon") {
+	color: $color-primary;
+    }
+}
+.icon__content {
+    font-size: $font-size-sm;
+    color: $color-gray;
+}
+
+
+///
+/// icon-detail
+///
+.icons-detail {
+    @include fill(r);
+    @include shadow(1);
+    @include theme-reverse($bgc: $color-primary);
+    @include border-box-padding(2rem 0);
+    width: 15rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.icons-detail-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-d;
+    color: $color-gray-ll;
+    margin-bottom: 0.5rem;
+}
+
+.icons-detail-header {
+    @extend %p1;
+    text-align: center;
+    font-size: $font-size-lg;
+
+    .ic {
+	font-size: $font-size-2x;
+	margin-right: 0.5rem
+    }
+}
+
+.icons-detail__close {
+    @include fill(tl, false);
+    @extend %p1;
+    cursor: pointer;
+}
+
+.icons-detail-name {
+    @extend %p1;
+    text-align: center;
+}
+
+.icons-detail-code {
+    @extend %p1;
+    text-align: center;
+    font-size: $font-size-sm;
+}
+
+.icons-detail-tags {
+    @extend %p1;
+    text-align: center;
+}
+
+.icons-detail-ic {
+    @extend %p1;
+    text-align: center;
+    margin: 1rem 0;
+
+    &__item {
+	margin-bottom: 0.5rem;
+    }
+}
+
+.icons-detail-finder {
+    @extend %p1;
+    text-align: center;
+    
+    // used for iscroll
+    @include fill(b);
+    @include border-box-padding(0 0 2rem 0);
+    height: 300px;
+    
+    &__item {
+	text-align: center;
+	padding: 0.5rem;
+	cursor: pointer;
+
+	// used for tips
+	position: relative;
+    }
+}
+
+.js-iscroll-flag {
+    height: calc(100% - 1rem);
+    @include border-box-padding(1rem 0);
+    overflow: hidden;
+}
+
+.js-icons-scroller {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+///
+/// icon-animate
+///
+
+.icons-detail {
+    @include trans();
+    transform: translate3d(100%, 0, 0);
+}
+
+.icons-detail-header {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0);
+}
+
+.icons-detail-name {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+}
+
+.icons-detail-code {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+}
+
+.icons-detail-tags {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+}
+
+.icons-detail-ic {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+}
+
+.icons-detail-finder {
+    opacity: 0;
+    transform: translate3d(50%, 0, 0);
+}
+
+.js-icons-detail-active-hook {
+    .console-main {
+	width: calc(100% - 15rem);
+    }
+    .icons-detail {
+	transform: translate3d(0, 0, 0);
+    }
+    .icons-detail-header {
+	@include trans($delay: 0.1s, $during: 0.6s);
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+    }
+    .icons-detail-name {
+	@include trans($delay: 0.2s, $during: 0.6s);
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+    }
+    .icons-detail-code {
+	@include trans($delay: 0.3s, $during: 0.6s);
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+    }
+    .icons-detail-tags {
+	@include trans($delay: 0.4s, $during: 0.6s);
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+    }
+    .icons-detail-ic {
+	@include trans($delay: 0.5s, $during: 0.6s);
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+    }
+    .icons-detail-finder {
+	@include trans($delay: 0.6s, $during: 0.6s);
+	transform: translate3d(0, 0, 0);
+	opacity: 1;
+    }
+}
+
+.anim--init {
+    @include trans();
+}
+
+
+.height--f10 {
+    height: 100%;
+}
+
+.left-bar {
+    color: lightgray;
+    background-color: $color-primary;
+    height: 100%;
+}
+
+.left-bar_item {
+    padding: 2rem;
+    border-bottom: 2px solid gray;
+}
+
+@mixin icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    
+    margin-right: 1em;
+}
+
+.icon--mail {
+    @include icon;
+    background-color: lightsteelblue;
+}
+.icon--trash {
+    @include icon;
+    background-color: lightsteelblue;
+}
+
+.counter--red {
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    color: lightgray;
+    background-color: red;
+    border-radius: 1em;
+    padding: 0.3em;
+    margin: -0.3em;
+}
+
+.flex-center-col {
+    @include flex-center-col;
+}
+.flex-center-row {
+    @include flex-center-row;
+}
+
+.flex-center-all {
+    @include flex-center-all;
+}
+
+
+
+
+
+///
+/// Comments
+///
+
+.comments {
+    @include shadow(1);
+    width: 40%;
+    background: $color-white;
+    border-radius: $global-border-radius;
+}
+
+.comment {
+    @include border-box-padding(1rem);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $color-gray-ll;
+
+    &:last-child {
+	margin: 0;
+	border: 0;
+    }
+}
+
+.comment-left {
+    width: 8rem;
+}

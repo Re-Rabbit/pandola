@@ -1,0 +1,28 @@
+{#
+
+ Icon template.
+
+ #}
+
+
+<article class="icons__item">
+  <section class="icon"
+	   data-clipboard-text="{{name}}"
+	   data-name="{{name}}"
+	   data-tags="{{tags}}"
+	   data-code="{{code}}"
+	   data-group="{{group}}">
+    
+    <section class="icon__icon">
+      <span class="ic {{name}}"></span>
+    </section>
+
+    <section class="icon__name">
+      {{name}}
+    </section>
+
+    <section class="icon__content">
+      {{code}}
+    </section>
+  </section>
+</article><!-- /.icons__item -->

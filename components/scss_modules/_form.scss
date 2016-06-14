@@ -1,0 +1,33 @@
+////
+/// Form element.
+///
+/// 表单元素
+////
+
+
+.field {
+    @include reset-box();
+    @include reset-font();
+    @include reset-theme();
+    @include border-box-padding(0.5rem 1.5rem);
+    
+    width: 6rem;
+    line-height: $global-line-height;
+}
+
+.field__label {
+    display: inline-block;
+    position: relative;
+}
+
+
+.field__icon {
+    @include fill(l, false);
+    @include size(1rem, 2rem);
+    @include border-box-padding(0.5rem 0);
+    display: inline-block;
+    text-align: center;
+    .ic {
+	line-height: $global-line-height;
+    }
+}

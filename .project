@@ -2,14 +2,18 @@
 
 api = "http://localhost:7777/api"
 
+[oauth]
+id  = "08c92eeed755200fa60c"
+key = "83e052e397ae6734bcc5017dcce9fc909f7d11f8"
+
 [[contributors]]
 name   = "Rabbit"
-github = "https://github.com/yuffiy"
+github = "yuffiy"
 
 [[contributors]]
 name   = "PL"
-github = "https://github.com/0x00-pl"
+github = "0x00-pl"
 
 [[contributors]]
 name   = "wuwu"
-github = "https://github.com/zooxyt"
+github = "zooxyt"

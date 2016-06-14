@@ -1,0 +1,159 @@
+///
+/// Config
+///
+
+
+$grid: 12;
+
+
+///
+/// Font
+///
+
+// font family
+$global-font-family: "Microsoft YaHei UI","Microsoft YaHei","Ubuntu mono","Helvetica Neue","Helvetica,Arial","Hiragino Sans GB","Hiragino Sans GB W3","sans-serif";
+
+// font size
+// 1rem = 16px
+$global-font-size: 16px;
+
+// line height
+$global-line-height: 1.5;
+
+// default foreground color
+$global-color: #232323;
+// default background color
+$global-bgColor: #f3f3f3;
+// default border radius
+$global-border-radius: 4px;
+
+// aside images path
+$aside-image-path: "/layouts/images/";
+
+
+///
+/// Text
+///
+$font-size-lg: 1.2rem;
+$font-size:    1rem;
+$font-size-sm: 0.8rem;
+$font-size-2x: 2rem;
+$font-size-3x: 3rem;
+$font-size-4x: 4rem;
+
+
+$font-weight-l: 100;
+$font-weight:   400;
+$font-weight-d: 700;
+
+
+///
+/// Color
+///
+
+// gray
+$color-white:   #fff;
+$color-black:   #000;
+$color-gray-ll: #ddd;
+$color-gray-l:  #aaa;
+$color-gray:    #888;
+$color-gray-d:  #555;
+$color-gray-dd: #333;
+
+// primary color
+$color-primary:   #4CAF50; //#90ee90;
+$color-secondary: #bdb76b;
+
+// stated color
+$color-info:    #03A9F4; // blue
+$color-success: #4CAF50; // green
+$color-warning: #FF9800; // yellow
+$color-error:   #F44336; // red
+
+// alpha
+$alpha-ll: 0.08;
+$alpha-l:  0.32;
+$alpha:    0.56;
+$alpha-d:  0.72;
+$alpha-dd: 0.88;
+$alpha-hide: 0;
+$alpha-show: 1;
+
+
+
+$hover-darken-rate: 10%;
+$active-darken-rate: 20%;
+
+
+///
+/// Shadow
+///
+
+$shadow-inset:  rgba(#000, 0.2);
+$shadow-outset: rgba(#000, 0.14);
+$shadow-around: rgba(#000, 0.12);
+
+$shadows: (
+	  0: none,
+    1: (0px 2px 4px -1px   $shadow-inset,
+	      0px 4px 5px 0px    $shadow-outset,
+	      0px 1px 10px 0px   $shadow-around),
+    2: (0px 5px 6px -3px   $shadow-inset,
+	      0px 9px 12px 1px   $shadow-outset,
+	      0px 3px 16px 2px   $shadow-around),
+    3: (0px 7px 9px -4px   $shadow-inset,
+	      0px 14px 21px 2px  $shadow-outset,
+	      0px 5px 26px 4px   $shadow-around),
+    4: (0px 9px 12px -6px  $shadow-inset,
+	      0px 19px 29px 2px  $shadow-outset,
+	      0px 7px 36px 6px   $shadow-around),
+    5: (0px 11px 15px -7px $shadow-inset,
+	      0px 24px 38px 3px  $shadow-outset,
+	      0px 9px 46px 8px   $shadow-around)
+);
+
+
+
+///
+/// Border
+///
+
+$border-size: 2px;
+$border-radius-size-default: 2px;
+
+///
+/// Containers
+///
+
+$container-sm: 50rem;
+$container:    64rem;
+$container-lg: 75rem;
+
+$aside-default-width:  12rem;
+
+
+///
+/// Model
+///
+
+$model-z: 90;
+$model-bg-z: 1;
+$model-main-z: 2;
+$model-bg-alpha: 0.28;
+$model-main-shadow: 1;
+
+
+///
+/// Button main color
+///
+
+$button-color-text: lightgoldenrodyellow;
+$button-color-main: dodgerblue;
+$button-color-border: darken($button-color-main, 20%);
+
+
+///
+/// CSS shape
+///
+
+$triangle-default-width: 0.25rem;

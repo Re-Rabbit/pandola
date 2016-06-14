@@ -1,0 +1,18 @@
+* Auth with github
+
+
+- 从ls获取token
+  - null -> /auth/code 获取path
+  - open window and listen
+  - /auth/token?code=code 获取token
+  - 写入token
+- 根据token获取用户信息
+  - token 过期 -> get token
+
+
+
+** issus topic
+
+- 获取issues
+- 创建 !(public | test)
+- 回复

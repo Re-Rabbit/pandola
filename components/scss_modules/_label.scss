@@ -1,0 +1,27 @@
+////
+/// Label
+////
+
+.label {
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+
+    @include reset-font();
+    font-size: $font-size-sm;
+
+    cursor: pointer;
+}
+
+.label {
+
+    &--info {
+        @include theme-reverse($bgc: $color-info);
+    }
+    &--warning {
+        @include theme-reverse($bgc: $color-warning);
+    }
+}
+
+.label--radius {
+    border-radius: $global-border-radius;
+}

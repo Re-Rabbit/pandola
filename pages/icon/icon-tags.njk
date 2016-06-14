@@ -1,0 +1,14 @@
+{#
+
+Icon tags
+
+#}
+
+
+{% from "templates/label.njk" import label %}
+
+{% for tag in tags %}
+
+{{ label(tag, state="info") }}
+
+{% endfor %}

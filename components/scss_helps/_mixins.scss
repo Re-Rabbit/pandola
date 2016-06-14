@@ -1,0 +1,307 @@
+///
+/// Mixins
+/// 
+
+
+///
+/// Reset
+/// 
+@mixin reset-box() {
+    margin:   0;
+    padding:  0;
+    border:   0;
+    outline:  0;
+}
+
+@mixin reset-font() {
+    font-size:   inherit;
+    font-weight: normal;
+    font-style:  normal;
+    font-family: inherit;
+    line-height: 1;
+    vertical-align: baseline;
+}
+
+@mixin reset-theme() {
+    background-color: transparent;
+    color: inherit;
+    border: 0 none;
+}
+
+@mixin reset-body($fontFamily: sans-serif,
+		              $fontSize: 16px,
+		              $color: #000,
+		              $bgColor: #fff) {
+    // typo
+    font-family: $fontFamily;
+    font-size:   $fontSize;
+    line-height: 1;
+    // theme
+    color: $color;
+    background-color: $bgColor;
+    // overflow
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/// Console
+
+@mixin reset-console() {
+    html,
+    body,
+    body > .main,
+    body > .console {
+        @include size(100%);
+	overflow-y: auto;
+	overflow-x: hidden;
+    }
+}
+
+@mixin console-container($w: 1rem) {
+    @include size($w, 100%);
+}
+
+
+/// Box
+
+@mixin size($width, $height: null) {
+    @if $height != null {
+        width:  $width;
+        height: $height;
+    } @else {
+        width:  $width;
+        height: $width;
+    }
+}
+
+
+@mixin middle-block($width: 50rem) {
+    width: $width;
+    margin-left:  auto;
+    margin-right: auto;
+}
+
+
+/// Theme
+
+@mixin theme-reverse($c: $global-bgColor, $bgc: $global-color) {
+    color: $c;
+    background-color: $bgc;
+}
+
+
+@mixin shadow($z: 0) {
+    box-shadow: map-get($shadows, $z);
+}
+
+
+/// Border
+
+@mixin border($size, $color, $style:solid) {
+    border: $size $style $color;
+}
+
+@mixin border-radius-ex($tl, $tr, $bl, $br) {
+    border-top-left-radius: $tl;
+    border-top-right-radius: $tr;
+    border-bottom-left-radius: $bl;
+    border-bottom-right-radius: $br;
+}
+
+@mixin border-radius-direction($direction, $size: $border-radius-size-default) {
+    @if(str-index($direction, "t") or str-index($direction, "u")){
+        border-top-left-radius: $size;
+        border-top-right-radius: $size;
+    }
+    @if(str-index($direction, "b") or str-index($direction, "d")){
+        border-bottom-left-radius: $size;
+        border-bottom-right-radius: $size;
+    }
+    @if(str-index($direction, "l")){
+        border-top-left-radius: $size;
+        border-bottom-left-radius: $size;
+    }
+    @if(str-index($direction, "r")){
+        border-top-right-radius: $size;
+        border-bottom-right-radius: $size;
+    }
+}
+
+@mixin border-radius($size){
+    @include border-radius-ex($size, $size, $size, $size);
+}
+
+/// Text
+
+@mixin monospaced-icon() {
+    display: inline-block;
+    min-width: 1.2em;
+    text-align: center;
+}
+
+/// Fill
+@mixin fill($direction: a, $isFixed: fixed) {
+    @if ifFixed == fixed {
+        position: fixed;
+    }
+    @else {
+        position: absolute;
+    }
+
+    @if $direction == t {
+        left: 0;
+        right: 0;
+        top: 0;
+    } @else if $direction == r {
+        top: 0;
+        right: 0;
+        bottom: 0;
+    } @else if $direction == b {
+        left: 0;
+        right: 0;
+        bottom: 0;
+    } @else if $direction == l {
+        top: 0;
+        left: 0;
+        bottom: 0;
+    } @else if $direction == tl {
+        top: 0;
+        left: 0;
+    } @else if $direction == tr {
+        top: 0;
+        right: 0;
+    } @else if $direction == bl {
+        left: 0;
+        bottom: 0;
+    } @else if $direction == br {
+        right: 0;
+        bottom: 0;
+    } @else {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+
+/// Color
+
+@mixin color($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    color: $color;
+    background-color: $bg-color;
+    border-color: $border-color;
+}
+
+@mixin color-darken($color:inherit, $bg-color:inherit, $border-color:inherit, $rate:10%) {
+    color: darken($color, $rate);
+    background-color: darken($bg-color, $rate);
+    border-color: darken($border-color, $rate);
+}
+
+
+@mixin hover-darken($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    &:hover {
+        @include color-darken($color, $bg-color, $border-color, $hover-darken-rate);
+    }
+}
+
+@mixin active-darken($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    &:active {
+        @include color-darken($color, $bg-color, $border-color, $active-darken-rate);
+    }
+}
+
+@mixin auto-darken($color:inherit, $bg-color:inherit, $border-color:inherit) {
+    @include color($color, $bg-color, $border-color);
+    &:hover {
+        @include color-darken($color, $bg-color, $border-color, $hover-darken-rate);
+    }
+    &:active {
+        @include color-darken($color, $bg-color, $border-color, $active-darken-rate);
+    }
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin flex-center-row {
+    @include flex-center;
+    flex-direction: row;
+}
+@mixin flex-center-col {
+    @include flex-center;
+    flex-direction: col;
+}
+@mixin flex-center-all {
+    @include flex-center;
+    align-items: center;
+}
+
+
+
+@mixin nav-link() {
+    li {
+	      display: inline-block;
+    }
+}
+
+
+@mixin border-box-padding($pad...) {
+    box-sizing: border-box;
+    padding: $pad;
+}
+
+@mixin trans($prop: all,
+             $during: 0.2s,
+             $ease: ease-in-out,
+             $delay: 0s) {
+    transition: $prop $during $ease $delay;
+}
+
+@mixin trans-hover($selector) {
+    @include trans();
+    #{$selector}:hover & {
+        @content;
+    }
+}
+
+@mixin after-init($position: absolute) {
+    &:after {
+	content: ' ';
+	position: $position;
+	display: inline-block;
+    }
+}
+
+@mixin triangle($direction: l,
+		$width: $triangle-default-width,
+		$color: inherit) {
+    @include after-init();
+    &:after {
+	width: 0;
+	height: 0;
+	border-width: $width;
+	border-style: solid;
+	border-color: transparent;
+	color: $color;
+	@content;
+	
+	@if $direction == t {
+	    border-bottom-color: initial;
+	    margin-top: -$width / 2;
+	} @else if $direction == b {
+	    border-top-color: initial;
+	    margin-bottom: -$width / 2;
+	} @else if $direction == r {
+	    border-left-color: initial;
+	    margin-right: -$width / 2;
+	} @else {
+	    border-right-color: initial;
+	    margin-left: -$width / 2;
+	}
+    }
+}
