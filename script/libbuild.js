@@ -31,7 +31,7 @@ const paths = {
     },
     watchers: {
 	      style: [
-	          src + '/**/index.scss',
+	          src + '/**/*.scss',
 	          components + '/**/*.scss'
 	      ],
         html: src + '/**/*.html'
