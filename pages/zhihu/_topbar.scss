@@ -1,0 +1,100 @@
+@import "../layouts/public";
+
+$page-max-width: 1000px;
+$header-height: 45px;
+
+.main-header-back {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    height: $header-height;
+    // background-color: dodgerblue;
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #086ed5, #055db5) repeat scroll 0 0;
+}
+
+.main-header {
+    box-sizing: border-box;
+    max-width: $page-max-width;
+    margin: 0 auto;
+    height: $header-height;
+    &:after {
+        clear: both;
+    }
+}
+
+.logo {
+    display: inline-block;
+    box-sizing: border-box;
+    height: $header-height;
+    line-height: $header-height;
+    vertical-align: middle;
+    color: white;
+    font-size: 2rem;
+}
+
+.search {
+    display: inline-block;
+    // height: $header-height;
+    // vertical-align: middle;
+    .search-input {
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: middle;
+        width: 240px;
+        height: 2rem;
+        // margin: calc($header-height - 1rem / 2) 0;
+        border: none;
+        @include border-radius-ex(0.3rem, 0, 0.3rem, 0);
+        padding: 0.5rem 0.5rem;
+        background-color: lightgray; 
+    }
+    .search-button {
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: middle;
+        text-align: center;
+        width: 40px;
+        height: 2rem;
+        border: 1px solid darkblue;
+        @include border-radius-ex(0, 0.3rem, 0, 0.3rem);
+        span {
+            display: inline-block;
+            line-height: 2rem;
+            vertical-align: middle;
+            color: white;
+        }
+    }
+}
+
+.float-right {
+    float: right;
+}
+
+.navigation {
+    font-size: 1rem;
+    color: white;
+    .nav--item {
+        margin: 0 0.3rem;
+    }
+}
+
+.add-question {
+    display: inline-block;
+    box-sizing: border-box;
+    border: 1px solid darkblue;
+    @include border-radius(0.3rem);
+    height: 2rem;
+    line-height: 2rem;
+    padding: 0 0.5rem;
+    margin: 0 1rem;
+    color: white;
+}
+
+.user-info {
+    height: $header-height;
+    color: white;
+    line-height: $header-height;
+    .user-info--item {
+        margin: 1rem;
+    }
+}
