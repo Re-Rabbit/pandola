@@ -2,13 +2,15 @@
 
 Icon finder
 
+列举可能会用到的图标
+
 #}
 
 
 <div class="row">
   {% for icon in icons %}
-	<div class="icons-detail-finder__item grid width--4">
-	  <span class="ic ic--3x {{icon}}"></span>
-	</div>
+  <div class="icons-detail-finder__item grid width--4" data-name="{{icon}}">
+    <span class="ic ic--3x {{icon}}"></span>
+  </div>
   {% endfor %}
 </div>
