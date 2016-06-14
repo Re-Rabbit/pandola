@@ -30,10 +30,11 @@ const paths = {
         font: './node_modules/ionicons/dist/fonts/**/*.*'
     },
     watchers: {
-	style: [
-	    src + '/**/index.scss',
-	    components + '/**/*.scss'
-	]
+	      style: [
+	          src + '/**/index.scss',
+	          components + '/**/*.scss'
+	      ],
+        html: src + '/**/*.html'
     }
 }
 
@@ -53,11 +54,11 @@ function buildHtml() {
 function buildStyle() {
     return gulp
         .src(paths.dirs.style)
-	//.pipe(cached('styles'))
+	  //.pipe(cached('styles'))
         .pipe(sass().on('error', sass.logError))
-	//.pipe(remember('styles'))
+	  //.pipe(remember('styles'))
         .pipe(gulp.dest(paths.tmp))
-	.pipe(reload({ stream: true }))
+	      .pipe(reload({ stream: true }))
 }
 
 
@@ -67,16 +68,16 @@ function buildScript() {
         .src(paths.dirs.script, { base: src })
         .pipe(named())
         .pipe(webpack(webpackConfig, null, (err, stats) => {
-	    console.log(stats.toString({
-		colors: true,
-		modules: false,
-		chunks: false,
-		cached: false
-	    }))
-	    
-	})).on('error', console.log)
+	          console.log(stats.toString({
+		            colors: true,
+		            modules: false,
+		            chunks: false,
+		            cached: false
+	          }))
+	          
+	      })).on('error', console.log)
         .pipe(gulp.dest(paths.tmp))
-	.pipe(reload({ stream: true }))
+	      .pipe(reload({ stream: true }))
 }
 
 function buildFont() {
@@ -92,10 +93,10 @@ function buildImage() {
 }
 
 var buildAll = gulp.parallel(buildHtml,
-			     buildStyle,
-			     //buildScript,
-			     buildFont,
-			     buildImage)
+			                       buildStyle,
+			                       //buildScript,
+			                       buildFont,
+			                       buildImage)
 
 module.exports = {
     paths: paths
