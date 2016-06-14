@@ -1,38 +1,14 @@
-<html>
+{% extends "pages/layouts/application.html" %}
 
-<head>
-    <link rel="stylesheet" href="index.css" />
-</head>
 
-<body>
-    <header>
-        <span class="logo"></span>
-        <span class="search"></span>
-        <span class="navigation"></span>
-        <span class="add-question"></span>
-        <span class="user-info"></span>
-    </header>
-    <main>
-        <div class="main-center">
-            <div class="question-box">
-                <div class="tags"></div>
-                <div class="title"></div>
-                <div class="content"></div>
-                <div class="panel"></div>
-            </div>
-            <div class="answers-box">
-                TODO
-            </div>
-        </div>
-        <div class="main-right">
-            <div class="join"></div>
-            <div class="follow"></div>
-            <div class="author"></div>
-            <div class="collection"></div>
-            <div class="related"></div>
-            <div class="answer-status"></div>
-        </div>
-    </main>
-</body>
+{% block styles %}
+<link rel="stylesheet" href="index.css" />
+{% endblock %}
 
-</html>
+
+{% block content %}
+
+{% include "pages/zhihu/topbar.html" %}
+{% include "pages/zhihu/article.html" %}
+
+{% endblock %}
