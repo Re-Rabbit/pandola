@@ -1,10 +1,38 @@
 export function next(fn) {
     return new Promise((res, rej) => {
-	requestAnimationFrame(() => {
+	let timer = requestAnimationFrame(() => {
 	    fn()
-	    res()
+	    res(timer)
 	})
     })
+}
+
+export function delay(timeout = 0) {
+    return function(fn) {
+	return new Promise(res => {
+	    let timer = setTimeout(() => {
+		fn()
+		res(timer)
+	    }, timeout)
+	})
+    }
+}
+
+export function waitFor(elem) {
+    return function(fn) {
+	return new Promise(res => {
+	    function handle() {
+		fn()
+		res()
+		elem.removeEventListener('transitionend', handle)
+	    }
+	    elem.addEventListener('transitionend', handle)
+	})
+    }
+}
+
+export function now() {
+    return performance.now()
 }
 
 export function PL(val) {

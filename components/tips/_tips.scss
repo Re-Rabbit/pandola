@@ -1,0 +1,73 @@
+////
+/// tips
+///
+/// 提示
+////
+
+$tips-pointer-position-self: -$triangle-default-width / 2 * 3;
+$tips-pointer-position-container: -$triangle-default-width;
+
+.tips {
+    @include reset-font();
+    @include theme-reverse($bgc: $color-gray-dd);
+    display: inline-block;
+    padding: 0.1rem 0.5rem;
+    line-height: $global-line-height;
+    font-size: $font-size-sm;
+    border-radius: $global-border-radius;
+    cursor: default;
+    position: absolute;
+    z-index: 10;
+    word-break: keep-all;
+}
+
+.tips {
+    &--left {
+	@include triangle($color: $color-gray-dd) {
+	    left: $tips-pointer-position-self;
+	    top: 50%;
+	    margin-top: $tips-pointer-position-container;
+	}
+    }
+    &--right {
+	@include triangle(r, $color: $color-gray-dd) {
+	    right: $tips-pointer-position-self;
+	    top: 50%;
+	    margin-top: $tips-pointer-position-container;
+	}
+    }
+    &--bottom {
+	bottom: 0;
+	left: 50%;
+	transform: translate3d(-50%, 100%, 0);
+	
+	@include triangle(t, $color: $color-gray-dd) {
+	    top: $tips-pointer-position-self;
+	    left: 50%;
+	    margin-left: $tips-pointer-position-container;
+	}
+    }
+    &--top {
+	@include triangle(b, $color: $color-gray-dd) {
+	    bottom: $tips-pointer-position-self;
+	    left: 50%;
+	    margin-left: $tips-pointer-position-container;
+	}
+    }
+}
+
+
+.tips {
+    &.js-anim--in {
+	transform: translate3d(-50%, 80%, 0);
+    }
+    &.js-anim--enter {
+	transform: translate3d(-50%, 100%, 0);
+    }
+    &.js-anim--leave {
+	transform: translate3d(-50%, 80%, 0);
+    }
+    &.js-anim--out {
+	transform: translate3d(-50%, 80%, 0);
+    }
+}

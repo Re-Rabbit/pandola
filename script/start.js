@@ -54,7 +54,7 @@ function main() {
     function watch() {
         server()
         gulp.watch(build.paths.dirs.html, gulp.series(build.buildHtml, reload))
-        gulp.watch(build.paths.dirs.style, gulp.series(build.buildStyle, reload))
+        gulp.watch(build.paths.watchers.style, gulp.series(build.buildStyle, reload))
         
         gulp.watch(build.paths.dirs.image, gulp.series(build.buildImage, reload))
         // gulp.watch(build.paths.dirs.api, gulp.series(reload))  // useless
@@ -62,17 +62,11 @@ function main() {
 
     }
 
-    gulp.task
-    ('default'
-     , gulp.series
-     (build.buildAll
-      , gulp.parallel
-      (watch
-       , apiServer
-       , build.buildScript
-      )
-     )
-    )
+    gulp.task('default' , gulp.series(build.buildAll,
+				      gulp.parallel(watch,
+						    apiServer,
+						    build.buildScript)
+				     ))
 }
 
 main()

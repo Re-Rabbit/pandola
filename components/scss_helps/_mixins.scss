@@ -268,3 +268,40 @@
         @content;
     }
 }
+
+@mixin after-init($position: absolute) {
+    &:after {
+	content: ' ';
+	position: $position;
+	display: inline-block;
+    }
+}
+
+@mixin triangle($direction: l,
+		$width: $triangle-default-width,
+		$color: inherit) {
+    @include after-init();
+    &:after {
+	width: 0;
+	height: 0;
+	border-width: $width;
+	border-style: solid;
+	border-color: transparent;
+	color: $color;
+	@content;
+	
+	@if $direction == t {
+	    border-bottom-color: initial;
+	    margin-top: -$width / 2;
+	} @else if $direction == b {
+	    border-top-color: initial;
+	    margin-bottom: -$width / 2;
+	} @else if $direction == r {
+	    border-left-color: initial;
+	    margin-right: -$width / 2;
+	} @else {
+	    border-right-color: initial;
+	    margin-left: -$width / 2;
+	}
+    }
+}

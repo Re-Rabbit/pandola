@@ -1,3 +1,4 @@
+
 var gulp = require('gulp')
 var sass = require('gulp-sass')
 var nunjucks = require('gulp-nunjucks')
@@ -13,10 +14,10 @@ var webpackConfig = require('./../webpack.config.js')
 
 
 
-var src = './pages'
-var components = './components'
+const src = './pages'
+const components = './components'
 
-var paths = {
+const paths = {
     src: src,
     tmp: './tmp',
     publish: './.publish',
@@ -27,6 +28,12 @@ var paths = {
         image: src + '/**/images/*',
         api: src + '/**/api.js',
         font: './node_modules/ionicons/dist/fonts/**/*.*'
+    },
+    watchers: {
+	style: [
+	    src + '/**/index.scss',
+	    components + '/**/*.scss'
+	]
     }
 }
 
@@ -46,10 +53,11 @@ function buildHtml() {
 function buildStyle() {
     return gulp
         .src(paths.dirs.style)
-	.pipe(cached('styles'))
+	//.pipe(cached('styles'))
         .pipe(sass().on('error', sass.logError))
-	.pipe(remember('styles'))
+	//.pipe(remember('styles'))
         .pipe(gulp.dest(paths.tmp))
+	.pipe(reload({ stream: true }))
 }
 
 
@@ -59,8 +67,6 @@ function buildScript() {
         .src(paths.dirs.script, { base: src })
         .pipe(named())
         .pipe(webpack(webpackConfig, null, (err, stats) => {
-
-	    //console.log(stats.toJson())
 	    console.log(stats.toString({
 		colors: true,
 		modules: false,
@@ -85,13 +91,11 @@ function buildImage() {
         .pipe(gulp.dest(paths.tmp))
 }
 
-var buildAll = gulp.parallel(buildHtml
-			     , buildStyle
-			     //, buildScript
-			     , buildFont
-			     , buildImage
-			    )
-
+var buildAll = gulp.parallel(buildHtml,
+			     buildStyle,
+			     //buildScript,
+			     buildFont,
+			     buildImage)
 
 module.exports = {
     paths: paths

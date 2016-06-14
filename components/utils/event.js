@@ -12,7 +12,7 @@ export function on(name, handle, selector, isCapture = false) {
 		let body = $('body')
 		let els = $$(selector)
 		let res = contain()
-
+		
 		function contain(el = evt.target) {
 		    if(el === root) return false
 		    if(el === body) return false
@@ -20,8 +20,8 @@ export function on(name, handle, selector, isCapture = false) {
 		    if(filter) return filter
 		    return contain(el.parentNode)
 		}
-		
-		return res ? handle.call(res) : void 0
+
+		return res ? handle.bind(res)(evt) : void 0
 	    }, isCapture)
 	} else {
 	    el.addEventListener(name, handle, isCapture)
@@ -42,6 +42,14 @@ export function trigger(name) {
 	    }
 	})()
 	el.dispatchEvent(new Evt(name))
+	return el
+    }
+}
+
+export function off(name, handle, isCapture = false) {
+    return function(el) {
+	el.removeEventListener(name, handle, isCapture)
+	
 	return el
     }
 }
