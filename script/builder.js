@@ -14,6 +14,7 @@
  *
  * @warning Development environment only.
  * @todo Add production environment builder.
+ * @todo Check tmp dir is exist.
  */
 
 
@@ -21,16 +22,15 @@ const gulp = require('gulp')
 const sass = require('gulp-sass')
 const nunjucks = require('gulp-nunjucks')
 const data = require('gulp-data')
-const changed = require('gulp-changed');
 const tool = require('gulp-util')
-//const watch = require('gulp-watch')
 const nunjucks_impl = require('nunjucks')
 const named = require('vinyl-named')
-const path = require('path')
 const webpack = require('webpack-stream')
 const del = require('del')
 const reload = require('browser-sync').reload
 const webpackConfig = require('./../webpack.config.js')
+const path = require('path')
+const fs = require('fs')
 
 /**
  * Paths
@@ -42,57 +42,83 @@ const components = 'components'
 const libs = 'libs'
 // dest
 const tmp = 'tmp'
+// workspace
+var workspace = 'zhihu'
+const workspaceTmp = '.workspace'
+const workspaceTmpFile = `${tmp}/${workspaceTmp}`
 
-const stylesInitBuildPath = () => `${pages}/**/index.scss`
-const stylesReBuildPath = (workspace) => `${pages}/${workspace}/index.scss`
-const stylesWatchPath = () => [pages, components, libs].map(n => `${n}/**/*.scss`)
+const stylesBuildPath = (workspace) => `${pages}/${workspace}/index.scss`
+const stylesWatchPath = () => [pages, components, libs].map(n => `${n}/**/[^#]*.scss`)
+
+function clean() {
+    return del('tmp/*')
+}
+
+
+function boot(done) {
+    process.nextTick(() => setWorkSpace(workspace)(done))
+}
+
+
+function setWorkSpace(value) {
+    return function(done) {
+        const cb = typeof done === 'function' ? done : function() {}
+        fs.writeFile(workspaceTmpFile, value, err => {
+            if(err) throw err
+            console.log(tool.colors.bgMagenta(' Workspace '),
+                     tool.colors.green(`${workspace}`),
+                     '->',
+                     tool.colors.yellow(`${value}`))
+            workspace = value
+            cb()
+        })
+    }
+}
+
+function replaceScssComponentPath(url) {
+    return url
+}
+
+function defineSassImporter(filter) {
+    return function(url, prev, done) {
+        return done({ file: filter(url) })
+    }
+}
 
 function sassConfig() {
     return {
-	outputStyle: 'expanded',
-	indentType: 'space',
-	importer: [(url, prev, done) => {
-	    setImmediate(
-		() => console.log(url, prev)
-	    )
-	    done({ file: url })
-	}]
+	      outputStyle: 'expanded',
+	      indentType: 'space',
+	      importer: defineSassImporter(replaceScssComponentPath)
     }
 }
-function cssInitBuild() {
+
+function css() {
+    const cssPath = stylesBuildPath(workspace)
+    console.log(tool.colors.bgBlue(' CSS '), cssPath, +new Date)
     return gulp
-	.src(stylesInitBuildPath())
-	.pipe(sass(sassConfig()))
-	.pipe(gulp.dest(tmp))
+	      .src(cssPath)
+	      .pipe(sass(sassConfig()))
+	      .pipe(gulp.dest(tmp))
 }
-
-cssInitBuild.displayName = 'css:init'
-
-var workspace = 'zhihu'
-
-function cssReBuild() {
-    console.log(workspace)
-    return gulp
-	.src(stylesReBuildPath(workspace))
-	.pipe(sass(sassConfig()))
-	.pipe(gulp.dest(tmp))
-}
-
-cssReBuild.displayName = `css::${workspace}`
 
 function watch(done) {
-    gulp.watch(stylesWatchPath(), gulp.series(cssReBuild))
-	.on('change', (path, stats) => {
-	    if (stats)
-		setImmediate(
-		    () => tool.log(`${tool.colors.bgMagenta(' File ')} ${tool.colors.magenta(path)} changed size to ${stats.size}`)
-		)
-	});
-    
+
+    gulp.watch(stylesWatchPath(), gulp.series(css))
+	      .on('change', (path, stats) => {
+	          if (stats)
+		            setImmediate(
+		                () => console.log(`${tool.colors.bgWhite(' File ')} ${tool.colors.magenta(path)} changed size to ${stats.size}`)
+		            )
+	      })
+
+
+    gulp.watch(workspaceTmpFile, gulp.series(css))
+
     done()
 }
 
 
-gulp.task('default', gulp.series(cssInitBuild,
-				 gulp.parallel(watch)))
-
+gulp.task('default', gulp.series(clean,
+				                         gulp.parallel(watch,
+                                               boot)))
