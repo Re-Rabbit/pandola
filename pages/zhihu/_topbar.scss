@@ -1,100 +1,73 @@
 @import "../layouts/public";
+@import "./zhihu_global";
 
-$page-max-width: 1000px;
-$header-height: 45px;
-
-.main-header-back {
+@mixin header-element {
     display: inline-block;
     box-sizing: border-box;
+    vertical-align: middle;
+    color: white;
+}
+
+
+.main-header-back {
     width: 100%;
-    height: $header-height;
-    // background-color: dodgerblue;
+    padding: 0.3rem 0;
     background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #086ed5, #055db5) repeat scroll 0 0;
 }
 
 .main-header {
-    box-sizing: border-box;
+    display: block;
     max-width: $page-max-width;
     margin: 0 auto;
-    height: $header-height;
     &:after {
         clear: both;
     }
 }
 
 .logo {
-    display: inline-block;
-    box-sizing: border-box;
-    height: $header-height;
-    line-height: $header-height;
-    vertical-align: middle;
-    color: white;
+    @include header-element;
     font-size: 2rem;
 }
 
 .search {
-    display: inline-block;
-    // height: $header-height;
-    // vertical-align: middle;
+    @include header-element;
     .search-input {
-        display: inline-block;
-        box-sizing: border-box;
-        vertical-align: middle;
-        width: 240px;
-        height: 2rem;
-        // margin: calc($header-height - 1rem / 2) 0;
-        border: none;
+        @include header-element;
+        @include input-gray;
         @include border-radius-ex(0.3rem, 0, 0.3rem, 0);
-        padding: 0.5rem 0.5rem;
-        background-color: lightgray; 
+        width: 240px;
     }
     .search-button {
-        display: inline-block;
-        box-sizing: border-box;
-        vertical-align: middle;
-        text-align: center;
-        width: 40px;
-        height: 2rem;
-        border: 1px solid darkblue;
+        @include header-element;
+        @include btn-blue;
         @include border-radius-ex(0, 0.3rem, 0, 0.3rem);
-        span {
-            display: inline-block;
-            line-height: 2rem;
-            vertical-align: middle;
-            color: white;
-        }
+        width: 40px;
     }
 }
 
 .float-right {
+    @include header-element;
     float: right;
 }
 
 .navigation {
-    font-size: 1rem;
-    color: white;
+    @include header-element;
     .nav--item {
-        margin: 0 0.3rem;
+        @include header-element;
+        margin: 0 1rem;
     }
 }
 
 .add-question {
-    display: inline-block;
-    box-sizing: border-box;
-    border: 1px solid darkblue;
-    @include border-radius(0.3rem);
-    height: 2rem;
-    line-height: 2rem;
-    padding: 0 0.5rem;
+    @include header-element;
+    @include btn-blue;
     margin: 0 1rem;
-    color: white;
 }
 
 .user-info {
-    height: $header-height;
+    @include header-element;
     color: white;
-    line-height: $header-height;
     .user-info--item {
-        margin: 1rem;
+        margin: 0 1rem;
     }
 }
