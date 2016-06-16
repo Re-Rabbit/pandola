@@ -8,27 +8,65 @@
     color: white;
 }
 
-
+// @Fixme
+//
+// 1.默认背景色用一个蓝色，rgba也是sass一个build-in的函数可以写
+// rgba(#fff, 0)，后面的repeat这些是不需要的。为了方便控制
+// 最好定义一个主色 $color-primary 覆盖就好
+// 
+// 2.这里因为是容器，不需要定义padding，可以放在之后每一块中定义
+// 3.block也不需要定义100%的宽度
+// 4.需要添加一个阴影 @include shadow(1)
 .main-header-back {
-    width: 100%;
-    padding: 0.3rem 0;
-    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #086ed5, #055db5) repeat scroll 0 0;
+    width: 100%; // 3
+    padding: 0.3rem 0; // 2
+    background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #086ed5, #055db5) repeat scroll 0 0; // 1
 }
 
+// @Fixme 
+//
+// 1. $page-max-width 在 config 中有类似的定义 $container
+// 覆盖就好
+//
+// 2. block是重复定义，可以去掉
+// 3. 这里我们写过grid不需要再做了，直接混起来也就可以@extend row
+// 4. html标签那里的left，不应该是span，换成div或section，left
+// 的命名需要改为类似class="header-left"
 .main-header {
-    display: block;
-    max-width: $page-max-width;
+    display: block; // 2
+    max-width: $page-max-width; // 1
     margin: 0 auto;
     &:after {
-        clear: both;
+        clear: both; // 3
     }
 }
 
+// @Fixme
+//
+// 这个logo应该是套了层a标签的图片，不是文字
+// <div class="header-logo">
+//    <a class="logo" href="#">
+//      <img src="" />
+//    </a>
+// </div>
 .logo {
     @include header-element;
     font-size: 2rem;
 }
 
+// @Fixme
+//
+// 1.表单元素在使用之前应该先充值样式，mixins中reset-font()
+// 2.容器不要用span，要用block标签，按钮应该是<button></button>
+// 输入框需要<label>
+// <div class="header-searcher">
+//    <label class="search-bar" for="search">
+//      <input class="search-bar__field" placeholder="" name="search" id="search" type="search" />
+//      <button type="button" class="search-bar__btn"></button>
+//    </label>
+// </div>
+// 在布局时按钮的位置可以用position: absolute;来定位，这需要给input框
+// 的padding-right空出一个按钮的距离 padding-right: 3rem;
 .search {
     @include header-element;
     .search-input {
@@ -51,6 +89,18 @@
     float: right;
 }
 
+
+// @Fixme
+//
+// 1.这里的列表需要使用ul与li，
+// <nav class="nav"><ul>
+//    <li class="nav__item">
+//      <a href="#" class="menu">首页</a>
+//    </li>
+// </ul></nav>
+//
+// 2.水平排列的列表可以简单的使用inline-block，但这里尽量还是用grid
+// 避免中间出现空格
 .navigation {
     @include header-element;
     .nav--item {
