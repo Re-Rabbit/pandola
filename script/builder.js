@@ -20,6 +20,15 @@
  * @todo add init pages build for history operation.
  * @todo need use a public path searcher.
  * @todo fix nunjucks paths.
+ * @todo support other files, include index.ext.
+ * @fixme change workspace until all reasons compiled.
+ *
+ * v1.1
+ * @todo add private/public file own builder.
+ * @todo format err message.
+ *
+ * v2.0
+ * @todo add black list.
  */
 
 
@@ -41,6 +50,7 @@ const chalk = require('chalk')
 
 const logger = require('./log.js')
 const log = logger.log
+const say = logger.say
 const flag = logger.flag
 const pad = logger.pad
 
@@ -59,6 +69,75 @@ var workspace = null
 const workspaceTmp = '.workspace'
 const workspaceTmpFile = `${tmp}/${workspaceTmp}`
 
+/**
+ * Files.
+ */
+const extname = {
+    html: 'html',
+    js: 'js',
+    css: 'scss'    
+}
+
+const ignorename = '[^#~]'
+
+/**
+ * Build page files.
+ *
+ * @require ignorename
+ * @require pages
+ *
+ * @todo enter point maybe configurable.
+ * @todo add other file supports.
+ */
+function gulpBuildPath(extname, workspace) {
+    const work  = workspace || '**'
+    const files = 'index.' + extname
+    return [pages, work, files].join('/')
+}
+
+/**
+ * Watch files.
+ *
+ * @require workspace
+ * @require ignorename
+ * @require extnames
+ * @require pages
+ * @require components
+ * @require libs
+ */
+function gulpWatchPath(type) {
+    const files = ignorename + '*.' + getExtname(extnames, type)
+    return [pages, components, libs].map(n => `${n}/**/${files}`)
+}
+
+function reverseTmpFileName(p) {
+    let fmtp = path.relative(process.cwd(), path.normalize(p)).split(path.sep).slice(1)
+    return {
+	workspace: fmtp[0],
+	file: fmtp.slice(1).join('/')
+    }
+}
+
+
+/**
+ * Gulp entry files.
+ *
+ * @require page
+ * @require ignorename
+ * @require extnames
+ */
+function gulpEntrySrc(paths) {
+    const config = {
+	base: pages,
+	allowEmpty: true
+    }
+    return gulp.src(paths, config)
+}
+
+function gulpDuringTime(stream, cb) {
+    return stream
+}
+
 const stylesBuildPath = (workspace) => `${pages}/${workspace ? workspace : '**'}/index.scss`
 const stylesWatchPath = () => [pages, components, libs].map(n => `${n}/**/[^#~]*.scss`)
 
@@ -75,7 +154,7 @@ function clean() {
 
 
 function boot(done) {
-    process.nextTick(() => setWorkSpace(workspace)(done))
+    setWorkSpace(workspace)(done)
 }
 
 
@@ -91,6 +170,9 @@ function setWorkSpace(value) {
     }
 }
 
+/**
+ * Build css.
+ */
 function replaceScssComponentPath(url) {
     return url
 }
@@ -109,39 +191,65 @@ function sassConfig() {
     }
 }
 
+/**
+ * Gulp css build
+ *
+ * @todo fix during time
+ */
 function css() {
-    const cssPath = stylesBuildPath(workspace)
-    
-    const start = +new Date
-    return gulp
-	.src(cssPath, { base: pages })
-	.pipe(sass(sassConfig()))
+    return gulpEntrySrc(gulpBuildPath(extname.css, workspace))
+	.pipe(data(file => file.start = Date.now()))
+	.pipe(sass(sassConfig()).on('error', function(err) {
+	    log.errFlag()
+	    log.errFile(err.relativePath)
+	    log.errPos(err.line, err.column)
+	    log.n()
+	    sass.logError.bind(this)(err)
+	    this.emit('end')
+	}))
 	.pipe(gulp.dest(tmp))
-	.pipe(data(() => {
-	    log.css(workspace, +new Date - start)
+	.pipe(data(file => {
+	    let tp = reverseTmpFileName(file.path)
+	    log.css(tp.workspace, tp.file, Date.now() - file.start)
 	}))
 }
 
+
+/**
+ * Build html.
+ *
+ * @todo match the file current path.
+ */
 function nunjucksEnv() {
+    let paths = [pages,
+		 `${pages}/${workspace}`,
+		 libs,
+		 components]
+    
     return new Nunjucks.Environment(
-	new Nunjucks.FileSystemLoader([pages,
-				       `${pages}/${workspace}`,
-				       libs,
-				       components])
+	new Nunjucks.FileSystemLoader(paths)
     )
 }
 
 function html() {
-    const htmlPath = htmlsBuildPath(workspace)
-    const start = +new Date
-    return gulp
-	.src(htmlPath, { base: pages })
+    return gulpEntrySrc(gulpBuildPath(extname.html, workspace))
+	.pipe(data(file => file.start = Date.now()))
 	.pipe(nunjucks
 	      .compile({}, { env: nunjucksEnv() })
-	      .on('error', console.log))
+	      .on('error', function(err) {
+		  log.errFlag()
+		  log.errFile(path.relative(process.cwd(), path.normalize(err.fileName)))
+		  let m = err.message.match(/\[Line\s?(\d+),\s?Column\s?(\d+)\]/)
+		  if(m) log.errPos(m[1], m[2])
+		  log.n()
+		  console.log(err.message)
+		  log.n()
+		  this.emit('end')
+	      }))
 	.pipe(gulp.dest(tmp))
-	.pipe(data(() => {
-	    log.html(workspace, +new Date - start)
+	.pipe(data(file => {
+	    let tp = reverseTmpFileName(file.path)
+	    log.html(tp.workspace, tp.file, Date.now() - file.start)
 	}))
 }
 
@@ -153,49 +261,54 @@ function reload(done) {
 function javascriptServer(done) {
     const jsPath = scriptsBuildPath(workspace)
     
-    return gulp
-	.src(jsPath, { base: pages, allowEmpty: true })
+    return gulpEntrySrc(gulpBuildPath(extname.js, workspace))
 	.pipe(named())
         .pipe(webpack(webpackConfig, null, (err, stats) => {
 	    const res = stats.toJson()
 	    log.js(workspace, res.time)
-	})).on('error', console.log)
+	})).on('error', function(err) {
+	    log.errFlag()
+	    let mf = err.message.match(/([^]+)Module/)
+	    if(mf) log.errFile(path.normalize(mf[1].trim()))
+	    let mp = err.message.match(/Unexpected token\s*\((.+)\)\n/)
+	    if (mp) log.errPos.apply(null, mp[1].split(':'))
+	    log.n()
+	    say(err.message)
+	    log.n()
+	    this.emit('end')
+	})
 	.pipe(gulp.dest(tmp))
 }
 
 var historyApiFallback = require('connect-history-api-fallback')
 
+const broserServerPort = 8888
+
 function browserServer(done) {
 
     browserSync.init({
-        port: 8888,
-	//ui: false,
-	//logLevel: 'silent',
+        port: broserServerPort,
+	ui: false,
+	logLevel: 'silent',
 	open: false,
 	reloadOnRestart: true,
         startPath: `/${workspace}/`,
         server: {
             baseDir: tmp
         },
-	middleware: [(req, res, next) => {
-	    const test = req.url.match(/^\/(\w+)\/$/)
-	    console.log(test, req.url)
-	    if(test && test[1] != workspace) {
-		setWorkSpace(test[1])(browserSync.reload)
+	middleware: (req, res, next) => {
+	    const matched = req.url.match(/^\/(\w+)\/$/)
+	    //console.log(matched, req.url)
+	    if(matched && matched[1] != workspace) {
+		setWorkSpace(matched[1])(browserSync.reload)
+		// Disable cache because when browser history back which can't trigger setWorkSpace
+		res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store')
 	    }
 
-	    // Disable cache because when browser history back which can't trigger setWorkSpace
-	    res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store')
-	    
 	    next()
-	}],
+	},
     }, () => {
-	
-	log.browser(workspace, `http://localhost:8888/${workspace}/`)
-    })
-
-    browserSync.emitter.on('connent', () => {
-	console.log('1111111')
+	log.browser(workspace, `http://localhost:${broserServerPort}/${workspace}/`)
     })
     
     gulp.watch(stylesWatchPath(), gulp.series(css, reload))
