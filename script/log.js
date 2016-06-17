@@ -2,32 +2,55 @@
 
 const chalk = require('chalk')
 
-function replaceFstChar(str) {
-    return str.replace(/(\w)(\w+)/, (f, a, b) => a.toUpperCase() + b)
-}
+/**
+ * Logger util.
+ *
+ * Used for Gulp task or ...
+ * Just server side.
+ *
+ * @private
+ */
 
+
+// used for pad flag str.
+const flagPad = 2
+// used reset workspace width.
+// @fixme
+const workspaceLen = 15
+const FlagRight  = '\u25ba'
+const Result_Ok  = '\u25cf' //'\u221a'
+const Result_Err = '\u25cf' //'\u03c7'
+
+
+/**
+ * Flag.
+ *
+ * Used for display task type.
+ *
+ * @Class
+ * @private
+ * @param {String} flag
+ * @param {String} color
+ */
 class Flag {
     constructor(flag, color) {
 	this.flag  = flag
 	this.color = color
     }
     toStr() {
-	return chalk['bg' + replaceFstChar(this.color)](chalk.bold((this.flag)))// + chalk[this.color]('\u25ba')
+	let bg = chalk['bg' + replaceFstChar(this.color)]
+	return bg(chalk.bold((this.flag)))// + chalk[this.color]('\u25ba')
     }
 }
 
 const Flag_WrokSpace = new Flag('WorkSpace', 'magenta')
-const Flag_CSS = new Flag('CSS ', 'blue')
-const Flag_HTML = new Flag('HTML', 'green')
-const Flag_JS = new Flag('JavaScript', 'yellow')
-const Flag_File = new Flag('File', 'red')
-const Flag_BS = new Flag('Browser', 'cyan')
+const Flag_CSS       = new Flag('CSS ', 'blue')
+const Flag_HTML      = new Flag('HTML', 'green')
+const Flag_JS        = new Flag('JavaScript', 'yellow')
+const Flag_File      = new Flag('File', 'red')
+const Flag_BS        = new Flag('Browser', 'cyan')
 
-const flagPad = 2
-
-const Result_Ok = '\u25cf'//'\u221a'
-const Result_Err = '\u25cf' //'\u03c7'
-
+// compute max string length.
 const flagMaxLen = (() => {
     return [
 	Flag_WrokSpace,
@@ -36,9 +59,10 @@ const flagMaxLen = (() => {
 	Flag_JS,
 	Flag_File,
 	Flag_BS
-    ].reduce((acc, curr) => Math.max(acc, curr.flag.length), 0) + 2
+    ].reduce((acc, curr) => Math.max(acc, curr.flag.length), 0) + flagPad
 })()
 
+// normalize the flag content.
 const flag = normalizeFlags({
     workspace: Flag_WrokSpace,
     css: Flag_CSS,
@@ -48,13 +72,49 @@ const flag = normalizeFlags({
     browser: Flag_BS
 })
 
+
+
 /**
  * Utils.
  */
-function pad(len) {
-    return Array(len).fill(' ').join('')
+
+
+/**
+ * Replace string first char.
+ *
+ * @example
+ * replaceFstChar('abc') //=> 'Abc'
+ *
+ * @param {String} str
+ * @return {String}
+ */
+function replaceFstChar(str) {
+    return str.replace(/(\w)(\w+)/, (f, a, b) => a.toUpperCase() + b)
 }
 
+/**
+ * Replace string first char.
+ *
+ * @example
+ * pad('abc') //=> 'Abc'
+ *
+ * @param {Number} len
+ * @param {String} f
+ * @return {String}
+ */
+function pad(len, f) {
+    return Array(len).fill(f || ' ').join('')
+}
+
+/**
+ * Center the flag string.
+ *
+ * @private
+ *
+ * @param {Number} max
+ * @param {Flag} flag
+ * @return {String}
+ */
 function flagPadCenter(max) {
     return function(flag) {
 	var content = flag.flag
@@ -64,6 +124,17 @@ function flagPadCenter(max) {
     }
 }
 
+/**
+ * Rewrite flag string.
+ *
+ * @private
+ * @effects
+ *
+ * @requrie flagMaxLen
+ *
+ * @param {Flag} flag
+ * @return {Flag}
+ */
 function normalizeFlags(flags) {
     const nor = flagPadCenter(flagMaxLen)
     for(let k in flags) {
@@ -72,6 +143,12 @@ function normalizeFlags(flags) {
     return flags
 }
 
+/**
+ * Format Date time
+ *
+ * @param {Number} time - timestamp
+ * @return {[String, String]}
+ */
 function fmtTime(time) {
     return time < 1000 ? [time.toString(), 'ms'] : [(time / 1000).toString(), 's']
 }
@@ -79,7 +156,7 @@ function fmtTime(time) {
 /**
  * Faces.
  */
-const workspaceLen = 15
+
 
 function defineFaceWorkspace(workspace) {
     let len  = workspace ? workspace.length : 0
@@ -133,8 +210,6 @@ function logCSS(workspace, file, during) {
     let out = ''
     out += 'ReBuild  '
     out += defineFaceWorkspace(workspace)
-    //out += ' '
-    //out += defineFaceResultOk()
     out += defineFaceTime(during)
     out += '\t'
     out += defineFaceFile(file)    
@@ -209,6 +284,10 @@ function logErrPosition(line, col) {
 function logNewLine() {
     return console.log('\n')
 }
+
+/**
+ * Exports
+ */
 
 module.exports = {
     flag: flag,
