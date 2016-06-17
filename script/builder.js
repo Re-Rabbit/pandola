@@ -51,8 +51,6 @@ const chalk = require('chalk')
 const logger = require('./log.js')
 const log = logger.log
 const say = logger.say
-const flag = logger.flag
-const pad = logger.pad
 
 /**
  * Paths
@@ -280,8 +278,6 @@ function javascriptServer(done) {
 	.pipe(gulp.dest(tmp))
 }
 
-var historyApiFallback = require('connect-history-api-fallback')
-
 const broserServerPort = 8888
 
 function browserServer(done) {
@@ -304,7 +300,6 @@ function browserServer(done) {
 		// Disable cache because when browser history back which can't trigger setWorkSpace
 		res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store')
 	    }
-
 	    next()
 	},
     }, () => {
@@ -321,11 +316,13 @@ function browserServer(done) {
 	    log.file(`${chalk.yellow('@component')} ${path}`)
 	})
 
+    
     gulp.watch(scriptsWatchPath())
 	.on('change', (path, stats) => {
 	    log.file(`${chalk.yellow('@component')} ${path}`)
 	})
 
+    // @todo need talk about a better way.
     gulp.watch(workspaceTmpFile, gulp.series(css,
 					     html,
 					     reload))
@@ -334,7 +331,12 @@ function browserServer(done) {
 }
 
 
-gulp.task('default', gulp.series(clean,
-				 gulp.parallel(browserServer,
-					       javascriptServer,
-                                               boot)))
+function main() {
+    gulp.task('default', gulp.series(
+	clean,
+	gulp.parallel(browserServer,
+		      javascriptServer,
+		      boot)))
+}
+
+main()

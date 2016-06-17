@@ -258,7 +258,7 @@ function logErrFlag() {
     out += pad(20)
     out += chalk.bgRed(chalk.bold(' ERROR '))
     out += '\n'
-    return console.log(out)
+    return log(out)
 }
 
 function logErrFile(file) {
@@ -266,7 +266,7 @@ function logErrFile(file) {
     out += defineFaceResultErr()
     out += ' '
     out += file
-    return console.log(out)
+    return log(out)
 }
 
 function logErrPosition(line, col) {
@@ -278,11 +278,11 @@ function logErrPosition(line, col) {
     out += ' '
     out += 'column '
     out += chalk.yellow(col)
-    return console.log(out)
+    return log(out)
 }
 
 function logNewLine() {
-    return console.log('\n')
+    return log('\n')
 }
 
 /**
