@@ -47,8 +47,11 @@ const Flag_WrokSpace = new Flag('WorkSpace', 'magenta')
 const Flag_CSS       = new Flag('CSS ', 'blue')
 const Flag_HTML      = new Flag('HTML', 'green')
 const Flag_JS        = new Flag('JavaScript', 'yellow')
+const Flag_IMAGE     = new Flag('IMAGE', 'red')
+const Flag_FONT      = new Flag('FONT', 'red')
 const Flag_File      = new Flag('File', 'red')
 const Flag_BS        = new Flag('Browser', 'cyan')
+const Flag_API       = new Flag('API ', 'cyan')
 
 // compute max string length.
 const flagMaxLen = (() => {
@@ -57,8 +60,11 @@ const flagMaxLen = (() => {
 	Flag_CSS,
 	Flag_HTML,
 	Flag_JS,
+	Flag_IMAGE,
+	Flag_FONT,
 	Flag_File,
-	Flag_BS
+	Flag_BS,
+	Flag_API
     ].reduce((acc, curr) => Math.max(acc, curr.flag.length), 0) + flagPad
 })()
 
@@ -68,8 +74,11 @@ const flag = normalizeFlags({
     css: Flag_CSS,
     html: Flag_HTML,
     js: Flag_JS,
+    image: Flag_IMAGE,
+    font: Flag_FONT,
     file: Flag_File,
-    browser: Flag_BS
+    browser: Flag_BS,
+    api: Flag_API
 })
 
 
@@ -89,7 +98,7 @@ const flag = normalizeFlags({
  * @return {String}
  */
 function replaceFstChar(str) {
-    return str.replace(/(\w)(\w+)/, (f, a, b) => a.toUpperCase() + b)
+    return str.replace(/(\w)(\w+)/, (_, a, b) => a.toUpperCase() + b)
 }
 
 /**
@@ -159,9 +168,10 @@ function fmtTime(time) {
 
 
 function defineFaceWorkspace(workspace) {
-    let len  = workspace ? workspace.length : 0
+    let len  = workspace ? workspace.length : 'all'.length
     let padw = len < workspaceLen ? pad(workspaceLen - len) : ''
-    return chalk.gray('{') + chalk.magenta(workspace || 'all') + chalk.gray('}')  + padw
+    
+    return chalk.gray('{') + chalk.magenta(workspace || 'all') + chalk.gray('}') + padw
 }
 
 function defineFaceTime(time) {
@@ -203,6 +213,7 @@ function logWorkSpace(workspace) {
     let out = ''
     out += 'SwitchTo '
     out += defineFaceWorkspace(workspace)
+    //out += '\n'
     return log(flag.workspace, out)
 }
 
@@ -212,7 +223,8 @@ function logCSS(workspace, file, during) {
     out += defineFaceWorkspace(workspace)
     out += defineFaceTime(during)
     out += '\t'
-    out += defineFaceFile(file)    
+    out += defineFaceFile(file)
+    //out += '\n'
     return log(flag.css, out)
 }
 
@@ -223,6 +235,7 @@ function logHTML(workspace, file, during) {
     out += defineFaceTime(during)
     out += '\t'
     out += defineFaceFile(file)
+    //out += '\n'
     return log(flag.html, out)
 }
 
@@ -231,7 +244,26 @@ function logJs(workspace, during) {
     out += 'ReBuild  '
     out += defineFaceWorkspace(workspace)
     out += defineFaceTime(during)
+    //out += '\n'
     return log(flag.js, out)
+}
+
+function logImage(workspace, during) {
+    let out = ''
+    out += 'ReBuild  '
+    out += defineFaceWorkspace(workspace)
+    out += defineFaceTime(during)
+    //out += '\n'
+    return log(flag.image, out)
+}
+
+function logFont(workspace, during) {
+    let out = ''
+    out += 'ReBuild  '
+    out += defineFaceWorkspace(workspace)
+    out += defineFaceTime(during)
+    //out += '\n'
+    return log(flag.font, out)
 }
 
 function logFile(file) {
@@ -246,10 +278,19 @@ function logFile(file) {
 function logBrowser(workspace, info) {
     let out = ''
     out += 'ServerOn '
-    out += defineFaceWorkspace(workspace)
-    out += ' '
+    //out += defineFaceWorkspace(workspace)
     out += info
+    //out += '\n'
     return log(flag.browser, out)
+}
+
+function logAPI(workspace, info) {
+    let out = ''
+    out += 'ServerOn '
+    //out += defineFaceWorkspace(workspace)
+    out += info
+    //out += '\n'
+    return log(flag.api, out)
 }
 
 function logErrFlag() {
@@ -281,6 +322,18 @@ function logErrPosition(line, col) {
     return log(out)
 }
 
+function logApiRequest() {
+    let out = ''
+    //out += '\n'
+    //out += pad(20) + chalk.bgCyan(chalk.bold(' API REQUEST ')) + '\n'
+    out += ':method :url :status :response-time ms - :res[content-length] \n'
+    return out
+}
+
+function logApiResponse() {
+
+}
+
 function logNewLine() {
     return log('\n')
 }
@@ -298,11 +351,15 @@ module.exports = {
 	css: logCSS,
 	html: logHTML,
 	js: logJs,
+	image: logImage,
+	font: logFont,
 	file: logFile,
 	browser: logBrowser,
+	api: logAPI,
 	errFlag: logErrFlag,
 	errFile: logErrFile,
 	errPos: logErrPosition,
+	apiReq: logApiRequest,
 	n: logNewLine
     }
 }

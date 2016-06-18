@@ -15,13 +15,10 @@
  * @warning Development environment only.
  * @todo Add production environment builder.
  * @todo Check tmp dir is exist.
- * @todo nunjucks template error then can't auto reload.
- * @todo add webpack toString interface.
- * @todo add init pages build for history operation.
  * @todo need use a public path searcher.
  * @todo fix nunjucks paths.
  * @todo support other files, include index.ext.
- * @fixme change workspace until all reasons compiled.
+ * @todo add api request and response friendly log.
  *
  * v1.1
  * @todo add private/public file own builder.
@@ -42,15 +39,22 @@ const named = require('vinyl-named')
 const webpack = require('webpack-stream')
 const del = require('del')
 const browserSync = require('browser-sync').create()
-//const reload = require('browser-sync').reload
 const webpackConfig = require('./../webpack.config.js')
 const path = require('path')
 const fs = require('fs')
 const chalk = require('chalk')
+const express = require('express')
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const compression = require('compression')
 
 const logger = require('./log.js')
 const log = logger.log
 const say = logger.say
+
+
+
 
 /**
  * Paths
@@ -63,7 +67,8 @@ const libs = 'libs'
 // dest
 const tmp = 'tmp'
 // workspace
-var workspace = null
+let workspace = null
+let initBuild = false
 const workspaceTmp = '.workspace'
 const workspaceTmpFile = `${tmp}/${workspaceTmp}`
 
@@ -73,7 +78,7 @@ const workspaceTmpFile = `${tmp}/${workspaceTmp}`
 const extname = {
     html: 'html',
     js: 'js',
-    css: 'scss'    
+    css: 'scss'
 }
 
 const ignorename = '[^#~]'
@@ -103,8 +108,8 @@ function gulpBuildPath(extname, workspace) {
  * @require components
  * @require libs
  */
-function gulpWatchPath(type) {
-    const files = ignorename + '*.' + getExtname(extnames, type)
+function gulpWatchPath(extname) {
+    const files = ignorename + '*.' + extname
     return [pages, components, libs].map(n => `${n}/**/${files}`)
 }
 
@@ -131,19 +136,6 @@ function gulpEntrySrc(paths) {
     }
     return gulp.src(paths, config)
 }
-
-function gulpDuringTime(stream, cb) {
-    return stream
-}
-
-const stylesBuildPath = (workspace) => `${pages}/${workspace ? workspace : '**'}/index.scss`
-const stylesWatchPath = () => [pages, components, libs].map(n => `${n}/**/[^#~]*.scss`)
-
-const htmlsBuildPath = (workspace) => `${pages}/${workspace ? workspace : '**'}/index.html`
-const htmlsWatchPath = () => [pages, components, libs].map(n => `${n}/**/[^#~]*.html`)
-
-const scriptsBuildPath = (workspace) => `${pages}/${workspace ? workspace : '**'}/index.js`
-const scriptsWatchPath = () => [pages, components, libs].map(n => `${n}/**/[^#~]*.js`)
 
 
 function clean() {
@@ -194,7 +186,8 @@ function sassConfig() {
  *
  * @todo fix during time
  */
-function css() {
+function css(done) {
+    if(!workspace && initBuild) return done()
     return gulpEntrySrc(gulpBuildPath(extname.css, workspace))
 	.pipe(data(file => file.start = Date.now()))
 	.pipe(sass(sassConfig()).on('error', function(err) {
@@ -220,7 +213,6 @@ function css() {
  */
 function nunjucksEnv() {
     let paths = [pages,
-		 `${pages}/${workspace}`,
 		 libs,
 		 components]
     
@@ -229,7 +221,8 @@ function nunjucksEnv() {
     )
 }
 
-function html() {
+function html(done) {
+    if(!workspace && initBuild) return done()
     return gulpEntrySrc(gulpBuildPath(extname.html, workspace))
 	.pipe(data(file => file.start = Date.now()))
 	.pipe(nunjucks
@@ -251,13 +244,12 @@ function html() {
 	}))
 }
 
-function reload(done) {
-    browserSync.reload()
-    done()
-}
+
+/**
+ * Build javascript
+ */
 
 function javascriptServer(done) {
-    const jsPath = scriptsBuildPath(workspace)
     
     return gulpEntrySrc(gulpBuildPath(extname.js, workspace))
 	.pipe(named())
@@ -278,65 +270,178 @@ function javascriptServer(done) {
 	.pipe(gulp.dest(tmp))
 }
 
-const broserServerPort = 8888
+function image() {
+    let start
+
+    function begin(done) {
+	start = Date.now()
+	done()
+    }
+
+    function end(done) {
+	log.image(workspace, Date.now() - start)
+	done()
+    }
+    function task() {
+	return gulp.src(`images/**/*.*`)
+	    .pipe(gulp.dest(`${tmp}/images`))
+    }
+
+    return {
+	start: begin,
+	end: end,
+	task: task
+    }
+}
+
+function font() {
+    let start
+
+    function begin(done) {
+	start = Date.now()
+	done()
+    }
+
+    function end(done) {
+	log.font(workspace, Date.now() - start)
+	done()
+    }
+    function task() {
+	return gulp.src('./node_modules/ionicons/dist/fonts/**/*.*')
+	    .pipe(gulp.dest(`${tmp}/fonts`))
+    }
+
+    return {
+	start: begin,
+	end: end,
+	task: task
+    }
+}
+
+
+/**
+ * Browser server
+ */
+
+
+function reload(done) {
+    browserSync.reload()
+    done()
+}
+
+function reportBrowserInfo(workspace, port) {
+    return function() {
+	log.browser(workspace, `http://localhost:${port}/${workspace}/`)
+    }
+}
+
+function defineWatcher(paths, handle, reporter) {
+    gulp.watch(paths, handle).on('change', reporter)
+}
+
+function reversePathToType(path) {
+    if(path.indexOf(pages) != -1) return chalk.red('@page')
+    if(path.indexOf(components) != -1) return chalk.yellow('@component')
+    if(path.indexOf(libs) != -1) return chalk.green('@lib')
+    return ''
+}
+
+function reportFileChange(path, stat) {
+    reversePathToType(path)
+    log.file(`${reversePathToType(path)} ${path}`)
+}
+
+function noop() {}
+
+function switchWorkspaceMiddleware(req, res, next) {
+    const matched = req.url.match(/^\/(\w+)\/$/)
+    //console.log(matched, req.url)
+    if(matched && matched[1] != workspace) {
+	setWorkSpace(matched[1])(browserSync.reload)
+	// Disable cache because when browser history back which can't trigger setWorkSpace
+	res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store')
+    }
+    next()
+}
+
+function initBuildDone(done) {
+    initBuild = true
+    done()
+}
+
+const browserServerPort = 8888
+const openWhenServerStar = false
 
 function browserServer(done) {
 
     browserSync.init({
-        port: broserServerPort,
+        port: browserServerPort,
 	ui: false,
 	logLevel: 'silent',
-	open: false,
+	open: openWhenServerStar,
 	reloadOnRestart: true,
-        startPath: `/${workspace}/`,
+        startPath: `/${workspace || 'index'}/`,
         server: {
             baseDir: tmp
         },
-	middleware: (req, res, next) => {
-	    const matched = req.url.match(/^\/(\w+)\/$/)
-	    //console.log(matched, req.url)
-	    if(matched && matched[1] != workspace) {
-		setWorkSpace(matched[1])(browserSync.reload)
-		// Disable cache because when browser history back which can't trigger setWorkSpace
-		res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store')
-	    }
-	    next()
-	},
-    }, () => {
-	log.browser(workspace, `http://localhost:${broserServerPort}/${workspace}/`)
-    })
-    
-    gulp.watch(stylesWatchPath(), gulp.series(css, reload))
-	.on('change', (path, stats) => {
-	    log.file(`${chalk.yellow('@component')} ${path}`)
-	})
+	middleware: switchWorkspaceMiddleware
+    }, reportBrowserInfo(workspace, browserServerPort))
 
-    gulp.watch(htmlsWatchPath(), gulp.series(html, reload))
-	.on('change', (path, stats) => {
-	    log.file(`${chalk.yellow('@component')} ${path}`)
-	})
-
-    
-    gulp.watch(scriptsWatchPath())
-	.on('change', (path, stats) => {
-	    log.file(`${chalk.yellow('@component')} ${path}`)
-	})
-
-    // @todo need talk about a better way.
-    gulp.watch(workspaceTmpFile, gulp.series(css,
-					     html,
-					     reload))
+    defineWatcher(gulpWatchPath(extname.css), gulp.series(css, reload), reportFileChange)
+    defineWatcher(gulpWatchPath(extname.html), gulp.series(html, reload), reportFileChange)
+    defineWatcher(gulpWatchPath(extname.js), noop, reportFileChange)
+    defineWatcher(workspaceTmpFile, gulp.series(css, html, reload), noop)
 
     done()
 }
 
 
+function apiRouter() {
+    var router = express.Router()
+    require('../pages/icon/api.js')(router)
+    require('../pages/auth/api.js')(router)
+    return router
+}
+
+function apiServer() {
+    var port = 7777
+    var url = 'http://localhost:' + port
+    express()
+        .use(cors())
+        .use(compression())
+	.use(bodyParser.urlencoded({ extended: false }))
+	.use(bodyParser.json())
+        .use(morgan('dev'))
+        .use('/api', apiRouter())
+        .listen(port)
+
+    log.api(workspace, url)
+}
+
+/**
+ * Default task.
+ */
+
 function main() {
+    
+    let f = font()
+    let i = image()
+    
     gulp.task('default', gulp.series(
 	clean,
+	gulp.parallel(css,
+		      html,
+		      gulp.series(i.start, i.task, i.end),
+		      gulp.series(f.start, f.task, f.end)),
+	initBuildDone,
 	gulp.parallel(browserServer,
 		      javascriptServer,
+		      apiServer,
 		      boot)))
 }
 
-main()
+
+
+
+
+main(' Gulp init here :) ')
