@@ -1,0 +1,9 @@
+<script>
+    var search = window.location.search
+    if(search.startsWith('?')) {search = search.substr(1)}
+    var searchParams = new URLSearchParams(search)
+    var code = searchParams.get('code')
+    if(window.cb){ window.cb(code) }
+    else{window.code=code}
+    window.close()
+</script>
