@@ -64,6 +64,7 @@ const say = logger.say
 const pages = 'pages'
 const components = 'components'
 const libs = 'libs'
+const projectRoot = '.'
 // dest
 const tmp = 'tmp'
 // workspace
@@ -214,7 +215,8 @@ function css(done) {
 function nunjucksEnv() {
     let paths = [pages,
 		 libs,
-		 components]
+		 components,
+                 projectRoot]
     
     return new Nunjucks.Environment(
 	new Nunjucks.FileSystemLoader(paths)
