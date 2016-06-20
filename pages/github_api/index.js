@@ -20,7 +20,8 @@ function window_get_token(evt) {
 function get_auth_token(client_id, scope){
     var searchParams = new URLSearchParams()
     searchParams.set('client_id', client_id)
-    searchParams.set('redirect_uri', 'http://localhost:8888/github_api/set_token/')
+    const redirect_url = window.location.protocol + '//' + window.location.host + '/github_api/set_token/'
+    searchParams.set('redirect_uri', redirect_url)
     searchParams.set('scope', scope)
     searchParams.set('state', 'test')
     

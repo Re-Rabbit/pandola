@@ -46,7 +46,8 @@ function main() {
             startPath: '/index/',
             server: {
                 baseDir: build.paths.tmp
-            }
+            },
+open: false
         })
     }
 
