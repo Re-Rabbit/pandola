@@ -1,6 +1,54 @@
-.item-tag {
+@import "../layouts/public";
+@import "./zhihu_global";
+
+.main-page {
+    @extend .row;
+    width: $container;
+    margin: 0 auto;
+    border: 1px solid red; //debug
+}
+
+.main-center {
+    @extend .grid;
+    @extend .width--8;
+    padding-left: 4rem;
+    padding-right: 2rem;
+    border: 1px solid blue;
+}
+
+.main-right {
+    @extend .grid;
+    @extend .width--4;
+    border: 1px solid yellow;
+}
+
+.tags--item {
     display: inline-block;
-    border-radius: 30px;
-    background-color: #0f0;
-    color: #259;
+    padding: 0.2rem;
+    border-radius: 1rem;
+    background-color: lightblue;
+    color: $main-text-blue;
+}
+
+.question-title {
+    @extend h2;
+    color: $main-text-blue;
+}
+
+.panel {
+    a {
+        color: gray;
+        margin: 0 0.5rem;
+    }
+}
+
+.sep-line {
+    width: 100%;
+    height: 1px;
+    background-color: gray;
+    margin: 1rem 0;
+}
+
+.answers--hidden {
+    a { color: $main-text-blue; }
 }
