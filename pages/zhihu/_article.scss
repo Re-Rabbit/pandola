@@ -4,8 +4,7 @@
 .main-page {
     @extend .row;
     width: $container;
-    margin: 0 auto;
-    border: 1px solid red; //debug
+    margin: 1rem auto;
 }
 
 .main-center {
@@ -13,7 +12,6 @@
     @extend .width--8;
     padding-left: 4rem;
     padding-right: 2rem;
-    border: 1px solid blue;
 }
 
 .main-right {
@@ -26,8 +24,12 @@
     display: inline-block;
     padding: 0.2rem;
     border-radius: 1rem;
-    background-color: lightblue;
+    background-color: $main-text-lightblue;
     color: $main-text-blue;
+    &:hover {
+        background-color: darkblue;
+        color: lightgray;
+    }
 }
 
 .question-title {
@@ -49,6 +51,35 @@
     margin: 1rem 0;
 }
 
-.answers--hidden {
+.answers__info {
+    @extend .row;
     a { color: $main-text-blue; }
+}
+
+.answers__order {
+    @extend .grid-right;
+}
+
+.answer__user-info {
+    @extend .row;
+}
+
+.user-name {
+    display: inline-block;
+    font-weight: bold;
+}
+.user-describe {
+    display: inline-block;    
+}
+.user-avatar {
+    @extend .grid-right;
+    img {
+        width: 2em;
+        height: 2em;
+    }   
+}
+
+.answer__agrees__count {
+    display: inline;
+    color: gray;
 }
