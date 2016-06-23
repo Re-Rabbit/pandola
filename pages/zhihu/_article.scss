@@ -83,3 +83,16 @@
     display: inline;
     color: gray;
 }
+
+.answer_content {
+    margin: 0.5rem 0;
+    line-height: 1.5em;
+}
+
+.answer-panel {
+    margin: 0.5rem 0;
+    a {
+        color: gray;
+        display: inline-block;
+    }
+}
